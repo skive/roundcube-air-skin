@@ -140,6 +140,14 @@ a.attach:before            { .am-mask(@ic-paperclip; 1.15em); }
 @ic-server:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/server.svg');
 @ic-lock:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/lock.svg');
 @ic-identity:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/identity.svg');
+@ic-create:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/create.svg');
+@ic-import:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/import.svg');
+
+// Address book / list toolbars — create + import
+.toolbar a.create:before,
+.popupmenu a.create:before   { .am-mask(@ic-create; 1.15em); }
+.toolbar a.import:before,
+.toolbar a.export:before     { .am-mask(@ic-import; 1.15em); }
 
 // Settings — section list (content) + preferences sidebar
 .listing.iconized {
