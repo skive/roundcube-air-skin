@@ -6,11 +6,11 @@
  * mask so they still inherit `currentColor` (selected / hover / dark mode).
  */
 
-.am-mask(@u) {
+.am-mask(@u; @sz: 1.35em) {
     content: "" !important;
     display: inline-block !important;
-    width: 1.35em !important;
-    height: 1.35em !important;
+    width: @sz !important;
+    height: @sz !important;
     flex: none !important;
     background-color: currentColor !important;
     -webkit-mask-image: @u;            mask-image: @u;
@@ -47,6 +47,14 @@
 @ic-refresh:   data-uri('image/svg+xml;charset=utf-8', '../images/icons/refresh.svg');
 @ic-image:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/image.svg');
 @ic-text:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/text.svg');
+@ic-flag:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/flag.svg');
+@ic-paperclip: data-uri('image/svg+xml;charset=utf-8', '../images/icons/paperclip.svg');
+@ic-download:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/download.svg');
+@ic-copy:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/copy.svg');
+@ic-move:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/move.svg');
+@ic-source:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/source.svg');
+@ic-open:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/open.svg');
+@ic-read:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/read.svg');
 
 // Task rail + message toolbar. Nested under the id selectors so these rules
 // carry id-level specificity and beat the `#taskmenu/#toolbar-menu a:before`
@@ -103,4 +111,51 @@ a.toolbar-button.refresh:before,
     &.headers-all:before     { .am-mask(@ic-about); vertical-align: -.2em; }
     &.html:before            { .am-mask(@ic-image); vertical-align: -.2em; }
     &.plain:before           { .am-mask(@ic-text);  vertical-align: -.2em; }
+}
+
+// Message-list status flags + attachment indicator
+.messagelist {
+    td.subject span.msgicon.status.replied:before,
+    td.subject span.msgicon.status.replied.forwarded:before { .am-mask(@ic-reply; 1em); }
+    td.subject span.msgicon.status.forwarded:before         { .am-mask(@ic-forward; 1em); }
+    span.flagged:before,
+    tr.flaggedroot span.unflagged:before                    { .am-mask(@ic-flag; 1em); }
+    span.attachment span:before                             { .am-mask(@ic-paperclip; 1em); vertical-align: -.15em; }
+}
+
+// Attachment list inside a message + compose attach button
+.attachmentslist li > a:before,
+.menu a.attach:before,
+a.attach:before            { .am-mask(@ic-paperclip; 1.15em); }
+
+// Popup / dropdown menu items. content:"" and the unique mask-image win
+// regardless of Elastic's more specific compound selectors, so a single class
+// per action covers all its variants (forward.inline / forward.bounce / …).
+.popupmenu {
+    a.reply:before        { .am-mask(@ic-reply; 1.15em); }
+    a.reply.all:before,
+    a.reply.list:before   { .am-mask(@ic-reply-all; 1.15em); }
+    a.forward:before      { .am-mask(@ic-forward; 1.15em); }
+    a.print:before        { .am-mask(@ic-print; 1.15em); }
+    a.delete:before       { .am-mask(@ic-delete; 1.15em); }
+    a.download:before,
+    a.export:before,
+    a.import:before       { .am-mask(@ic-download; 1.15em); }
+    a.copy:before         { .am-mask(@ic-copy; 1.15em); }
+    a.move:before         { .am-mask(@ic-move; 1.15em); }
+    a.edit:before         { .am-mask(@ic-drafts; 1.15em); }
+    a.source:before       { .am-mask(@ic-source; 1.15em); }
+    a.extwin:before,
+    a.open:before         { .am-mask(@ic-open; 1.15em); }
+    a.read:before         { .am-mask(@ic-read; 1.15em); }
+    a.unread:before       { .am-mask(@ic-mail; 1.15em); }
+    a.flag:before         { .am-mask(@ic-flag; 1.15em); }
+    a.unflag:before       { .am-mask(@ic-flag; 1.15em); }
+    a.archive:before      { .am-mask(@ic-archive; 1.15em); }
+    a.folders:before,
+    a.move.folder:before  { .am-mask(@ic-folder; 1.15em); }
+    a.addressbook:before  { .am-mask(@ic-contacts; 1.15em); }
+    a.compose:before      { .am-mask(@ic-compose; 1.15em); }
+    a.select:before       { .am-mask(@ic-select; 1.15em); }
+    a.options:before      { .am-mask(@ic-options; 1.15em); }
 }
