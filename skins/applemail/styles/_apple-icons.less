@@ -1,0 +1,161 @@
+/**
+ * Apple Mail skin — Apple-style icon set (design branch `apple-icons`).
+ *
+ * Replaces Elastic's FontAwesome glyphs with SF-Symbols-inspired line icons
+ * (thin, rounded) drawn as SVGs in images/icons/ and applied through a CSS
+ * mask so they still inherit `currentColor` (selected / hover / dark mode).
+ */
+
+.am-mask(@u; @sz: 1.35em) {
+    content: "" !important;
+    display: inline-block !important;
+    width: @sz !important;
+    height: @sz !important;
+    flex: none !important;
+    background-color: currentColor !important;
+    -webkit-mask-image: @u;            mask-image: @u;
+    -webkit-mask-repeat: no-repeat;    mask-repeat: no-repeat;
+    -webkit-mask-position: center;     mask-position: center;
+    -webkit-mask-size: contain;        mask-size: contain;
+}
+
+@ic-compose:   data-uri('image/svg+xml;charset=utf-8', '../images/icons/compose.svg');
+@ic-mail:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/mail.svg');
+@ic-contacts:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/contacts.svg');
+@ic-settings:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/settings.svg');
+@ic-theme:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/theme.svg');
+@ic-about:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/about.svg');
+@ic-logout:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/logout.svg');
+@ic-reply:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/reply.svg');
+@ic-reply-all: data-uri('image/svg+xml;charset=utf-8', '../images/icons/reply-all.svg');
+@ic-forward:   data-uri('image/svg+xml;charset=utf-8', '../images/icons/forward.svg');
+@ic-delete:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/delete.svg');
+@ic-mark:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/mark.svg');
+@ic-more:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/more.svg');
+@ic-search:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/search.svg');
+@ic-print:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/print.svg');
+@ic-prev:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/prev.svg');
+@ic-next:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/next.svg');
+@ic-folder:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/folder.svg');
+@ic-inbox:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/inbox.svg');
+@ic-sent:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/sent.svg');
+@ic-drafts:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/drafts.svg');
+@ic-junk:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/junk.svg');
+@ic-archive:   data-uri('image/svg+xml;charset=utf-8', '../images/icons/archive.svg');
+@ic-select:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/select.svg');
+@ic-options:   data-uri('image/svg+xml;charset=utf-8', '../images/icons/options.svg');
+@ic-refresh:   data-uri('image/svg+xml;charset=utf-8', '../images/icons/refresh.svg');
+@ic-image:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/image.svg');
+@ic-text:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/text.svg');
+@ic-flag:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/flag.svg');
+@ic-paperclip: data-uri('image/svg+xml;charset=utf-8', '../images/icons/paperclip.svg');
+@ic-download:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/download.svg');
+@ic-copy:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/copy.svg');
+@ic-move:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/move.svg');
+@ic-source:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/source.svg');
+@ic-open:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/open.svg');
+@ic-read:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/read.svg');
+
+// Task rail + message toolbar. Nested under the id selectors so these rules
+// carry id-level specificity and beat the `#taskmenu/#toolbar-menu a:before`
+// sizing rules in _styles.less (which otherwise collapse the masked box).
+#taskmenu,
+#toolbar-menu {
+    a.compose:before     { .am-mask(@ic-compose); }
+    a.mail:before        { .am-mask(@ic-mail); }
+    a.contacts:before    { .am-mask(@ic-contacts); }
+    a.settings:before    { .am-mask(@ic-settings); }
+    a.theme:before       { .am-mask(@ic-theme); }
+    a.about:before       { .am-mask(@ic-about); }
+    a.logout:before      { .am-mask(@ic-logout); }
+
+    a.reply:before       { .am-mask(@ic-reply); }
+    a.reply-all:before,
+    a.reply.all:before   { .am-mask(@ic-reply-all); }
+    a.forward:before     { .am-mask(@ic-forward); }
+    a.delete:before      { .am-mask(@ic-delete); }
+    a.markmessage:before { .am-mask(@ic-mark); }
+    a.more:before        { .am-mask(@ic-more); }
+    a.print:before       { .am-mask(@ic-print); }
+    a.prev:before        { .am-mask(@ic-prev); }
+    a.next:before        { .am-mask(@ic-next); }
+}
+
+// Search field magnifier
+.searchbar form:before   { .am-mask(@ic-search); }
+
+// Folder list — inline icons (align with the folder name)
+#mailboxlist {
+    li > a:before             { .am-mask(@ic-folder);  vertical-align: -.28em; margin-right: .5rem; }
+    li.inbox > a:before       { .am-mask(@ic-inbox);   vertical-align: -.28em; }
+    li.sent > a:before        { .am-mask(@ic-sent);    vertical-align: -.28em; }
+    li.drafts > a:before,
+    li.drafts a:before        { .am-mask(@ic-drafts);  vertical-align: -.28em; }
+    li.junk > a:before,
+    li.junk a:before          { .am-mask(@ic-junk);    vertical-align: -.28em; }
+    li.trash > a:before,
+    li.trash a:before         { .am-mask(@ic-delete);  vertical-align: -.28em; }
+    li.archive > a:before     { .am-mask(@ic-archive); vertical-align: -.28em; }
+}
+
+// List toolbar (#toolbar-list-menu) — select / options / refresh
+#toolbar-list-menu a.select:before   { .am-mask(@ic-select); }
+#toolbar-list-menu a.options:before  { .am-mask(@ic-options); }
+a.toolbar-button.refresh:before,
+#toolbar-list-menu a.refresh:before  { .am-mask(@ic-refresh); }
+
+// Message header links (Подробности / Заголовки / формат)
+#message-header .header-links a {
+    &.headers-details:before,
+    &.headers-summary:before { .am-mask(@ic-mail);  vertical-align: -.2em; }
+    &.headers-all:before     { .am-mask(@ic-about); vertical-align: -.2em; }
+    &.html:before            { .am-mask(@ic-image); vertical-align: -.2em; }
+    &.plain:before           { .am-mask(@ic-text);  vertical-align: -.2em; }
+}
+
+// Message-list status flags + attachment indicator
+.messagelist {
+    td.subject span.msgicon.status.replied:before,
+    td.subject span.msgicon.status.replied.forwarded:before { .am-mask(@ic-reply; 1em); }
+    td.subject span.msgicon.status.forwarded:before         { .am-mask(@ic-forward; 1em); }
+    span.flagged:before,
+    tr.flaggedroot span.unflagged:before                    { .am-mask(@ic-flag; 1em); }
+    span.attachment span:before                             { .am-mask(@ic-paperclip; 1em); vertical-align: -.15em; }
+}
+
+// Attachment list inside a message + compose attach button
+.attachmentslist li > a:before,
+.menu a.attach:before,
+a.attach:before            { .am-mask(@ic-paperclip; 1.15em); }
+
+// Popup / dropdown menu items. content:"" and the unique mask-image win
+// regardless of Elastic's more specific compound selectors, so a single class
+// per action covers all its variants (forward.inline / forward.bounce / …).
+.popupmenu {
+    a.reply:before        { .am-mask(@ic-reply; 1.15em); }
+    a.reply.all:before,
+    a.reply.list:before   { .am-mask(@ic-reply-all; 1.15em); }
+    a.forward:before      { .am-mask(@ic-forward; 1.15em); }
+    a.print:before        { .am-mask(@ic-print; 1.15em); }
+    a.delete:before       { .am-mask(@ic-delete; 1.15em); }
+    a.download:before,
+    a.export:before,
+    a.import:before       { .am-mask(@ic-download; 1.15em); }
+    a.copy:before         { .am-mask(@ic-copy; 1.15em); }
+    a.move:before         { .am-mask(@ic-move; 1.15em); }
+    a.edit:before         { .am-mask(@ic-drafts; 1.15em); }
+    a.source:before       { .am-mask(@ic-source; 1.15em); }
+    a.extwin:before,
+    a.open:before         { .am-mask(@ic-open; 1.15em); }
+    a.read:before         { .am-mask(@ic-read; 1.15em); }
+    a.unread:before       { .am-mask(@ic-mail; 1.15em); }
+    a.flag:before         { .am-mask(@ic-flag; 1.15em); }
+    a.unflag:before       { .am-mask(@ic-flag; 1.15em); }
+    a.archive:before      { .am-mask(@ic-archive; 1.15em); }
+    a.folders:before,
+    a.move.folder:before  { .am-mask(@ic-folder; 1.15em); }
+    a.addressbook:before  { .am-mask(@ic-contacts; 1.15em); }
+    a.compose:before      { .am-mask(@ic-compose; 1.15em); }
+    a.select:before       { .am-mask(@ic-select; 1.15em); }
+    a.options:before      { .am-mask(@ic-options; 1.15em); }
+}
