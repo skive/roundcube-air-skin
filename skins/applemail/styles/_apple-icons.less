@@ -136,6 +136,32 @@ a.attach:before            { .am-mask(@ic-paperclip; 1.15em); }
 @ic-signature: data-uri('image/svg+xml;charset=utf-8', '../images/icons/signature.svg');
 @ic-spell:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/spellcheck.svg');
 @ic-responses: data-uri('image/svg+xml;charset=utf-8', '../images/icons/responses.svg');
+@ic-display:   data-uri('image/svg+xml;charset=utf-8', '../images/icons/display.svg');
+@ic-server:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/server.svg');
+@ic-lock:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/lock.svg');
+@ic-identity:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/identity.svg');
+
+// Settings — section list (content) + preferences sidebar
+.listing.iconized {
+    tr.general > td.section:before      { .am-mask(@ic-display; 1.1em); }
+    tr.mailbox > td.section:before      { .am-mask(@ic-mail; 1.1em); }
+    tr.mailview > td.section:before     { .am-mask(@ic-inbox; 1.1em); }
+    tr.compose > td.section:before      { .am-mask(@ic-sent; 1.1em); }
+    tr.addressbook > td.section:before  { .am-mask(@ic-contacts; 1.1em); }
+    tr.folders > td.section:before,
+    li.folders > a:before               { .am-mask(@ic-folder; 1.1em); }
+    tr.server > td.section:before       { .am-mask(@ic-server; 1.1em); }
+    tr.encryption > td.section:before   { .am-mask(@ic-lock; 1.1em); }
+    tr.chat > td.section:before         { .am-mask(@ic-responses; 1.1em); }
+    tr.calendar > td.section:before     { .am-mask(@ic-about; 1.1em); }
+
+    tr.preferences > td.section:before,
+    li.preferences > a:before           { .am-mask(@ic-settings; 1.1em); }
+    tr.identities > td.section:before,
+    li.identities > a:before            { .am-mask(@ic-identity; 1.1em); }
+    tr.responses > td.section:before,
+    li.responses > a:before             { .am-mask(@ic-responses; 1.1em); }
+}
 
 // Compose toolbar (#messagetoolbar) — save / signature / responses / spellcheck
 .toolbar a.save:before       { .am-mask(@ic-save); }
