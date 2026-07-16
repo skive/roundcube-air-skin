@@ -113,8 +113,18 @@
 		img.dataset.amDone = '1';
 		img.replaceWith(av);
 	}
+	// Roundcube sets the placeholder photo asynchronously, so retry a few
+	// times after paint (build() is idempotent — it only acts on a still-
+	// unprocessed placeholder image).
 	if (document.readyState !== 'loading') build();
 	else document.addEventListener('DOMContentLoaded', build);
+	window.addEventListener('load', build);
+	setTimeout(build, 200);
+	setTimeout(build, 500);
+	setTimeout(build, 1000);
+	if (window.rcmail && rcmail.addEventListener) {
+		try { rcmail.addEventListener('actionafter', build); } catch (e) {}
+	}
 })();
 </script>
 
