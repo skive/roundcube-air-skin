@@ -132,6 +132,17 @@ body.status-flagged #message-header > .subject:before { .am-mask(@ic-flag; .85em
 .menu a.attach:before,
 a.attach:before            { .am-mask(@ic-paperclip; 1.15em); }
 
+@ic-save:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/save.svg');
+@ic-signature: data-uri('image/svg+xml;charset=utf-8', '../images/icons/signature.svg');
+@ic-spell:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/spellcheck.svg');
+@ic-responses: data-uri('image/svg+xml;charset=utf-8', '../images/icons/responses.svg');
+
+// Compose toolbar (#messagetoolbar) — save / signature / responses / spellcheck
+.toolbar a.save:before       { .am-mask(@ic-save); }
+.toolbar a.signature:before  { .am-mask(@ic-signature); }
+.toolbar a.responses:before  { .am-mask(@ic-responses); }
+.toolbar a.spellcheck:before { .am-mask(@ic-spell); }
+
 // Popup / dropdown menu items. content:"" and the unique mask-image win
 // regardless of Elastic's more specific compound selectors, so a single class
 // per action covers all its variants (forward.inline / forward.bounce / …).

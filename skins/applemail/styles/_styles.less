@@ -442,3 +442,51 @@ html.dark-mode .formbuttons .btn.cancel {
     background: @color-dark-input-addon-background;
     border-color: @color-dark-border;
 }
+
+// ---------------------------------------------------------------------------
+// Tahoe extras — toolbar hover, thin scrollbars, rounded controls
+// ---------------------------------------------------------------------------
+
+// Toolbar buttons get a soft rounded highlight on hover (macOS Tahoe)
+#toolbar-menu a:not(.disabled):hover,
+#toolbar-list-menu a:not(.disabled):hover {
+    background: fade(@color-font, 6%);
+}
+html.dark-mode #toolbar-menu a:not(.disabled):hover,
+html.dark-mode #toolbar-list-menu a:not(.disabled):hover {
+    background: fade(#fff, 9%);
+}
+
+// Thin, unobtrusive scrollbars
+.scroller,
+#messagelist-content,
+.iframe-wrapper,
+#messagebody,
+.watermark {
+    scrollbar-width: thin;
+}
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-thumb {
+    background: fade(@color-font, 22%);
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover { background: fade(@color-font, 34%); }
+*::-webkit-scrollbar-track { background: transparent; }
+html.dark-mode *::-webkit-scrollbar-thumb { background: fade(#fff, 20%); background-clip: padding-box; }
+html.dark-mode *::-webkit-scrollbar-thumb:hover { background: fade(#fff, 30%); background-clip: padding-box; }
+
+// Consistent rounded corners on primary controls
+.btn { border-radius: 8px; }
+.form-control,
+select.form-control,
+input.form-control,
+textarea.form-control { border-radius: 8px; }
+
+// Popup menus: rounded, soft shadow (Tahoe)
+.popupmenu,
+.popover .popover-body,
+.ui-dialog {
+    border-radius: 12px !important;
+}
