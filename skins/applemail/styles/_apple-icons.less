@@ -104,6 +104,10 @@
 a.toolbar-button.refresh:before,
 #toolbar-list-menu a.refresh:before  { .am-mask(@ic-refresh); }
 
+// Message subject row — flag indicator + open-in-window
+body.status-flagged #message-header > .subject:before { .am-mask(@ic-flag; .85em); vertical-align: 0; }
+#message-header > .subject a.extwin:before            { .am-mask(@ic-open; .8em); vertical-align: -.05em; }
+
 // Message header links (Подробности / Заголовки / формат)
 #message-header .header-links a {
     &.headers-details:before,

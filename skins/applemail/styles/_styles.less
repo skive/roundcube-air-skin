@@ -11,29 +11,40 @@
  */
 
 // ---------------------------------------------------------------------------
-// Frosted glass — task rail, folder sidebar, pane headers, search bar
+// Liquid Glass — task rail, folder sidebar, pane headers, search bar.
+// Strong blur + saturation for depth, plus a hairline light edge on top to
+// fake the refraction macOS Tahoe gives its glass materials.
 // (blur/backdrop is theme-agnostic; backgrounds are scoped below)
 // ---------------------------------------------------------------------------
 #layout-menu,
 #layout-sidebar,
 #layout > div > .header,
 .searchbar {
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(200%) blur(30px);
+    backdrop-filter: saturate(200%) blur(30px);
 }
 
 html:not(.dark-mode) {
-    #layout-menu               { background-color: fade(@color-taskmenu-background, 85%); }
+    #layout-menu               { background-color: fade(@color-taskmenu-background, 72%); }
     #layout-sidebar,
-    #folderlist-content        { background-color: fade(#f6f6f8, 80%); }
-    #layout > div > .header    { background-color: fade(@color-layout-header-background, 82%); }
+    #folderlist-content        { background-color: fade(#f4f4f7, 70%); }
+    #layout > div > .header    { background-color: fade(#f7f7fa, 72%); }
+
+    // lit top edge (edge refraction)
+    #layout > div > .header    { box-shadow: inset 0 .5px 0 fade(#fff, 70%); }
+    #layout-menu,
+    #layout-sidebar            { box-shadow: inset .5px 0 0 fade(#fff, 60%); }
 }
 
 html.dark-mode {
-    #layout-menu               { background-color: fade(@color-dark-background, 68%); }
+    #layout-menu               { background-color: fade(#28282a, 60%); }
     #layout-sidebar,
-    #folderlist-content        { background-color: fade(@color-dark-background, 55%); }
-    #layout > div > .header    { background-color: fade(@color-dark-background, 72%); }
+    #folderlist-content        { background-color: fade(#242426, 55%); }
+    #layout > div > .header    { background-color: fade(#242426, 62%); }
+
+    #layout > div > .header    { box-shadow: inset 0 .5px 0 fade(#fff, 8%); }
+    #layout-menu,
+    #layout-sidebar            { box-shadow: inset .5px 0 0 fade(#fff, 6%); }
 }
 
 // hairline separators
@@ -129,32 +140,49 @@ textarea.form-control {
 }
 
 .searchbar {
-    margin: .4rem .6rem;
+    margin: .5rem .6rem;
     border: 1px solid @color-layout-border;
-    border-radius: 8px;
-    height: 2rem;
-    min-height: 2rem;
-    line-height: 2rem;
+    border-radius: 10px;
+    height: 2.15rem;
+    min-height: 2.15rem;
+    line-height: 2.15rem;
+    background: fade(#000, 4%);
 }
-html.dark-mode .searchbar { border-color: @color-dark-border; }
+html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#fff, 6%); }
 
 // ---------------------------------------------------------------------------
-// Folder list — rounded rows, blue pill selection
+// Folder list — rounded rows, blue pill selection, airier spacing
 // ---------------------------------------------------------------------------
 #mailboxlist li a {
-    border-radius: 7px;
+    border-radius: 8px;
     margin: 1px .4rem;
+    padding-top: .4rem;
+    padding-bottom: .4rem;
     border: 0 !important;
+    transition: background-color .12s ease;
 }
+#mailboxlist li:not(.selected) > a:hover { background: fade(@color-font, 5%); }
+html.dark-mode #mailboxlist li:not(.selected) > a:hover { background: fade(#fff, 7%); }
 
 // ---------------------------------------------------------------------------
 // Message list — Apple typography + white text on the blue active row
 // ---------------------------------------------------------------------------
 .messagelist {
     // Apple Mail: sender is the prominent line (dark + semibold), subject muted
-    span.fromto { font-weight: 600; color: @color-font; }
-    td.subject span.subject { color: @color-list-secondary; }
+    span.fromto { font-weight: 600; color: @color-font; font-size: 14px; }
+    td.subject span.subject { color: @color-list-secondary; font-size: 13.5px; }
     tr.unread td.subject span.subject { color: @color-font; }
+    span.date { font-size: 12.5px; letter-spacing: .01em; }
+
+    // airier rows (Tahoe)
+    tbody td { padding-top: 8px; padding-bottom: 9px; }
+
+    // subtle hover on unselected rows
+    tbody tr:not(.selected):hover td { background-color: fade(@color-font, 4%); }
+
+    // rounded capsule ends on the blue active row
+    tbody tr.selected td:first-child { border-radius: 9px 0 0 9px; }
+    tbody tr.selected td:last-child  { border-radius: 0 9px 9px 0; }
 
     // Apple-blue unread dot (kept white on the blue active row)
     tr.unread:not(.selected) td.subject span.msgicon.status.unread:before,
@@ -172,30 +200,35 @@ html.dark-mode .searchbar { border-color: @color-dark-border; }
         color: @color-list-selected !important;
     }
 }
+html.dark-mode .messagelist tbody tr:not(.selected):hover td { background-color: fade(#fff, 5%); }
 
 // ---------------------------------------------------------------------------
-// Message toolbar (#toolbar-menu) — rectangular buttons: icon left, label right.
-// Elastic renders it as `.menu.toolbar.listing.iconized` (icon stacked over a
-// label); these rules lay each button out as a horizontal row instead.
+// Top toolbars (#toolbar-menu = message actions, #toolbar-list-menu = list) —
+// unified rectangular buttons: icon left, label right, vertically centred.
+// Elastic renders them as `.menu.toolbar.listing.iconized` (icon stacked over a
+// label); these rules lay each button out as one horizontal row so both
+// toolbars read identically, macOS Mail–style.
 // ---------------------------------------------------------------------------
-#toolbar-menu {
+#toolbar-menu,
+#toolbar-list-menu {
     align-items: center;
 
-    li { display: inline-flex; height: auto; }
+    li { display: inline-flex; align-items: center; height: auto; }
 
     a {
         display: inline-flex !important;
         align-items: center;
+        justify-content: flex-start;
         flex-direction: row !important;
         float: none !important;
         width: auto !important;
         max-width: none !important;
-        height: auto !important;
+        height: 2.1rem !important;
         min-width: 0 !important;
-        padding: .4rem .7rem !important;
+        padding: 0 .7rem !important;
         margin: 0 1px;
         border-radius: 8px;
-        line-height: 1.3 !important;
+        line-height: 1 !important;
         text-align: left !important;
 
         &:before {
@@ -204,16 +237,19 @@ html.dark-mode .searchbar { border-color: @color-dark-border; }
             justify-content: center;
             float: none !important;
             width: 1.3em !important;
-            height: auto !important;
+            height: 1.3em !important;
             margin: 0 .4rem 0 0 !important;
             line-height: 1 !important;
+            vertical-align: middle;
         }
 
         span.inner {
-            display: inline-block !important;
+            display: inline-flex !important;
+            align-items: center;
             position: static !important;
             font-size: .9rem;
             font-weight: 400;
+            line-height: 1 !important;
             white-space: nowrap;
             clip: auto !important;
             width: auto !important;
@@ -223,10 +259,20 @@ html.dark-mode .searchbar { border-color: @color-dark-border; }
 
     // dropdown chevrons (reply-all / forward) stay compact, icon-only
     .dropbutton a.dropdown {
-        padding: .4rem .25rem !important;
+        padding: 0 .3rem !important;
         span.inner { display: none !important; }
     }
+
+    // group separator: a slim hairline instead of Elastic's wide gap
+    .spacer {
+        width: 1px !important;
+        height: 1.3rem;
+        margin: 0 .5rem;
+        background: fade(@color-font, 12%);
+    }
 }
+html.dark-mode #toolbar-menu .spacer,
+html.dark-mode #toolbar-list-menu .spacer { background: fade(#fff, 14%); }
 
 // ---------------------------------------------------------------------------
 // Message preview header — Apple Mail style (avatar, sender, right-aligned date)
@@ -305,6 +351,17 @@ html.dark-mode .searchbar { border-color: @color-dark-border; }
         margin-top: .35rem;
 
         a { font-size: .82rem; }
+    }
+
+    // Details view (От / Кому / Дата) — muted labels, dark values, Apple-like
+    .header-headers {
+        font-size: .9rem;
+
+        .header-title {
+            font-weight: 400 !important;
+            color: @color-list-secondary !important;
+        }
+        td { padding-top: 1px; padding-bottom: 1px; }
     }
 }
 
