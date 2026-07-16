@@ -33,6 +33,15 @@
 @ic-mark:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/mark.svg');
 @ic-more:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/more.svg');
 @ic-search:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/search.svg');
+@ic-print:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/print.svg');
+@ic-prev:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/prev.svg');
+@ic-next:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/next.svg');
+@ic-folder:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/folder.svg');
+@ic-inbox:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/inbox.svg');
+@ic-sent:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/sent.svg');
+@ic-drafts:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/drafts.svg');
+@ic-junk:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/junk.svg');
+@ic-archive:   data-uri('image/svg+xml;charset=utf-8', '../images/icons/archive.svg');
 
 // Task rail + message toolbar. Nested under the id selectors so these rules
 // carry id-level specificity and beat the `#taskmenu/#toolbar-menu a:before`
@@ -54,7 +63,24 @@
     a.delete:before      { .am-mask(@ic-delete); }
     a.markmessage:before { .am-mask(@ic-mark); }
     a.more:before        { .am-mask(@ic-more); }
+    a.print:before       { .am-mask(@ic-print); }
+    a.prev:before        { .am-mask(@ic-prev); }
+    a.next:before        { .am-mask(@ic-next); }
 }
 
 // Search field magnifier
 .searchbar form:before   { .am-mask(@ic-search); }
+
+// Folder list — inline icons (align with the folder name)
+#mailboxlist {
+    li > a:before             { .am-mask(@ic-folder);  vertical-align: -.28em; margin-right: .5rem; }
+    li.inbox > a:before       { .am-mask(@ic-inbox);   vertical-align: -.28em; }
+    li.sent > a:before        { .am-mask(@ic-sent);    vertical-align: -.28em; }
+    li.drafts > a:before,
+    li.drafts a:before        { .am-mask(@ic-drafts);  vertical-align: -.28em; }
+    li.junk > a:before,
+    li.junk a:before          { .am-mask(@ic-junk);    vertical-align: -.28em; }
+    li.trash > a:before,
+    li.trash a:before         { .am-mask(@ic-delete);  vertical-align: -.28em; }
+    li.archive > a:before     { .am-mask(@ic-archive); vertical-align: -.28em; }
+}
