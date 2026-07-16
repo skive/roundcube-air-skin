@@ -1,0 +1,387 @@
+/**
+ * Apple Mail skin — aesthetic refinements on top of the reworked Elastic base.
+ *
+ * Colours/typography are handled at the source (colors.less, mixins.less).
+ * This file, imported last from styles.less (after dark.less), adds the
+ * things that aren't just a variable: frosted-glass translucency, rounded
+ * controls, the filled Compose button and Apple-style list/header polish.
+ *
+ * Any theme-dependent background is scoped explicitly to html:not(.dark-mode)
+ * / html.dark-mode so it never leaks across modes.
+ */
+
+// ---------------------------------------------------------------------------
+// Frosted glass — task rail, folder sidebar, pane headers, search bar
+// (blur/backdrop is theme-agnostic; backgrounds are scoped below)
+// ---------------------------------------------------------------------------
+#layout-menu,
+#layout-sidebar,
+#layout > div > .header,
+.searchbar {
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+
+html:not(.dark-mode) {
+    #layout-menu               { background-color: fade(@color-taskmenu-background, 85%); }
+    #layout-sidebar,
+    #folderlist-content        { background-color: fade(#f6f6f8, 80%); }
+    #layout > div > .header    { background-color: fade(@color-layout-header-background, 82%); }
+}
+
+html.dark-mode {
+    #layout-menu               { background-color: fade(@color-dark-background, 68%); }
+    #layout-sidebar,
+    #folderlist-content        { background-color: fade(@color-dark-background, 55%); }
+    #layout > div > .header    { background-color: fade(@color-dark-background, 72%); }
+}
+
+// hairline separators
+#layout-menu    { border-right: 1px solid @color-layout-border; }
+#layout-sidebar { border-right: 1px solid @color-layout-border; }
+html.dark-mode {
+    #layout-menu,
+    #layout-sidebar { border-color: @color-dark-border; }
+}
+
+// ---------------------------------------------------------------------------
+// Task rail — rounded buttons + filled Compose action (macOS Mail style)
+// ---------------------------------------------------------------------------
+#taskmenu {
+    // Large screens: rectangular rows — icon on the left, label on the right
+    // (Apple sidebar style), instead of Elastic's stacked icon-over-label.
+    @media screen and (min-width: (@screen-width-medium + 1px)) {
+        padding: 6px 8px;
+
+        a {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: none;       // Elastic caps task buttons at ~84px — lift it
+            height: auto;
+            text-align: left;
+            padding: 8px 12px;
+            margin: 1px 0;
+            border-radius: 9px;
+            line-height: 1.2;
+            transition: background-color .12s ease, color .12s ease;
+
+            // Center every glyph the same way regardless of its intrinsic
+            // FontAwesome metrics, so icons line up with the label baseline.
+            &:before {
+                float: none;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 1.5em;
+                height: 1.6em;
+                margin: 0 .8rem 0 0;
+                font-size: 1.15em;
+                line-height: 1;
+            }
+        }
+
+        span.inner {
+            display: inline-block;
+            padding: 0;
+            font-size: .95rem;
+            line-height: 1.6em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        // Compose = filled accent row at the top
+        .action-buttons {
+            display: block;
+            margin-bottom: 6px;
+
+            a.compose {
+                background-color: @color-main;
+                color: #fff;
+                font-weight: 600;
+                box-shadow: 0 2px 8px fade(@color-main, 35%);
+
+                &:before,
+                span.inner { color: #fff; }
+                &:hover { background-color: darken(@color-main, 6%); color: #fff; }
+            }
+        }
+
+        // Bottom group (theme / about / logout) spans the full rail width
+        .special-buttons {
+            left: 0;
+            right: 0;
+            width: auto;
+            padding: 0 8px 6px;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Rounded controls
+// ---------------------------------------------------------------------------
+.btn,
+input.form-control,
+select.form-control,
+textarea.form-control {
+    border-radius: 8px;
+}
+
+.searchbar {
+    margin: .4rem .6rem;
+    border: 1px solid @color-layout-border;
+    border-radius: 8px;
+    height: 2rem;
+    min-height: 2rem;
+    line-height: 2rem;
+}
+html.dark-mode .searchbar { border-color: @color-dark-border; }
+
+// ---------------------------------------------------------------------------
+// Folder list — rounded rows, blue pill selection
+// ---------------------------------------------------------------------------
+#mailboxlist li a {
+    border-radius: 7px;
+    margin: 1px .4rem;
+    border: 0 !important;
+}
+
+// ---------------------------------------------------------------------------
+// Message list — Apple typography + white text on the blue active row
+// ---------------------------------------------------------------------------
+.messagelist {
+    // Apple Mail: sender is the prominent line (dark + semibold), subject muted
+    span.fromto { font-weight: 600; color: @color-font; }
+    td.subject span.subject { color: @color-list-secondary; }
+    tr.unread td.subject span.subject { color: @color-font; }
+
+    // Apple-blue unread dot (kept white on the blue active row)
+    tr.unread:not(.selected) td.subject span.msgicon.status.unread:before,
+    tr.unread:not(.selected) td.subject span.msgicon.status.unreadchildren:before {
+        color: @color-main;
+    }
+
+    tr.selected td,
+    tr.selected td a,
+    tr.selected td span,
+    tr.selected td span.msgicon.status:before,
+    tr.selected td .date,
+    tr.selected td .subject a,
+    tr.selected td .fromto {
+        color: @color-list-selected !important;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Message toolbar (#toolbar-menu) — rectangular buttons: icon left, label right.
+// Elastic renders it as `.menu.toolbar.listing.iconized` (icon stacked over a
+// label); these rules lay each button out as a horizontal row instead.
+// ---------------------------------------------------------------------------
+#toolbar-menu {
+    align-items: center;
+
+    li { display: inline-flex; height: auto; }
+
+    a {
+        display: inline-flex !important;
+        align-items: center;
+        flex-direction: row !important;
+        float: none !important;
+        width: auto !important;
+        max-width: none !important;
+        height: auto !important;
+        min-width: 0 !important;
+        padding: .4rem .7rem !important;
+        margin: 0 1px;
+        border-radius: 8px;
+        line-height: 1.3 !important;
+        text-align: left !important;
+
+        &:before {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            float: none !important;
+            width: 1.3em !important;
+            height: auto !important;
+            margin: 0 .4rem 0 0 !important;
+            line-height: 1 !important;
+        }
+
+        span.inner {
+            display: inline-block !important;
+            position: static !important;
+            font-size: .9rem;
+            font-weight: 400;
+            white-space: nowrap;
+            clip: auto !important;
+            width: auto !important;
+            height: auto !important;
+        }
+    }
+
+    // dropdown chevrons (reply-all / forward) stay compact, icon-only
+    .dropbutton a.dropdown {
+        padding: .4rem .25rem !important;
+        span.inner { display: none !important; }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Message preview header — Apple Mail style (avatar, sender, right-aligned date)
+// ---------------------------------------------------------------------------
+#message-header {
+    padding: 20px 30px 16px;
+    border-bottom: 1px solid @color-layout-border;
+
+    & > .subject {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -.015em;
+        line-height: 1.2;
+        margin: 0 0 16px;
+    }
+
+    & > .header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        img.contactphoto,
+        .am-avatar {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 50%;
+            margin: 0;
+            object-fit: cover;
+            background: @color-image-upload-background;
+            padding: 0;
+        }
+
+        // synthesized coloured initials avatar (see script in message.html)
+        .am-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: .01em;
+            flex: none;
+        }
+    }
+
+    .header-content { flex: 1; min-width: 0; }
+
+    // sender on the left (bold), date pushed to the right (muted).
+    // font-size:0 on the row collapses the bare "От"/"за" label text nodes,
+    // leaving just the sender element and the date element (Apple-style).
+    .header-summary > span {
+        display: flex;
+        align-items: baseline;
+        width: 100%;
+        font-size: 0;
+
+        span.adr {
+            font-size: 1rem;
+            font-weight: 600;
+            color: @color-font;
+
+            a { font-weight: 600; color: @color-font; }
+        }
+
+        span.text-nowrap {
+            margin-left: auto;
+            padding-left: 1rem;
+            color: @color-list-secondary;
+            font-size: .85rem;
+            font-variant-numeric: tabular-nums;
+        }
+    }
+
+    .header-links {
+        margin-top: .35rem;
+
+        a { font-size: .82rem; }
+    }
+}
+
+// Body — Apple uses the system font for plain-text mail (not monospace),
+// with comfortable reading measure and spacing.
+#messagebody,
+.message-part,
+.message-htmlpart {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.message-part div.pre {
+    .font-family();
+    font-size: .95rem;
+    line-height: 1.6;
+}
+.message-htmlpart,
+.message-part {
+    font-size: .95rem;
+    line-height: 1.6;
+}
+
+// ---------------------------------------------------------------------------
+// Login — floating rounded card on a soft gradient
+// ---------------------------------------------------------------------------
+html:not(.dark-mode) .task-login #layout-content {
+    background: linear-gradient(135deg, #eef1f6 0%, #e7ebf2 100%);
+}
+html.dark-mode .task-login #layout-content {
+    background: linear-gradient(135deg, #0c0c0e 0%, #17171a 100%);
+}
+
+#login-form {
+    padding: 2rem 1.75rem;
+    border-radius: 18px;
+    background: @color-layout-content-background;
+    box-shadow: 0 30px 80px fade(#000, 18%), 0 2px 8px fade(#000, 8%);
+}
+html.dark-mode #login-form {
+    background: lighten(@color-dark-background, 4%);
+    box-shadow: 0 30px 80px fade(#000, 45%);
+}
+
+#login-form input.form-control {
+    height: 46px;
+    border-radius: 10px;
+}
+#login-form .btn-primary,
+#rcmloginsubmit {
+    height: 48px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+// ---------------------------------------------------------------------------
+// Compose — action buttons (Send + Cancel)
+// ---------------------------------------------------------------------------
+.compose-links .formbuttons,
+#compose-content .formbuttons,
+.formbuttons {
+    .btn.send { margin-right: 8px; }
+
+    .btn.cancel {
+        // Elastic tags unrecognised formbuttons with `.hidden` — force it visible
+        display: inline-flex !important;
+        align-items: center;
+        border-radius: 8px;
+        font-weight: 500;
+        color: @color-font;
+        background: @color-black-shade-bg;
+        border: 1px solid @color-layout-border;
+
+        &:hover { background: darken(@color-black-shade-bg, 4%); }
+    }
+}
+html.dark-mode .formbuttons .btn.cancel {
+    color: @color-dark-font;
+    background: @color-dark-input-addon-background;
+    border-color: @color-dark-border;
+}

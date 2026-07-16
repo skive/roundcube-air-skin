@@ -1,0 +1,657 @@
+<title>Apple Mail Skin — Prototype</title>
+<style>
+  :root {
+    --accent: #007AFF;
+    --accent-hover: #0071eb;
+    --unread: #007AFF;
+
+    --app-bg: #ffffff;
+    --taskmenu-bg: rgba(240,240,244,0.86);
+    --sidebar-bg-blur: rgba(246,246,248,0.80);
+    --list-bg: #ffffff;
+    --list-sel: #007AFF;
+    --reading-bg: #ffffff;
+    --toolbar-bg: rgba(250,250,252,0.82);
+
+    --text: #1d1d1f;
+    --text-2: #6e6e73;
+    --text-3: #a0a0a8;
+
+    --sep: rgba(0,0,0,0.08);
+    --sep-strong: rgba(0,0,0,0.13);
+    --hover: rgba(0,0,0,0.045);
+
+    --tl-red:#ff5f57; --tl-yellow:#febc2e; --tl-green:#28c840;
+
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+            "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #0A84FF; --accent-hover: #3f9dff; --unread: #0A84FF;
+      --app-bg: #1e1e1e;
+      --taskmenu-bg: rgba(28,28,30,0.90);
+      --sidebar-bg-blur: rgba(37,37,40,0.72);
+      --list-bg: #1e1e1e; --list-sel: #0A84FF; --reading-bg: #1c1c1e;
+      --toolbar-bg: rgba(38,38,41,0.82);
+      --text: #f5f5f7; --text-2: #98989d; --text-3: #67676c;
+      --sep: rgba(255,255,255,0.09); --sep-strong: rgba(255,255,255,0.14);
+      --hover: rgba(255,255,255,0.06);
+    }
+  }
+  :root[data-theme="light"] {
+    --accent:#007AFF;--accent-hover:#0071eb;--unread:#007AFF;
+    --app-bg:#fff;--taskmenu-bg:rgba(240,240,244,0.86);--sidebar-bg-blur:rgba(246,246,248,0.80);
+    --list-bg:#fff;--list-sel:#007AFF;--reading-bg:#fff;--toolbar-bg:rgba(250,250,252,0.82);
+    --text:#1d1d1f;--text-2:#6e6e73;--text-3:#a0a0a8;
+    --sep:rgba(0,0,0,0.08);--sep-strong:rgba(0,0,0,0.13);--hover:rgba(0,0,0,0.045);
+  }
+  :root[data-theme="dark"] {
+    --accent:#0A84FF;--accent-hover:#3f9dff;--unread:#0A84FF;
+    --app-bg:#1e1e1e;--taskmenu-bg:rgba(28,28,30,0.90);--sidebar-bg-blur:rgba(37,37,40,0.72);
+    --list-bg:#1e1e1e;--list-sel:#0A84FF;--reading-bg:#1c1c1e;--toolbar-bg:rgba(38,38,41,0.82);
+    --text:#f5f5f7;--text-2:#98989d;--text-3:#67676c;
+    --sep:rgba(255,255,255,0.09);--sep-strong:rgba(255,255,255,0.14);--hover:rgba(255,255,255,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; }
+  body {
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--app-bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== #layout — fills the viewport, no window chrome ===== */
+  #layout {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 60px 236px 340px 1fr;
+  }
+
+  /* ===== taskmenu (Roundcube's task rail) ===== */
+  .taskmenu {
+    background: var(--taskmenu-bg);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border-right: 0.5px solid var(--sep);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 12px 0; gap: 4px;
+  }
+  .taskmenu a {
+    width: 44px; height: 44px; border-radius: 11px;
+    display: grid; place-items: center; color: var(--text-2);
+    cursor: pointer; text-decoration: none; position: relative;
+  }
+  .taskmenu a:hover { background: var(--hover); color: var(--text); }
+  .taskmenu a.selected { color: var(--accent); }
+  .taskmenu a.selected::before {
+    content:""; position:absolute; left:-12px; top:11px; bottom:11px; width:3px;
+    border-radius:0 3px 3px 0; background:var(--accent);
+  }
+  .taskmenu a svg { width: 22px; height: 22px; }
+  .taskmenu .compose {
+    background: var(--accent); color:#fff; margin-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(0,122,255,.35);
+  }
+  .taskmenu .compose:hover { background: var(--accent-hover); color:#fff; }
+  .taskmenu .spacer { flex: 1; }
+  .taskmenu a.logout:hover { color:#ff3b30; }
+
+  /* ===== column header (shared) ===== */
+  .col-head {
+    height: 52px; flex: none;
+    display: flex; align-items: center; gap: 6px; padding: 0 14px;
+    background: var(--toolbar-bg);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 0.5px solid var(--sep);
+  }
+  .col-head .title { font-size: 15px; font-weight: 700; letter-spacing:-.01em; }
+  .col-head .spacer { flex: 1; }
+
+  .tbtn {
+    width:32px; height:30px; border-radius:7px; border:0; background:transparent;
+    color:var(--text-2); display:grid; place-items:center; cursor:pointer;
+  }
+  .tbtn:hover { background: var(--hover); color: var(--text); }
+  .tbtn svg { width:18px; height:18px; }
+
+  /* ===== sidebar (folder list) ===== */
+  .sidebar {
+    background: var(--sidebar-bg-blur);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border-right: 0.5px solid var(--sep);
+    display: flex; flex-direction: column; min-height: 0;
+  }
+  .sidebar .scroll { overflow-y: auto; padding: 8px 10px 14px; flex: 1; }
+  .side-group { margin-bottom: 16px; }
+  .side-title {
+    font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--text-3); padding: 4px 8px; margin-bottom: 2px;
+  }
+  .side-item {
+    display: flex; align-items: center; gap: 9px; padding: 6px 8px; border-radius: 7px;
+    cursor: pointer; font-size: 13.5px; color: var(--text);
+  }
+  .side-item .ico { width: 17px; height: 17px; color: var(--accent); flex: none; }
+  .side-item .ico.grey { color: var(--text-2); }
+  .side-item:hover { background: var(--hover); }
+  .side-item.active { background: var(--accent); color:#fff; }
+  .side-item.active .ico { color:#fff; }
+  .side-item .count { margin-left:auto; font-size:12px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+  .side-item.active .count { color: rgba(255,255,255,.85); }
+  .side-item .badge {
+    margin-left:auto; background:var(--accent); color:#fff; font-size:11px; font-weight:600;
+    padding:1px 7px; border-radius:9px; min-width:20px; text-align:center; font-variant-numeric:tabular-nums;
+  }
+  .side-item.active .badge { background: rgba(255,255,255,.25); }
+
+  /* quota / account footer inside sidebar */
+  .side-foot {
+    border-top: 0.5px solid var(--sep); padding: 10px 14px;
+    font-size: 12px; color: var(--text-3); display:flex; align-items:center; gap:8px;
+  }
+  .side-foot .who { color: var(--text-2); font-weight:600; }
+
+  /* ===== message list ===== */
+  .list { background: var(--list-bg); border-right: 0.5px solid var(--sep); display:flex; flex-direction:column; min-height:0; }
+  .list .search {
+    display:flex; align-items:center; gap:6px; margin: 8px 12px 0;
+    background: var(--hover); border: 0.5px solid var(--sep);
+    border-radius: 7px; height: 30px; padding: 0 9px; color: var(--text-3);
+  }
+  .list .search input { border:0; background:transparent; outline:none; color:var(--text); font-size:13px; width:100%; font-family:var(--font); }
+  .list .search svg { width:14px; height:14px; }
+  .list .scroll { overflow-y: auto; flex:1; margin-top: 6px; }
+  .msg {
+    display:grid; grid-template-columns: 8px 1fr; gap:0 8px;
+    padding: 10px 16px 11px; cursor:pointer; border-bottom: 0.5px solid var(--sep);
+  }
+  .msg:hover { background: var(--hover); }
+  .msg.sel { background: var(--list-sel); }
+  .msg.sel * { color:#fff !important; }
+  .msg.sel .snippet, .msg.sel .date { opacity:.9; }
+  .dot { grid-row:1; width:8px; height:8px; border-radius:50%; background:transparent; margin-top:5px; }
+  .msg.unread .dot { background: var(--unread); }
+  .msg-body { grid-column:2; min-width:0; }
+  .msg-top { display:flex; align-items:baseline; gap:8px; }
+  .sender { font-size:14px; font-weight:600; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .msg.unread .sender { font-weight:700; }
+  .date { margin-left:auto; font-size:12px; color:var(--text-3); white-space:nowrap; flex:none; }
+  .subject { font-size:13.5px; color:var(--text); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .msg.unread .subject { font-weight:600; }
+  .snippet { font-size:13px; color:var(--text-2); margin-top:2px; line-height:1.35;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .flags { display:flex; gap:5px; margin-top:5px; }
+  .tag { font-size:10.5px; font-weight:600; padding:1px 7px; border-radius:20px; }
+  .tag.att { background:var(--hover); color:var(--text-2); display:flex; align-items:center; gap:3px; }
+  .tag.red{ background:rgba(255,59,48,.14); color:#ff3b30; }
+  .tag.green{ background:rgba(40,200,64,.16); color:#1a9e35; }
+  .tag.orange{ background:rgba(255,149,0,.16); color:#e08600; }
+
+  /* ===== content / preview ===== */
+  .content { background: var(--reading-bg); display:flex; flex-direction:column; min-height:0; }
+  .content .scroll { overflow-y:auto; flex:1; }
+  .read-head { padding: 20px 30px 14px; border-bottom:0.5px solid var(--sep); }
+  .read-subject { font-size:22px; font-weight:700; letter-spacing:-.015em; margin:0 0 14px; text-wrap:balance; }
+  .from-row { display:flex; align-items:center; gap:12px; }
+  .avatar {
+    width:40px; height:40px; border-radius:50%; flex:none; display:grid; place-items:center;
+    color:#fff; font-weight:600; font-size:15px; background:linear-gradient(135deg,#5e9bff,#0a63d6);
+  }
+  .from-meta { min-width:0; }
+  .from-name { font-size:14.5px; font-weight:600; }
+  .from-name span { color:var(--text-3); font-weight:400; }
+  .from-to { font-size:12.5px; color:var(--text-2); margin-top:1px; }
+  .from-date { margin-left:auto; font-size:12.5px; color:var(--text-3); text-align:right; flex:none; }
+
+  .attach { display:flex; gap:12px; padding:14px 30px 4px; flex-wrap:wrap; }
+  .att-card {
+    display:flex; align-items:center; gap:10px; border:0.5px solid var(--sep);
+    border-radius:9px; padding:9px 12px; min-width:190px; background:var(--app-bg);
+  }
+  .att-icon { width:34px; height:34px; border-radius:7px; display:grid; place-items:center;
+    color:#fff; font-size:11px; font-weight:700; flex:none; background:linear-gradient(135deg,#ff6a88,#ff3b30); }
+  .att-name { font-size:13px; font-weight:600; }
+  .att-size { font-size:11.5px; color:var(--text-3); }
+
+  .read-body { padding:22px 30px 30px; font-size:14.5px; line-height:1.62; color:var(--text); }
+  .read-body p { margin:0 0 16px; max-width:64ch; }
+  .read-body h3 { font-size:16px; margin:22px 0 10px; }
+  .read-body a { color:var(--accent); text-decoration:none; }
+  .read-body .quote { border-left:3px solid var(--sep-strong); padding:2px 0 2px 14px; color:var(--text-2); margin:0 0 16px; }
+  .btn-primary { display:inline-block; background:var(--accent); color:#fff; font-weight:600; font-size:14px;
+    padding:9px 20px; border-radius:8px; text-decoration:none; margin:4px 0 18px; }
+
+  ::-webkit-scrollbar { width:9px; }
+  ::-webkit-scrollbar-thumb { background:rgba(128,128,128,.35); border-radius:6px; border:2px solid transparent; background-clip:padding-box; }
+
+  /* ===== compose (floating window like macOS Mail's new message) ===== */
+  .compose-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0.28);
+    display: none; align-items: center; justify-content: center; padding: 30px;
+  }
+  .compose-overlay.open { display: flex; }
+  .compose-window {
+    width: min(680px, 100%); height: min(640px, 100%);
+    background: var(--app-bg); border-radius: 12px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.35), 0 2px 10px rgba(0,0,0,0.2);
+    border: 0.5px solid var(--sep-strong);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .compose-bar {
+    height: 52px; flex: none; display: flex; align-items: center; gap: 4px; padding: 0 12px;
+    background: var(--toolbar-bg);
+    backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 0.5px solid var(--sep);
+  }
+  .compose-bar .title { font-size: 14px; font-weight: 700; margin: 0 auto; }
+  .compose-bar .send {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--accent); color:#fff; border:0; border-radius: 8px;
+    font-family: var(--font); font-size: 13.5px; font-weight: 600; padding: 7px 15px; cursor: pointer;
+  }
+  .compose-bar .send:hover { background: var(--accent-hover); }
+  .compose-bar .send svg { width: 15px; height: 15px; }
+  .compose-fields { flex: none; }
+  .cfield {
+    display: flex; align-items: center; gap: 10px; padding: 9px 18px;
+    border-bottom: 0.5px solid var(--sep); font-size: 14px;
+  }
+  .cfield label { color: var(--text-3); width: 52px; flex: none; }
+  .cfield input, .cfield select {
+    border: 0; background: transparent; outline: none; color: var(--text);
+    font-family: var(--font); font-size: 14px; width: 100%;
+  }
+  .cfield .chip {
+    display:inline-flex; align-items:center; gap:6px; background:rgba(0,122,255,.12); color:var(--accent);
+    border-radius:20px; padding:2px 4px 2px 10px; font-size:13px; font-weight:500;
+  }
+  .cfield .chip b { width:18px;height:18px;border-radius:50%;background:rgba(0,122,255,.2);display:grid;place-items:center;font-size:14px;line-height:1;cursor:pointer;font-weight:400;}
+  .cfield .cc { margin-left:auto; color:var(--text-3); font-size:13px; cursor:pointer; }
+  .format-bar { display:flex; align-items:center; gap:2px; padding:6px 14px; border-bottom:0.5px solid var(--sep); }
+  .format-bar .sep { width:1px; height:18px; background:var(--sep-strong); margin:0 6px; }
+  .compose-body {
+    flex: 1; padding: 18px; overflow-y: auto;
+    font-size: 14.5px; line-height: 1.6; color: var(--text); outline: none;
+  }
+  .compose-body .sig { color: var(--text-3); margin-top: 22px; font-size: 13.5px; }
+  .compose-foot {
+    flex: none; border-top: 0.5px solid var(--sep); padding: 10px 18px; display:flex; gap:10px; align-items:center;
+  }
+  .compose-foot .att-card { min-width: 0; }
+
+  /* ===== login screen ===== */
+  .login-screen {
+    position: fixed; inset: 0; z-index: 90; display: none;
+    align-items: center; justify-content: center; padding: 24px;
+    background:
+      radial-gradient(1200px 700px at 20% -10%, #d9e6ff 0%, transparent 55%),
+      radial-gradient(1000px 800px at 110% 120%, #ffe4f0 0%, transparent 55%),
+      linear-gradient(135deg, #eef1f6 0%, #e7ebf2 100%);
+  }
+  @media (prefers-color-scheme: dark) { .login-screen {
+    background:
+      radial-gradient(1200px 700px at 20% -10%, #16233a 0%, transparent 55%),
+      radial-gradient(1000px 800px at 110% 120%, #2a1522 0%, transparent 55%),
+      linear-gradient(135deg, #0c0c0e 0%, #17171a 100%); } }
+  :root[data-theme="light"] .login-screen { background:
+      radial-gradient(1200px 700px at 20% -10%, #d9e6ff 0%, transparent 55%),
+      radial-gradient(1000px 800px at 110% 120%, #ffe4f0 0%, transparent 55%),
+      linear-gradient(135deg, #eef1f6 0%, #e7ebf2 100%); }
+  :root[data-theme="dark"] .login-screen { background:
+      radial-gradient(1200px 700px at 20% -10%, #16233a 0%, transparent 55%),
+      radial-gradient(1000px 800px at 110% 120%, #2a1522 0%, transparent 55%),
+      linear-gradient(135deg, #0c0c0e 0%, #17171a 100%); }
+  .login-screen.open { display: flex; }
+  .login-card {
+    width: min(380px, 100%); background: var(--app-bg);
+    border-radius: 18px; padding: 36px 34px 30px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.1);
+    border: 0.5px solid var(--sep); text-align: center;
+  }
+  .login-logo {
+    width: 60px; height: 60px; border-radius: 15px; margin: 0 auto 16px;
+    background: linear-gradient(135deg, #5e9bff, #0a63d6); display: grid; place-items: center;
+    box-shadow: 0 8px 20px rgba(10,99,214,.35);
+  }
+  .login-logo svg { width: 34px; height: 34px; color: #fff; }
+  .login-card h1 { font-size: 21px; font-weight: 700; margin: 0 0 4px; letter-spacing: -.01em; }
+  .login-card .lead { font-size: 13.5px; color: var(--text-2); margin: 0 0 22px; }
+  .login-field {
+    display: flex; align-items: center; gap: 10px; text-align: left;
+    background: var(--hover); border: 0.5px solid var(--sep);
+    border-radius: 10px; padding: 0 12px; height: 46px; margin-bottom: 10px;
+  }
+  .login-field:focus-within { border-color: var(--accent); background: transparent; }
+  .login-field svg { width: 17px; height: 17px; color: var(--text-3); flex: none; }
+  .login-field input {
+    border: 0; background: transparent; outline: none; color: var(--text);
+    font-family: var(--font); font-size: 15px; width: 100%;
+  }
+  .login-btn {
+    width: 100%; background: var(--accent); color: #fff; border: 0; border-radius: 10px;
+    font-family: var(--font); font-size: 15px; font-weight: 600; padding: 13px; margin-top: 8px; cursor: pointer;
+  }
+  .login-btn:hover { background: var(--accent-hover); }
+  .login-foot { margin-top: 18px; font-size: 12.5px; color: var(--text-3); }
+  .login-foot a { color: var(--accent); text-decoration: none; }
+</style>
+
+<div id="layout">
+
+  <!-- ===== taskmenu ===== -->
+  <nav class="taskmenu">
+    <a class="compose" title="Написать" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h16M6 16l9-9 3 3-9 9H6v-3z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="mail selected" title="Почта" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h16v12H4zM4 7l8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="contacts" title="Контакты" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.4"/><path d="M5 20a7 7 0 0114 0" stroke-linecap="round"/></svg>
+    </a>
+    <a class="settings" title="Настройки" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8" stroke-linecap="round"/></svg>
+    </a>
+    <span class="spacer"></span>
+    <a class="theme dark" id="themeBtn" title="Сменить тему" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 108.5 12A7 7 0 0112 3z"/></svg>
+    </a>
+    <a class="about" title="О программе" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01" stroke-linecap="round"/></svg>
+    </a>
+    <a class="logout" title="Выход" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M15 12H4M4 12l4-4M4 12l4 4M13 5h6v14h-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
+
+  <!-- ===== sidebar: folders ===== -->
+  <aside class="sidebar">
+    <div class="col-head"><span class="title">Ящики</span><span class="spacer"></span>
+      <button class="tbtn" title="Новая папка"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h6l2 3h8v9H4z"/><path d="M14 13v4M12 15h4" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="scroll">
+      <div class="side-group">
+        <div class="side-title">Избранное</div>
+        <div class="side-item active">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h16v12H4zM4 7l8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Входящие <span class="badge">6</span>
+        </div>
+        <div class="side-item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3v18l6-4 6 4V3z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          С флажком <span class="count">3</span>
+        </div>
+        <div class="side-item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Отправленные
+        </div>
+        <div class="side-item">
+          <svg class="ico grey" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h6l2 3h8v9H4z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Черновики <span class="count">2</span>
+        </div>
+        <div class="side-item">
+          <svg class="ico grey" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 5h18v14H3zM3 9h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Спам <span class="count">14</span>
+        </div>
+        <div class="side-item">
+          <svg class="ico grey" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 7h14M9 7V5h6v2M8 7l1 13h6l1-13" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Корзина
+        </div>
+      </div>
+      <div class="side-group">
+        <div class="side-title">Метки</div>
+        <div class="side-item"><span class="ico" style="width:11px;height:11px;border-radius:50%;background:#ff3b30;"></span> Работа</div>
+        <div class="side-item"><span class="ico" style="width:11px;height:11px;border-radius:50%;background:#34c759;"></span> Личное</div>
+        <div class="side-item"><span class="ico" style="width:11px;height:11px;border-radius:50%;background:#ff9500;"></span> Финансы</div>
+      </div>
+    </div>
+    <div class="side-foot">
+      <span class="who">it.inprom.estate</span>
+      <span class="spacer" style="flex:1"></span>
+      <span>62% из 5 ГБ</span>
+    </div>
+  </aside>
+
+  <!-- ===== message list ===== -->
+  <section class="list">
+    <div class="col-head">
+      <span class="title">Входящие</span>
+      <span class="spacer"></span>
+      <button class="tbtn" title="Выбрать"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 11l3 3 8-8M4 12v7h7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="tbtn" title="Сортировка"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 5v14M7 5l-3 3M7 5l3 3M17 19V5M17 19l-3-3M17 19l3-3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4" stroke-linecap="round"/></svg>
+      <input placeholder="Поиск в почте" />
+    </div>
+    <div class="scroll">
+      <div class="msg unread sel">
+        <span class="dot"></span>
+        <div class="msg-body">
+          <div class="msg-top"><span class="sender">Анна Ковалёва</span><span class="date">9:41</span></div>
+          <div class="subject">Правки по макету рассылки — финал</div>
+          <div class="snippet">Привет! Посмотрела последнюю версию, почти всё отлично. Осталось поправить отступы в футере и цвет кнопки…</div>
+          <div class="flags"><span class="tag att">📎 2</span><span class="tag red">Работа</span></div>
+        </div>
+      </div>
+      <div class="msg unread">
+        <span class="dot"></span>
+        <div class="msg-body">
+          <div class="msg-top"><span class="sender">GitHub</span><span class="date">9:12</span></div>
+          <div class="subject">[roundcube/roundcubemail] Новый релиз 1.6.7</div>
+          <div class="snippet">A new version has been published. This is a maintenance release with several bug fixes and security…</div>
+        </div>
+      </div>
+      <div class="msg unread">
+        <span class="dot"></span>
+        <div class="msg-body">
+          <div class="msg-top"><span class="sender">Дмитрий Соколов</span><span class="date">8:30</span></div>
+          <div class="subject">Счёт за хостинг, июль</div>
+          <div class="snippet">Добрый день! Прикрепляю счёт за текущий месяц. Оплату желательно провести до 20 числа…</div>
+          <div class="flags"><span class="tag att">📎 1</span><span class="tag orange">Финансы</span></div>
+        </div>
+      </div>
+      <div class="msg">
+        <span class="dot"></span>
+        <div class="msg-body">
+          <div class="msg-top"><span class="sender">Apple</span><span class="date">Вчера</span></div>
+          <div class="subject">Ваша квитанция от Apple</div>
+          <div class="snippet">Спасибо за покупку. Ниже вы найдёте детали вашего недавнего заказа в App Store…</div>
+        </div>
+      </div>
+      <div class="msg">
+        <span class="dot"></span>
+        <div class="msg-body">
+          <div class="msg-top"><span class="sender">Мария, Илья, +3</span><span class="date">Вчера</span></div>
+          <div class="subject">Re: Планы на выходные 🏔️</div>
+          <div class="snippet">Отличная идея! Я за вариант с горами. Давайте выезжать пораньше, чтобы успеть до пробок…</div>
+          <div class="flags"><span class="tag green">Личное</span></div>
+        </div>
+      </div>
+      <div class="msg">
+        <span class="dot"></span>
+        <div class="msg-body">
+          <div class="msg-top"><span class="sender">Newsletter Design</span><span class="date">14 июл</span></div>
+          <div class="subject">10 трендов интерфейсов 2026 года</div>
+          <div class="snippet">В этом выпуске: возвращение скевоморфизма, spatial-интерфейсы, адаптивная типографика и…</div>
+        </div>
+      </div>
+      <div class="msg">
+        <span class="dot"></span>
+        <div class="msg-body">
+          <div class="msg-top"><span class="sender">Банк</span><span class="date">13 июл</span></div>
+          <div class="subject">Уведомление об операции</div>
+          <div class="snippet">По вашей карте •• 4417 совершена операция на сумму 2 340 ₽. Если это были не вы…</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== content / preview ===== -->
+  <main class="content">
+    <div class="col-head">
+      <button class="tbtn" title="Ответить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 7L4 12l5 5M4 12h11a5 5 0 015 5v1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="tbtn" title="Ответить всем"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 7l-5 5 5 5M13 7l-5 5 5 5M8 12h9a4 4 0 014 4v1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="tbtn" title="Переслать"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M15 7l5 5-5 5M20 12H9a5 5 0 00-5 5v1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <span class="spacer"></span>
+      <button class="tbtn" title="Флажок"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3v18l6-4 6 4V3z" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="tbtn" title="Архивировать"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h16v11H4zM3 5h18v3H3zM10 12h4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="tbtn" title="Удалить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 7h14M9 7V5h6v2M8 7l1 13h6l1-13" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="tbtn" title="Ещё"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>
+    </div>
+    <div class="scroll">
+      <div class="read-head">
+        <h1 class="read-subject">Правки по макету рассылки — финал</h1>
+        <div class="from-row">
+          <div class="avatar">АК</div>
+          <div class="from-meta">
+            <div class="from-name">Анна Ковалёва <span>&lt;anna@studio.design&gt;</span></div>
+            <div class="from-to">кому: я, команда дизайна</div>
+          </div>
+          <div class="from-date">16 июля 2026<br>9:41</div>
+        </div>
+      </div>
+      <div class="attach">
+        <div class="att-card"><div class="att-icon">PDF</div><div><div class="att-name">newsletter-final.pdf</div><div class="att-size">2,4 МБ</div></div></div>
+        <div class="att-card"><div class="att-icon" style="background:linear-gradient(135deg,#5e9bff,#0a63d6)">PNG</div><div><div class="att-name">footer-fix.png</div><div class="att-size">840 КБ</div></div></div>
+      </div>
+      <div class="read-body">
+        <p>Привет! 👋</p>
+        <p>Посмотрела последнюю версию макета рассылки — почти всё отлично, отличная работа. Осталось буквально пара мелочей, чтобы отдать в вёрстку:</p>
+        <h3>Что нужно поправить</h3>
+        <p class="quote">1. Отступы в футере слишком большие — уменьшить до 24px.<br>2. Цвет основной кнопки сделать чуть темнее (наш системный синий).<br>3. Логотип в шапке выровнять по центру на мобильной версии.</p>
+        <p>Всё остальное можно оставить как есть. Файлы с правками прикрепила выше — там PDF со скриншотами и отдельный PNG с исправленным футером для примера.</p>
+        <p>Как внесёшь — скинь, пожалуйста, обновлённую версию. Хочу успеть отправить на согласование до конца недели.</p>
+        <a class="btn-primary" href="#">Открыть в Figma</a>
+        <p>Спасибо! 🙌<br>Анна</p>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<!-- ===== compose window ===== -->
+<div class="compose-overlay" id="composeOverlay">
+  <div class="compose-window">
+    <div class="compose-bar">
+      <button class="tbtn" id="composeClose" title="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>
+      <button class="tbtn" title="Прикрепить файл"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12l-8.5 8.5a4 4 0 01-6-6L14 6a3 3 0 014 4l-8 8a1.5 1.5 0 01-2-2l7.5-7.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <span class="title">Новое сообщение</span>
+      <button class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>Отправить</button>
+    </div>
+    <div class="compose-fields">
+      <div class="cfield">
+        <label>От</label>
+        <select><option>it.inprom.estate@gmail.com</option><option>Работа &lt;work@studio.design&gt;</option></select>
+      </div>
+      <div class="cfield">
+        <label>Кому</label>
+        <span class="chip">Анна Ковалёва <b>×</b></span>
+        <input placeholder="" />
+        <span class="cc">Копия / СК</span>
+      </div>
+      <div class="cfield">
+        <label>Тема</label>
+        <input placeholder="Тема" value="Re: Правки по макету рассылки — финал" />
+      </div>
+    </div>
+    <div class="format-bar">
+      <button class="tbtn" title="Полужирный"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 5h6a3.5 3.5 0 010 7H7zM7 12h7a3.5 3.5 0 010 7H7z" stroke-linejoin="round"/></svg></button>
+      <button class="tbtn" title="Курсив"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 5h7M7 19h7M14 5l-4 14" stroke-linecap="round"/></svg></button>
+      <button class="tbtn" title="Подчёркнутый"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 5v6a5 5 0 0010 0V5M5 21h14" stroke-linecap="round"/></svg></button>
+      <span class="sep"></span>
+      <button class="tbtn" title="Список"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01" stroke-linecap="round"/></svg></button>
+      <button class="tbtn" title="Ссылка"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="compose-body" contenteditable="true">
+      <div>Привет, Анна!</div><br>
+      <div>Спасибо за правки — всё понятно. Внесу отступы в футере и поправлю цвет кнопки сегодня, ближе к вечеру пришлю обновлённую версию.</div>
+      <div class="sig">— <br>С уважением,<br>Команда</div>
+    </div>
+    <div class="compose-foot">
+      <div class="att-card"><div class="att-icon">PDF</div><div><div class="att-name">бриф-v2.pdf</div><div class="att-size">1,1 МБ</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== login screen ===== -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h16v12H4zM4 7l8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h1>Вход в почту</h1>
+    <p class="lead">Введите данные учётной записи</p>
+    <div class="login-field">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.4"/><path d="M5 20a7 7 0 0114 0" stroke-linecap="round"/></svg>
+      <input type="text" placeholder="Имя пользователя" value="it.inprom.estate@gmail.com" />
+    </div>
+    <div class="login-field">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke-linecap="round"/></svg>
+      <input type="password" placeholder="Пароль" value="········" />
+    </div>
+    <button class="login-btn" id="loginBtn">Войти</button>
+    <div class="login-foot">Roundcube · скин <a href="#">Apple Mail</a></div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeBtn');
+    function current() {
+      var t = root.getAttribute('data-theme');
+      if (t) return t;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    function apply(t){ root.setAttribute('data-theme', t); }
+    apply(current());
+    btn.addEventListener('click', function(e){ e.preventDefault(); apply(current() === 'dark' ? 'light' : 'dark'); });
+
+    var msgs = Array.prototype.slice.call(document.querySelectorAll('.msg'));
+    msgs.forEach(function(m){
+      m.addEventListener('click', function(){
+        msgs.forEach(function(x){ x.classList.remove('sel'); });
+        m.classList.add('sel'); m.classList.remove('unread');
+      });
+    });
+    var items = Array.prototype.slice.call(document.querySelectorAll('.side-item'));
+    items.forEach(function(i){
+      i.addEventListener('click', function(){
+        items.forEach(function(x){ x.classList.remove('active'); });
+        i.classList.add('active');
+      });
+    });
+    var tasks = Array.prototype.slice.call(document.querySelectorAll('.taskmenu a.mail, .taskmenu a.contacts, .taskmenu a.settings'));
+    tasks.forEach(function(t){
+      t.addEventListener('click', function(e){
+        e.preventDefault();
+        tasks.forEach(function(x){ x.classList.remove('selected'); });
+        t.classList.add('selected');
+      });
+    });
+
+    // compose window
+    var overlay = document.getElementById('composeOverlay');
+    function openCompose(){ overlay.classList.add('open'); }
+    function closeCompose(){ overlay.classList.remove('open'); }
+    document.querySelector('.taskmenu a.compose').addEventListener('click', function(e){ e.preventDefault(); openCompose(); });
+    document.getElementById('composeClose').addEventListener('click', closeCompose);
+    overlay.querySelector('.send').addEventListener('click', closeCompose);
+    overlay.addEventListener('click', function(e){ if (e.target === overlay) closeCompose(); });
+
+    // login screen
+    var login = document.getElementById('loginScreen');
+    document.querySelector('.taskmenu a.logout').addEventListener('click', function(e){ e.preventDefault(); login.classList.add('open'); });
+    document.getElementById('loginBtn').addEventListener('click', function(){ login.classList.remove('open'); });
+
+    // esc closes overlays
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') { closeCompose(); login.classList.remove('open'); }
+    });
+  })();
+</script>

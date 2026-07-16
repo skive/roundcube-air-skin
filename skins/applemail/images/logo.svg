@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Mail">
+  <defs>
+    <linearGradient id="am-bg" x1="256" y1="0" x2="256" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4a94ff"/>
+      <stop offset="1" stop-color="#0a63d6"/>
+    </linearGradient>
+    <linearGradient id="am-flap" x1="256" y1="150" x2="256" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2b7bff"/>
+      <stop offset="1" stop-color="#0a63d6"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="512" height="512" rx="116" fill="url(#am-bg)"/>
+  <rect x="96" y="150" width="320" height="212" rx="34" fill="#ffffff"/>
+  <path d="M120 178 L256 292 L392 178" fill="none" stroke="url(#am-flap)"
+        stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
