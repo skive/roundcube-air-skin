@@ -1,0 +1,60 @@
+/**
+ * Apple Mail skin — Apple-style icon set (design branch `apple-icons`).
+ *
+ * Replaces Elastic's FontAwesome glyphs with SF-Symbols-inspired line icons
+ * (thin, rounded) drawn as SVGs in images/icons/ and applied through a CSS
+ * mask so they still inherit `currentColor` (selected / hover / dark mode).
+ */
+
+.am-mask(@u) {
+    content: "" !important;
+    display: inline-block !important;
+    width: 1.35em !important;
+    height: 1.35em !important;
+    flex: none !important;
+    background-color: currentColor !important;
+    -webkit-mask-image: @u;            mask-image: @u;
+    -webkit-mask-repeat: no-repeat;    mask-repeat: no-repeat;
+    -webkit-mask-position: center;     mask-position: center;
+    -webkit-mask-size: contain;        mask-size: contain;
+}
+
+@ic-compose:   data-uri('image/svg+xml;charset=utf-8', '../images/icons/compose.svg');
+@ic-mail:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/mail.svg');
+@ic-contacts:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/contacts.svg');
+@ic-settings:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/settings.svg');
+@ic-theme:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/theme.svg');
+@ic-about:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/about.svg');
+@ic-logout:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/logout.svg');
+@ic-reply:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/reply.svg');
+@ic-reply-all: data-uri('image/svg+xml;charset=utf-8', '../images/icons/reply-all.svg');
+@ic-forward:   data-uri('image/svg+xml;charset=utf-8', '../images/icons/forward.svg');
+@ic-delete:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/delete.svg');
+@ic-mark:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/mark.svg');
+@ic-more:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/more.svg');
+@ic-search:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/search.svg');
+
+// Task rail + message toolbar. Nested under the id selectors so these rules
+// carry id-level specificity and beat the `#taskmenu/#toolbar-menu a:before`
+// sizing rules in _styles.less (which otherwise collapse the masked box).
+#taskmenu,
+#toolbar-menu {
+    a.compose:before     { .am-mask(@ic-compose); }
+    a.mail:before        { .am-mask(@ic-mail); }
+    a.contacts:before    { .am-mask(@ic-contacts); }
+    a.settings:before    { .am-mask(@ic-settings); }
+    a.theme:before       { .am-mask(@ic-theme); }
+    a.about:before       { .am-mask(@ic-about); }
+    a.logout:before      { .am-mask(@ic-logout); }
+
+    a.reply:before       { .am-mask(@ic-reply); }
+    a.reply-all:before,
+    a.reply.all:before   { .am-mask(@ic-reply-all); }
+    a.forward:before     { .am-mask(@ic-forward); }
+    a.delete:before      { .am-mask(@ic-delete); }
+    a.markmessage:before { .am-mask(@ic-mark); }
+    a.more:before        { .am-mask(@ic-more); }
+}
+
+// Search field magnifier
+.searchbar form:before   { .am-mask(@ic-search); }
