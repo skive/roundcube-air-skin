@@ -149,6 +149,9 @@ a.attach:before            { .am-mask(@ic-paperclip; 1.15em); }
     padding: 14px 0 4px !important;
     margin: 0;
     list-style: none;
+    // drop Elastic's full-width attachment "box" fill (grey plate in dark mode);
+    // the cards carry the surface now.
+    background: transparent !important;
 }
 .attachmentslist li {
     display: flex !important;
@@ -165,7 +168,8 @@ a.attach:before            { .am-mask(@ic-paperclip; 1.15em); }
 }
 html.dark-mode .attachmentslist li {
     border-color: rgba(255, 255, 255, 0.09);
-    background: #1e1e1e;
+    // the old attachment-box grey, now on the card itself so pills read as raised
+    background: #2c2c2e;
 }
 
 // filename anchor becomes a 2-column grid: icon spans both rows, name over size
@@ -300,6 +304,26 @@ html.dark-mode .attachmentslist li .attachment-size { color: #67676c; }
     li.identities > a:before            { .am-mask(@ic-identity; 1.1em); }
     tr.responses > td.section:before,
     li.responses > a:before             { .am-mask(@ic-responses; 1.1em); }
+}
+// Elastic floats these list icons (float:left, from the shared icon-font rule),
+// so they ride to the top of the row while the label stays vertically centred —
+// the icon ends up sitting above the text baseline. Drop the float and centre
+// the icon on the text line, consistent with the rest of the skin. Covers the
+// settings section lists (.iconized) and the identities / responses / filter
+// tables (plain .listing) that share the same floated-icon pattern.
+.listing.iconized td.section:before,
+.listing.iconized td:before,
+.listing.iconized li > a:before,
+#identities-table td.mail:before,
+#responses-table td.name:before,
+#filterslist td.name:before,
+#filtersetslist td.name:before {
+    float: none !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin: 0 .5rem 0 0 !important;
+    position: relative;
+    top: -.05em;
 }
 
 // Compose toolbar (#messagetoolbar) — save / signature / responses / spellcheck

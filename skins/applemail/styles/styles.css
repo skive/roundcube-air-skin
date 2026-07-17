@@ -7886,6 +7886,7 @@ a.attach:before {
   padding: 14px 0 4px !important;
   margin: 0;
   list-style: none;
+  background: transparent !important;
 }
 .attachmentslist li {
   display: flex !important;
@@ -7902,7 +7903,7 @@ a.attach:before {
 }
 html.dark-mode .attachmentslist li {
   border-color: rgba(255, 255, 255, 0.09);
-  background: #1e1e1e;
+  background: #2c2c2e;
 }
 .attachmentslist li > a.filename {
   display: grid;
@@ -8279,6 +8280,20 @@ html.dark-mode .attachmentslist li .attachment-size {
   mask-position: center;
   -webkit-mask-size: contain;
   mask-size: contain;
+}
+.listing.iconized td.section:before,
+.listing.iconized td:before,
+.listing.iconized li > a:before,
+#identities-table td.mail:before,
+#responses-table td.name:before,
+#filterslist td.name:before,
+#filtersetslist td.name:before {
+  float: none !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin: 0 0.5rem 0 0 !important;
+  position: relative;
+  top: -0.05em;
 }
 .toolbar a.save:before {
   content: "" !important;
