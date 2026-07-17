@@ -291,6 +291,52 @@ html.dark-mode .messagelist tbody tr:not(.selected):hover td { background-color:
 html.dark-mode #toolbar-menu .spacer,
 html.dark-mode #toolbar-list-menu .spacer { background: fade(#fff, 14%); }
 
+// The refresh/checkmail button sits in the list header OUTSIDE #toolbar-list-menu,
+// so it kept Elastic's stacked full-height style and didn't line up with the
+// other buttons. Give it the same horizontal, centred button treatment.
+.messagelist-header a.refresh,
+a.toolbar-button.refresh {
+    display: inline-flex !important;
+    align-items: center !important;
+    align-self: center !important;
+    flex-direction: row !important;
+    float: none !important;
+    width: auto !important;
+    height: 2.1rem !important;
+    min-width: 0 !important;
+    padding: 0 .7rem !important;
+    margin: 0 1px !important;
+    border-radius: 8px;
+    line-height: 1 !important;
+
+    &:before {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        float: none !important;
+        width: 1.3em !important;
+        height: 1.3em !important;
+        margin: 0 .4rem 0 0 !important;
+        line-height: 1 !important;
+        vertical-align: middle;
+    }
+    span.inner {
+        display: inline-flex !important;
+        align-items: center;
+        position: static !important;
+        font-size: .9rem;
+        font-weight: 400;
+        line-height: 1 !important;
+        white-space: nowrap;
+        clip: auto !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    &:not(.disabled):hover { background: fade(@color-font, 6%); }
+}
+html.dark-mode .messagelist-header a.refresh:not(.disabled):hover,
+html.dark-mode a.toolbar-button.refresh:not(.disabled):hover { background: fade(#fff, 9%); }
+
 // ---------------------------------------------------------------------------
 // Message preview header — Apple Mail style (avatar, sender, right-aligned date)
 // ---------------------------------------------------------------------------

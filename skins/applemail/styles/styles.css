@@ -6890,6 +6890,54 @@ html.dark-mode #toolbar-menu .spacer,
 html.dark-mode #toolbar-list-menu .spacer {
   background: rgba(255, 255, 255, 0.14);
 }
+.messagelist-header a.refresh,
+a.toolbar-button.refresh {
+  display: inline-flex !important;
+  align-items: center !important;
+  align-self: center !important;
+  flex-direction: row !important;
+  float: none !important;
+  width: auto !important;
+  height: 2.1rem !important;
+  min-width: 0 !important;
+  padding: 0 0.7rem !important;
+  margin: 0 1px !important;
+  border-radius: 8px;
+  line-height: 1 !important;
+}
+.messagelist-header a.refresh:before,
+a.toolbar-button.refresh:before {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  float: none !important;
+  width: 1.3em !important;
+  height: 1.3em !important;
+  margin: 0 0.4rem 0 0 !important;
+  line-height: 1 !important;
+  vertical-align: middle;
+}
+.messagelist-header a.refresh span.inner,
+a.toolbar-button.refresh span.inner {
+  display: inline-flex !important;
+  align-items: center;
+  position: static !important;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1 !important;
+  white-space: nowrap;
+  clip: auto !important;
+  width: auto !important;
+  height: auto !important;
+}
+.messagelist-header a.refresh:not(.disabled):hover,
+a.toolbar-button.refresh:not(.disabled):hover {
+  background: rgba(29, 29, 31, 0.06);
+}
+html.dark-mode .messagelist-header a.refresh:not(.disabled):hover,
+html.dark-mode a.toolbar-button.refresh:not(.disabled):hover {
+  background: rgba(255, 255, 255, 0.09);
+}
 #message-header {
   padding: 20px 30px 16px;
   border-bottom: 1px solid #dcdcde;
