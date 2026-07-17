@@ -7055,6 +7055,10 @@ html.dark-mode a.toolbar-button.refresh:not(.disabled):hover {
   padding-top: 1px;
   padding-bottom: 1px;
 }
+html.dark-mode #message-header .header-summary span.adr,
+html.dark-mode #message-header .header-summary span.adr a {
+  color: #f5f5f7 !important;
+}
 #messagebody,
 .message-part,
 .message-htmlpart {

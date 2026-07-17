@@ -470,6 +470,12 @@ html.dark-mode a.toolbar-button.refresh:not(.disabled):hover { background: fade(
         td { padding-top: 1px; padding-bottom: 1px; }
     }
 }
+// dark theme: the reading-pane sender name is pinned to the light-theme dark
+// colour → invisible on the dark header. Make it bright.
+html.dark-mode #message-header .header-summary span.adr,
+html.dark-mode #message-header .header-summary span.adr a {
+    color: @color-dark-font !important;
+}
 
 // Body — Apple uses the system font for plain-text mail (not monospace),
 // with comfortable reading measure and spacing.
