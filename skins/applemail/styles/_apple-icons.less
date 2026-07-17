@@ -169,8 +169,18 @@ a.attach:before            { .am-mask(@ic-paperclip; 1.15em); }
 .attachmentslist li.archive > a.filename:before                { background-image: @ft-zip; }
 .attachmentslist li.image > a.filename:before                  { background-image: @ft-img; }
 
-// per-attachment menu button — subtle ellipsis instead of a stray paperclip
-.attachmentslist li a.dropdown:before { .am-mask(@ic-more; .95em); }
+// remove Elastic's monochrome font-icon on the row (the colour icon lives on
+// a.filename) so there's just one, coloured, file-type icon per attachment
+.attachmentslist li:before { display: none !important; content: none !important; }
+
+// per-attachment "…" menu — subtle ellipsis, centred on the filename text line
+.attachmentslist li a.dropdown { vertical-align: middle; }
+.attachmentslist li a.dropdown:before {
+    .am-mask(@ic-more; .95em);
+    vertical-align: middle;
+    position: relative;
+    top: -.05em;
+}
 
 @ic-save:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/save.svg');
 @ic-signature: data-uri('image/svg+xml;charset=utf-8', '../images/icons/signature.svg');
