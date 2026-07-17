@@ -334,6 +334,12 @@ html.dark-mode .attachmentslist li .attachment-size { color: #67676c; }
     position: relative;
     top: -.05em;
 }
+// The contact-list avatar (shown for group members) sits ~1.6px below the name
+// with the shared centring above; drop it onto the name's optical centre.
+.contactlist td.contact:before,
+.contactlist td.name:before {
+    top: -2.5px !important;
+}
 
 // Compose toolbar (#messagetoolbar) — save / signature / responses / spellcheck
 .toolbar a.save:before       { .am-mask(@ic-save); }

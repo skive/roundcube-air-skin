@@ -195,8 +195,8 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
     box-sizing: border-box;
     border-radius: 8px;
     margin: 1px .4rem;
-    padding-top: .4rem;
-    padding-bottom: .4rem;
+    padding-top: calc(.4rem - 2px);
+    padding-bottom: calc(.4rem - 2px);
     border: 0 !important;
     transition: background-color .12s ease;
 }
@@ -219,6 +219,15 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
     margin: 0 0 0 auto;      // no top margin — push right only
     align-self: center;
     line-height: 1.35rem;
+}
+
+// Expand/collapse arrow: Elastic pins it absolute at top:0, but the folder name
+// (inside the anchor) is pushed down by the anchor's top margin (1px) + top
+// padding, so the chevron rode above the name. Nudge the toggle down by that
+// same amount so the chevron lines up with the folder name. (bottom must stay
+// unset — the li also wraps the nested sub-folder <ul>.)
+#mailboxlist li div.treetoggle {
+    top: calc(.4rem - 1px) !important;   // = padding-top (.4rem - 2px) + margin-top (1px)
 }
 
 #mailboxlist li:not(.selected) > a:hover { background: fade(@color-font, 5%); }

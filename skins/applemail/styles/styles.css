@@ -6769,8 +6769,8 @@ html.dark-mode .searchbar {
   box-sizing: border-box;
   border-radius: 8px;
   margin: 1px 0.4rem;
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
+  padding-top: calc(0.4rem - 2px);
+  padding-bottom: calc(0.4rem - 2px);
   border: 0 !important;
   transition: background-color 0.12s ease;
 }
@@ -6793,6 +6793,9 @@ html.dark-mode .searchbar {
   margin: 0 0 0 auto;
   align-self: center;
   line-height: 1.35rem;
+}
+#mailboxlist li div.treetoggle {
+  top: calc(0.4rem - 1px) !important;
 }
 #mailboxlist li:not(.selected) > a:hover {
   background: rgba(29, 29, 31, 0.05);
@@ -8343,6 +8346,10 @@ html.dark-mode .attachmentslist li .attachment-size {
   margin: 0 0.5rem 0 0 !important;
   position: relative;
   top: -0.05em;
+}
+.contactlist td.contact:before,
+.contactlist td.name:before {
+  top: -2.5px !important;
 }
 .toolbar a.save:before {
   content: "" !important;
