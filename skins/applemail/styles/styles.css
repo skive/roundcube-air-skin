@@ -6765,6 +6765,8 @@ html.dark-mode .searchbar {
 #mailboxlist li a {
   display: flex;
   align-items: center;
+  width: auto !important;
+  box-sizing: border-box;
   border-radius: 8px;
   margin: 1px 0.4rem;
   padding-top: 0.4rem;
@@ -6818,14 +6820,14 @@ html.dark-mode #mailboxlist li:not(.selected) > a:hover {
   padding-top: 8px;
   padding-bottom: 9px;
 }
+.messagelist tbody tr td {
+  border-bottom: 1px solid rgba(29, 29, 31, 0.08) !important;
+}
 .messagelist tbody tr:not(.selected):hover td {
   background-color: rgba(29, 29, 31, 0.04);
 }
-.messagelist tbody tr.selected td:first-child {
-  border-radius: 9px 0 0 9px;
-}
-.messagelist tbody tr.selected td:last-child {
-  border-radius: 0 9px 9px 0;
+.messagelist tbody tr.selected td {
+  border-radius: 0 !important;
 }
 .messagelist tr.unread:not(.selected) td.subject span.msgicon.status.unread:before,
 .messagelist tr.unread:not(.selected) td.subject span.msgicon.status.unreadchildren:before {
@@ -6842,6 +6844,9 @@ html.dark-mode #mailboxlist li:not(.selected) > a:hover {
 }
 html.dark-mode .messagelist tbody tr:not(.selected):hover td {
   background-color: rgba(255, 255, 255, 0.05);
+}
+html.dark-mode .messagelist tbody tr td {
+  border-bottom-color: rgba(255, 255, 255, 0.09) !important;
 }
 html.dark-mode .messagelist td.subject span.fromto,
 html.dark-mode .messagelist span.fromto,
@@ -6867,6 +6872,14 @@ html.dark-mode .messagelist td.subject span.subject {
 #toolbar-list-menu .dropbutton {
   display: flex;
   align-items: center;
+  margin: 0 1px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+#toolbar-menu .dropbutton > a,
+#toolbar-list-menu .dropbutton > a {
+  margin: 0 !important;
+  border-radius: 0 !important;
 }
 #toolbar-menu a,
 #toolbar-list-menu a {
@@ -7142,11 +7155,19 @@ html.dark-mode .formbuttons .btn.cancel {
   border-color: #38383a;
 }
 #toolbar-menu a:not(.disabled):hover,
-#toolbar-list-menu a:not(.disabled):hover {
+#toolbar-list-menu a:not(.disabled):hover,
+#toolbar-menu .dropbutton:not(.disabled):hover,
+#toolbar-list-menu .dropbutton:not(.disabled):hover {
   background: rgba(29, 29, 31, 0.06);
 }
+#toolbar-menu .dropbutton > a:not(.disabled):hover,
+#toolbar-list-menu .dropbutton > a:not(.disabled):hover {
+  background: transparent !important;
+}
 html.dark-mode #toolbar-menu a:not(.disabled):hover,
-html.dark-mode #toolbar-list-menu a:not(.disabled):hover {
+html.dark-mode #toolbar-list-menu a:not(.disabled):hover,
+html.dark-mode #toolbar-menu .dropbutton:not(.disabled):hover,
+html.dark-mode #toolbar-list-menu .dropbutton:not(.disabled):hover {
   background: rgba(255, 255, 255, 0.09);
 }
 .scroller,

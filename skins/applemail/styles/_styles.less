@@ -187,6 +187,12 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
 #mailboxlist li a {
     display: flex;               // icon + label always vertically centred
     align-items: center;
+    // Elastic forces width:100% on the anchor, so the .4rem side margins are
+    // ADDED outside it — the pill overflows the (overflow:hidden) folder pane on
+    // the right and its rounded corners get clipped to a square edge. width:auto
+    // lets the margins shrink the box so it's inset — and rounded — on both sides.
+    width: auto !important;
+    box-sizing: border-box;
     border-radius: 8px;
     margin: 1px .4rem;
     padding-top: .4rem;
@@ -231,12 +237,14 @@ html.dark-mode #mailboxlist li:not(.selected) > a:hover { background: fade(#fff,
     // airier rows (Tahoe)
     tbody td { padding-top: 8px; padding-bottom: 9px; }
 
+    // thin grey row separators (prototype: 0.5px rgba(0,0,0,.08))
+    tbody tr td { border-bottom: 1px solid fade(@color-font, 8%) !important; }
+
     // subtle hover on unselected rows
     tbody tr:not(.selected):hover td { background-color: fade(@color-font, 4%); }
 
-    // rounded capsule ends on the blue active row
-    tbody tr.selected td:first-child { border-radius: 9px 0 0 9px; }
-    tbody tr.selected td:last-child  { border-radius: 0 9px 9px 0; }
+    // prototype: neat full-width fill on the active row, NO rounded capsule
+    tbody tr.selected td { border-radius: 0 !important; }
 
     // Apple-blue unread dot (kept white on the blue active row)
     tr.unread:not(.selected) td.subject span.msgicon.status.unread:before,
@@ -255,6 +263,7 @@ html.dark-mode #mailboxlist li:not(.selected) > a:hover { background: fade(#fff,
     }
 }
 html.dark-mode .messagelist tbody tr:not(.selected):hover td { background-color: fade(#fff, 5%); }
+html.dark-mode .messagelist tbody tr td { border-bottom-color: fade(#fff, 9%) !important; }
 // dark theme: sender/subject were forced to the light-theme dark colour → fix.
 // Sender is the bright, prominent line; read subject is muted (Apple hierarchy).
 html.dark-mode .messagelist td.subject span.fromto,
@@ -278,7 +287,21 @@ html.dark-mode .messagelist td.subject span.subject { color: @color-dark-hint; }
     flex-wrap: nowrap;
 
     li { display: flex; align-items: center; height: auto; }
-    .dropbutton { display: flex; align-items: center; }
+
+    // reply-all / forward split buttons read as ONE unit: round + clip the group
+    // so its (theme-aware) hover highlight paints a single pill, instead of each
+    // inner <a> drawing its own rounded rectangle with a 2px gap between them.
+    .dropbutton {
+        display: flex;
+        align-items: center;
+        margin: 0 1px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .dropbutton > a {
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
 
     a {
         display: inline-flex !important;
@@ -581,13 +604,23 @@ html.dark-mode .formbuttons .btn.cancel {
 // Tahoe extras — toolbar hover, thin scrollbars, rounded controls
 // ---------------------------------------------------------------------------
 
-// Toolbar buttons get a soft rounded highlight on hover (macOS Tahoe)
+// Toolbar buttons get a soft rounded highlight on hover (macOS Tahoe). The
+// reply-all / forward split buttons highlight on the whole .dropbutton group so
+// they read as one pill; their inner <a>s stay transparent (no doubled rectangle).
 #toolbar-menu a:not(.disabled):hover,
-#toolbar-list-menu a:not(.disabled):hover {
+#toolbar-list-menu a:not(.disabled):hover,
+#toolbar-menu .dropbutton:not(.disabled):hover,
+#toolbar-list-menu .dropbutton:not(.disabled):hover {
     background: fade(@color-font, 6%);
 }
+#toolbar-menu .dropbutton > a:not(.disabled):hover,
+#toolbar-list-menu .dropbutton > a:not(.disabled):hover {
+    background: transparent !important;
+}
 html.dark-mode #toolbar-menu a:not(.disabled):hover,
-html.dark-mode #toolbar-list-menu a:not(.disabled):hover {
+html.dark-mode #toolbar-list-menu a:not(.disabled):hover,
+html.dark-mode #toolbar-menu .dropbutton:not(.disabled):hover,
+html.dark-mode #toolbar-list-menu .dropbutton:not(.disabled):hover {
     background: fade(#fff, 9%);
 }
 
