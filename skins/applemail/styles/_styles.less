@@ -152,10 +152,32 @@ textarea.form-control {
     margin: .5rem .6rem;
     border: 1px solid @color-layout-border;
     border-radius: 10px;
-    height: 2.15rem;
-    min-height: 2.15rem;
-    line-height: 2.15rem;
+    height: 2.25rem;
+    min-height: 2.25rem;
+    line-height: normal;
     background: fade(#000, 4%);
+    align-items: center;      // vertically centre icon + input + buttons
+
+    form { align-items: center; }
+
+    // search glyph: tight, centred, small left inset
+    form:before {
+        height: auto !important;
+        margin: 0 .15rem 0 .6rem !important;
+        color: @color-list-secondary;
+    }
+
+    // input fills the bar, text vertically centred, no stray vertical padding
+    input {
+        padding: 0 .35rem !important;
+        height: calc(2.25rem - 2px);
+        line-height: normal;
+        font-size: 13.5px;
+        background: transparent;
+    }
+
+    // reset / options buttons centred
+    a:before { height: auto !important; }
 }
 html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#fff, 6%); }
 
@@ -223,6 +245,14 @@ html.dark-mode #mailboxlist li:not(.selected) > a:hover { background: fade(#fff,
     }
 }
 html.dark-mode .messagelist tbody tr:not(.selected):hover td { background-color: fade(#fff, 5%); }
+// dark theme: sender/subject were forced to the light-theme dark colour → fix.
+// Sender is the bright, prominent line; read subject is muted (Apple hierarchy).
+html.dark-mode .messagelist td.subject span.fromto,
+html.dark-mode .messagelist span.fromto,
+html.dark-mode .messagelist tr.unread td.subject span.subject {
+    color: @color-dark-font !important;
+}
+html.dark-mode .messagelist td.subject span.subject { color: @color-dark-hint; }
 
 // ---------------------------------------------------------------------------
 // Top toolbars (#toolbar-menu = message actions, #toolbar-list-menu = list) —
@@ -298,6 +328,11 @@ html.dark-mode .messagelist tbody tr:not(.selected):hover td { background-color:
 }
 html.dark-mode #toolbar-menu .spacer,
 html.dark-mode #toolbar-list-menu .spacer { background: fade(#fff, 14%); }
+
+// Select / Options duplicate the list toolbar (above the message list) — drop
+// them from the message toolbar (above the open message).
+#toolbar-menu a.select,
+#toolbar-menu a.options { display: none !important; }
 
 // The refresh/checkmail button sits in the list header OUTSIDE #toolbar-list-menu,
 // so it kept Elastic's stacked full-height style and didn't line up with the

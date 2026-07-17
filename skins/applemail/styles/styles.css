@@ -6734,10 +6734,29 @@ textarea.form-control {
   margin: 0.5rem 0.6rem;
   border: 1px solid #dcdcde;
   border-radius: 10px;
-  height: 2.15rem;
-  min-height: 2.15rem;
-  line-height: 2.15rem;
+  height: 2.25rem;
+  min-height: 2.25rem;
+  line-height: normal;
   background: rgba(0, 0, 0, 0.04);
+  align-items: center;
+}
+.searchbar form {
+  align-items: center;
+}
+.searchbar form:before {
+  height: auto !important;
+  margin: 0 0.15rem 0 0.6rem !important;
+  color: #777779;
+}
+.searchbar input {
+  padding: 0 0.35rem !important;
+  height: calc(2.25rem - 2px);
+  line-height: normal;
+  font-size: 13.5px;
+  background: transparent;
+}
+.searchbar a:before {
+  height: auto !important;
 }
 html.dark-mode .searchbar {
   border-color: #38383a;
@@ -6818,6 +6837,14 @@ html.dark-mode #mailboxlist li:not(.selected) > a:hover {
 html.dark-mode .messagelist tbody tr:not(.selected):hover td {
   background-color: rgba(255, 255, 255, 0.05);
 }
+html.dark-mode .messagelist td.subject span.fromto,
+html.dark-mode .messagelist span.fromto,
+html.dark-mode .messagelist tr.unread td.subject span.subject {
+  color: #f5f5f7 !important;
+}
+html.dark-mode .messagelist td.subject span.subject {
+  color: #bcbcca;
+}
 #toolbar-menu,
 #toolbar-list-menu {
   display: flex !important;
@@ -6895,6 +6922,10 @@ html.dark-mode .messagelist tbody tr:not(.selected):hover td {
 html.dark-mode #toolbar-menu .spacer,
 html.dark-mode #toolbar-list-menu .spacer {
   background: rgba(255, 255, 255, 0.14);
+}
+#toolbar-menu a.select,
+#toolbar-menu a.options {
+  display: none !important;
 }
 .messagelist-header a.refresh,
 a.toolbar-button.refresh {
