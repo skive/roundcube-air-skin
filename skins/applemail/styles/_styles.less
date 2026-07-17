@@ -651,9 +651,23 @@ select.form-control,
 input.form-control,
 textarea.form-control { border-radius: 8px; }
 
-// Popup menus: rounded, soft shadow (Tahoe)
+// Popup menus: rounded card, soft shadow (Tahoe).
+.ui-dialog { border-radius: 12px !important; }
+
+// The visible card is `.popover` (bg + border + shadow); round IT and its body
+// to the same radius so they don't fight (Bootstrap left the card at ~4px while
+// our old rule rounded only the inner body to 12px — the mismatch is what made
+// the first/last item's hover corner look wrong).
 .popupmenu,
-.popover .popover-body,
-.ui-dialog {
-    border-radius: 12px !important;
+.popover,
+.popover .popover-body {
+    border-radius: 8px !important;
+}
+// Give the list top/bottom breathing room equal to the corner radius: the first
+// and last items' hover highlight then sits fully inside the straight edges, so
+// it stays a clean square (no rounding, no square corner poking past the card).
+.popupmenu,
+.popover .popover-body {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
 }

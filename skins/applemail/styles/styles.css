@@ -7210,10 +7210,18 @@ input.form-control,
 textarea.form-control {
   border-radius: 8px;
 }
-.popupmenu,
-.popover .popover-body,
 .ui-dialog {
   border-radius: 12px !important;
+}
+.popupmenu,
+.popover,
+.popover .popover-body {
+  border-radius: 8px !important;
+}
+.popupmenu,
+.popover .popover-body {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
 }
 /**
  * Apple Mail skin — Apple-style icon set (design branch `apple-icons`).
