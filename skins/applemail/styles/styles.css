@@ -323,12 +323,12 @@ html.iframe #layout-content {
 }
 #layout-menu .popover-header img {
   max-height: 58px;
-  max-width: 217px;
+  max-width: 60px;
   padding: 0.25rem;
 }
 @media screen and (min-width: 481px) and (max-width: 1024px) {
   #layout-menu .popover-header img {
-    max-width: 97.65px;
+    max-width: 27px;
   }
 }
 @media screen and (min-width: 481px) {
@@ -458,7 +458,7 @@ html.layout-phone #layout-menu .popover-header a .inner {
 }
 @media screen and (min-width: 1025px) {
   #layout-menu {
-    width: 217px;
+    width: 60px;
   }
 }
 @media screen and (min-width: 1201px) {
@@ -2646,7 +2646,7 @@ a.toolbar-button {
 }
 @media screen and (min-width: 1025px) {
   #taskmenu a {
-    width: 217px;
+    width: 60px;
     font-size: 1rem;
   }
   #taskmenu a:before {
@@ -5898,7 +5898,7 @@ html.dark-mode #taskmenu .action-buttons a {
 }
 @media screen and (min-width: 1025px) {
   html.dark-mode #taskmenu a {
-    width: 216px;
+    width: 59px;
   }
 }
 html.dark-mode.layout-small .popover,
@@ -6656,66 +6656,72 @@ html.dark-mode #layout-sidebar {
   border-color: #38383a;
 }
 @media screen and (min-width: 1025px) {
+  #layout-menu .popover-header {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 1025px) {
   #taskmenu {
-    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
   }
   #taskmenu a {
-    display: flex;
+    display: flex !important;
     align-items: center;
-    width: 100%;
-    max-width: none;
-    height: auto;
-    text-align: left;
-    padding: 8px 12px;
-    margin: 1px 0;
-    border-radius: 9px;
-    line-height: 1.2;
+    justify-content: center;
+    position: relative;
+    width: 44px !important;
+    min-width: 44px;
+    max-width: 44px;
+    height: 44px !important;
+    margin: 3px auto !important;
+    padding: 0 !important;
+    border-radius: 11px;
+    font-size: 1.05rem;
     transition: background-color 0.12s ease, color 0.12s ease;
   }
   #taskmenu a:before {
-    float: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.5em;
-    height: 1.6em;
-    margin: 0 0.95rem 0 0;
-    font-size: 1.15em;
-    line-height: 1;
-    flex: none;
+    float: none !important;
+    margin: 0 !important;
   }
   #taskmenu span.inner {
-    display: inline-block;
-    padding: 0;
-    font-size: 0.95rem;
-    line-height: 1.6em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: none !important;
+  }
+  #taskmenu a.selected {
+    color: #007aff;
+    background: rgba(0, 122, 255, 0.1);
+  }
+  #taskmenu a.selected::after {
+    content: "";
+    position: absolute;
+    left: -8px;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: #007aff;
   }
   #taskmenu .action-buttons {
-    display: block;
     margin-bottom: 6px;
   }
   #taskmenu .action-buttons a.compose {
-    background-color: #007aff;
-    color: #fff;
-    font-weight: 600;
+    background-color: #007aff !important;
+    color: #fff !important;
     box-shadow: 0 2px 8px rgba(0, 122, 255, 0.35);
   }
-  #taskmenu .action-buttons a.compose:before,
-  #taskmenu .action-buttons a.compose span.inner {
-    color: #fff;
-  }
   #taskmenu .action-buttons a.compose:hover {
-    background-color: #006be0;
-    color: #fff;
+    background-color: #006be0 !important;
   }
   #taskmenu .special-buttons {
     left: 0;
     right: 0;
-    width: auto;
-    padding: 0 8px 6px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 6px;
   }
 }
 .btn,

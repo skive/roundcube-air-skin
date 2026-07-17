@@ -56,76 +56,84 @@ html.dark-mode {
 }
 
 // ---------------------------------------------------------------------------
-// Task rail — rounded buttons + filled Compose action (macOS Mail style)
+// Task rail — slim icon-only rail, identical to the prototype: 44px rounded
+// buttons, no labels, filled Compose square on top, accent bar on the selected
+// item, theme/about/logout pinned to the bottom.
 // ---------------------------------------------------------------------------
+// hide the logo in the rail (the prototype starts with the Compose button)
+@media screen and (min-width: (@screen-width-medium + 1px)) {
+    #layout-menu .popover-header { display: none !important; }
+}
+
 #taskmenu {
-    // Large screens: rectangular rows — icon on the left, label on the right
-    // (Apple sidebar style), instead of Elastic's stacked icon-over-label.
     @media screen and (min-width: (@screen-width-medium + 1px)) {
-        padding: 6px 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0;
 
         a {
-            display: flex;
+            display: flex !important;
             align-items: center;
-            width: 100%;
-            max-width: none;       // Elastic caps task buttons at ~84px — lift it
-            height: auto;
-            text-align: left;
-            padding: 8px 12px;
-            margin: 1px 0;
-            border-radius: 9px;
-            line-height: 1.2;
+            justify-content: center;
+            position: relative;
+            width: 44px !important;
+            min-width: 44px;
+            max-width: 44px;
+            height: 44px !important;
+            margin: 3px auto !important;
+            padding: 0 !important;
+            border-radius: 11px;
+            font-size: 1.05rem;   // drives the em-based masked icon (~22px)
             transition: background-color .12s ease, color .12s ease;
 
-            // Center every glyph the same way regardless of its intrinsic
-            // FontAwesome metrics, so icons line up with the label baseline.
             &:before {
-                float: none;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 1.5em;
-                height: 1.6em;
-                margin: 0 .95rem 0 0;
-                font-size: 1.15em;
-                line-height: 1;
-                flex: none;
+                float: none !important;
+                margin: 0 !important;
             }
         }
 
-        span.inner {
-            display: inline-block;
-            padding: 0;
-            font-size: .95rem;
-            line-height: 1.6em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        // icon-only rail — labels hidden
+        span.inner { display: none !important; }
+
+        // selected: accent icon + a 3px accent bar at the rail's left edge
+        a.selected {
+            color: @color-main;
+            background: fade(@color-main, 10%);
+        }
+        a.selected::after {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 10px;
+            bottom: 10px;
+            width: 3px;
+            border-radius: 0 3px 3px 0;
+            background: @color-main;
         }
 
-        // Compose = filled accent row at the top
+        // Compose = filled accent square on top
         .action-buttons {
-            display: block;
             margin-bottom: 6px;
 
             a.compose {
-                background-color: @color-main;
-                color: #fff;
-                font-weight: 600;
+                background-color: @color-main !important;
+                color: #fff !important;
                 box-shadow: 0 2px 8px fade(@color-main, 35%);
 
-                &:before,
-                span.inner { color: #fff; }
-                &:hover { background-color: darken(@color-main, 6%); color: #fff; }
+                &:hover { background-color: darken(@color-main, 6%) !important; }
             }
         }
 
-        // Bottom group (theme / about / logout) spans the full rail width
+        // theme / about / logout pinned to the bottom, centred
         .special-buttons {
             left: 0;
             right: 0;
-            width: auto;
-            padding: 0 8px 6px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 6px;
         }
     }
 }
