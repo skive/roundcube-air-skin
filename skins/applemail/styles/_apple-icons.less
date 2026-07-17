@@ -128,9 +128,49 @@ body.status-flagged #message-header > .subject:before { .am-mask(@ic-flag; .85em
 }
 
 // Attachment list inside a message + compose attach button
-.attachmentslist li > a:before,
 .menu a.attach:before,
 a.attach:before            { .am-mask(@ic-paperclip; 1.15em); }
+
+// Attachment list — coloured file-type icon (full-colour SVG, NOT a mask) on
+// the filename; the per-attachment menu becomes a subtle ellipsis. No paperclips.
+@ft-file: data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/file.svg');
+@ft-pdf:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/pdf.svg');
+@ft-doc:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/doc.svg');
+@ft-xls:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/xls.svg');
+@ft-ppt:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/ppt.svg');
+@ft-zip:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/zip.svg');
+@ft-img:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/img.svg');
+
+.attachmentslist li > a.filename:before {
+    content: "" !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+    background-color: transparent !important;
+    background-image: @ft-file;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+    display: inline-block !important;
+    width: 1.7em !important;
+    height: 1.7em !important;
+    vertical-align: -.45em;
+    margin-right: .1rem;
+}
+.attachmentslist li.pdf > a.filename:before                    { background-image: @ft-pdf; }
+.attachmentslist li.doc > a.filename:before,
+.attachmentslist li.docx > a.filename:before                   { background-image: @ft-doc; }
+.attachmentslist li.xls > a.filename:before,
+.attachmentslist li.xlsx > a.filename:before,
+.attachmentslist li.csv > a.filename:before                    { background-image: @ft-xls; }
+.attachmentslist li.ppt > a.filename:before,
+.attachmentslist li.pptx > a.filename:before                   { background-image: @ft-ppt; }
+.attachmentslist li.zip > a.filename:before,
+.attachmentslist li.gzip > a.filename:before,
+.attachmentslist li.archive > a.filename:before                { background-image: @ft-zip; }
+.attachmentslist li.image > a.filename:before                  { background-image: @ft-img; }
+
+// per-attachment menu button — subtle ellipsis instead of a stray paperclip
+.attachmentslist li a.dropdown:before { .am-mask(@ic-more; .95em); }
 
 @ic-save:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/save.svg');
 @ic-signature: data-uri('image/svg+xml;charset=utf-8', '../images/icons/signature.svg');
