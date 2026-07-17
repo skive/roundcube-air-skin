@@ -131,55 +131,136 @@ body.status-flagged #message-header > .subject:before { .am-mask(@ic-flag; .85em
 .menu a.attach:before,
 a.attach:before            { .am-mask(@ic-paperclip; 1.15em); }
 
-// Attachment list — coloured file-type icon (full-colour SVG, NOT a mask) on
-// the filename; the per-attachment menu becomes a subtle ellipsis. No paperclips.
-@ft-file: data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/file.svg');
-@ft-pdf:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/pdf.svg');
-@ft-doc:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/doc.svg');
-@ft-xls:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/xls.svg');
-@ft-ppt:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/ppt.svg');
-@ft-zip:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/zip.svg');
-@ft-img:  data-uri('image/svg+xml;charset=utf-8', '../images/icons/filetypes/img.svg');
+// Attachments as macOS-Mail file cards (matches the prototype exactly): a
+// rounded bordered chip with a 34×34 gradient square carrying the upper-case
+// file-type label, then the filename over the size. No paperclips, no menu icon
+// clutter — just a subtle "…" affordance.
+//
+//   .attachmentslist  ->  prototype .attach   (flex row, wraps, 12px gap)
+//   li                ->  prototype .att-card  (bordered chip)
+//   a.filename        ->  grid: [icon] [name / size]
+//   a.filename:before ->  prototype .att-icon  (gradient square + type label)
 
+.attachmentslist {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 12px;
+    // 30px left/right indent already comes from #message-content
+    padding: 14px 0 4px !important;
+    margin: 0;
+    list-style: none;
+}
+.attachmentslist li {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    margin: 0 !important;
+    padding: 9px 12px !important;
+    min-width: 190px;
+    max-width: 320px;
+    border: 0.5px solid rgba(0, 0, 0, 0.08);
+    border-radius: 9px;
+    background: #fff;
+    box-shadow: none;
+}
+html.dark-mode .attachmentslist li {
+    border-color: rgba(255, 255, 255, 0.09);
+    background: #1e1e1e;
+}
+
+// filename anchor becomes a 2-column grid: icon spans both rows, name over size
+.attachmentslist li > a.filename {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    grid-auto-rows: auto;
+    align-content: center;
+    column-gap: 10px;
+    flex: 1;
+    min-width: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-decoration: none;
+    line-height: 1.3;
+    background: none !important;
+}
+
+// the gradient "icon" square with the upper-case type label (content per type)
 .attachmentslist li > a.filename:before {
-    content: "" !important;
+    content: "FILE";
+    grid-column: 1;
+    grid-row: 1 / 3;
+    align-self: center;
+    width: 34px !important;
+    height: 34px !important;
+    box-sizing: border-box;
+    border-radius: 7px;
+    display: grid !important;
+    place-items: center;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    // wipe any inherited mask / icon-font styling from the base skin
     -webkit-mask: none !important;
     mask: none !important;
-    background-color: transparent !important;
-    background-image: @ft-file;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: contain !important;
-    display: inline-block !important;
-    width: 1.7em !important;
-    height: 1.7em !important;
-    vertical-align: -.45em;
-    margin-right: .1rem;
+    .font-family();
+    vertical-align: 0 !important;
+    margin: 0 !important;
+    background: linear-gradient(135deg, #b3b8c2, #868c99);
 }
-.attachmentslist li.pdf > a.filename:before                    { background-image: @ft-pdf; }
-.attachmentslist li.doc > a.filename:before,
-.attachmentslist li.docx > a.filename:before                   { background-image: @ft-doc; }
-.attachmentslist li.xls > a.filename:before,
-.attachmentslist li.xlsx > a.filename:before,
-.attachmentslist li.csv > a.filename:before                    { background-image: @ft-xls; }
-.attachmentslist li.ppt > a.filename:before,
-.attachmentslist li.pptx > a.filename:before                   { background-image: @ft-ppt; }
-.attachmentslist li.zip > a.filename:before,
-.attachmentslist li.gzip > a.filename:before,
-.attachmentslist li.archive > a.filename:before                { background-image: @ft-zip; }
-.attachmentslist li.image > a.filename:before                  { background-image: @ft-img; }
+.attachmentslist li.pdf   > a.filename:before { content: "PDF"; background: linear-gradient(135deg, #ff6a88, #ff3b30); }
+.attachmentslist li.doc   > a.filename:before,
+.attachmentslist li.docx  > a.filename:before { content: "DOC"; background: linear-gradient(135deg, #5e9bff, #0a63d6); }
+.attachmentslist li.xls   > a.filename:before,
+.attachmentslist li.xlsx  > a.filename:before { content: "XLS"; background: linear-gradient(135deg, #43d783, #1a9e4b); }
+.attachmentslist li.csv   > a.filename:before { content: "CSV"; background: linear-gradient(135deg, #43d783, #1a9e4b); }
+.attachmentslist li.ppt   > a.filename:before,
+.attachmentslist li.pptx  > a.filename:before { content: "PPT"; background: linear-gradient(135deg, #ffb15e, #ff8a00); }
+.attachmentslist li.zip   > a.filename:before,
+.attachmentslist li.gzip  > a.filename:before,
+.attachmentslist li.archive > a.filename:before { content: "ZIP"; background: linear-gradient(135deg, #b3b8c2, #868c99); }
+.attachmentslist li.image > a.filename:before { content: "IMG"; background: linear-gradient(135deg, #c58bff, #8a3ffc); }
+.attachmentslist li.text  > a.filename:before { content: "TXT"; background: linear-gradient(135deg, #b3b8c2, #868c99); }
 
-// remove Elastic's monochrome font-icon on the row (the colour icon lives on
-// a.filename) so there's just one, coloured, file-type icon per attachment
+// filename + size stacked in the second column
+.attachmentslist li .attachment-name {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    font-size: 13px;
+    font-weight: 600;
+    color: @color-font;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.attachmentslist li .attachment-size {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    margin: 1px 0 0 0 !important;
+    font-size: 11.5px;
+    font-weight: 400;
+    color: #a0a0a8;
+    white-space: nowrap;
+}
+html.dark-mode .attachmentslist li .attachment-name { color: @color-dark-font; }
+html.dark-mode .attachmentslist li .attachment-size { color: #67676c; }
+
+// remove Elastic's monochrome row font-icon (the card carries its own icon)
 .attachmentslist li:before { display: none !important; content: none !important; }
 
-// per-attachment "…" menu — subtle ellipsis, centred on the filename text line
-.attachmentslist li a.dropdown { vertical-align: middle; }
-.attachmentslist li a.dropdown:before {
+// per-attachment "…" menu — subtle ellipsis at the card's trailing edge
+.attachmentslist li > a.dropdown {
+    flex: none;
+    align-self: center;
+    opacity: .45;
+    transition: opacity .12s ease;
+}
+.attachmentslist li:hover > a.dropdown { opacity: .85; }
+.attachmentslist li > a.dropdown:before {
     .am-mask(@ic-more; .95em);
     vertical-align: middle;
-    position: relative;
-    top: -.05em;
 }
 
 @ic-save:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/save.svg');

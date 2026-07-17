@@ -7850,53 +7850,145 @@ a.attach:before {
   -webkit-mask-size: contain;
   mask-size: contain;
 }
+.attachmentslist {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 0 4px !important;
+  margin: 0;
+  list-style: none;
+}
+.attachmentslist li {
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  margin: 0 !important;
+  padding: 9px 12px !important;
+  min-width: 190px;
+  max-width: 320px;
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: none;
+}
+html.dark-mode .attachmentslist li {
+  border-color: rgba(255, 255, 255, 0.09);
+  background: #1e1e1e;
+}
+.attachmentslist li > a.filename {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  grid-auto-rows: auto;
+  align-content: center;
+  column-gap: 10px;
+  flex: 1;
+  min-width: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-decoration: none;
+  line-height: 1.3;
+  background: none !important;
+}
 .attachmentslist li > a.filename:before {
-  content: "" !important;
+  content: "FILE";
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: center;
+  width: 34px !important;
+  height: 34px !important;
+  box-sizing: border-box;
+  border-radius: 7px;
+  display: grid !important;
+  place-items: center;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
   -webkit-mask: none !important;
   mask: none !important;
-  background-color: transparent !important;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M6%203.5A1.6%201.6%200%20017.6%201.9H13l5%205v11.6A1.6%201.6%200%200116.4%2020.1H7.6A1.6%201.6%200%20016%2018.5z%22%20fill%3D%22%23fff%22%20stroke%3D%22%239aa0a6%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%201.9V7h5%22%20fill%3D%22none%22%20stroke%3D%22%239aa0a6%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M8.5%2012h7M8.5%2015h7M8.5%2018h4%22%20stroke%3D%22%23c2c7cc%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: contain !important;
-  display: inline-block !important;
-  width: 1.7em !important;
-  height: 1.7em !important;
-  vertical-align: -0.45em;
-  margin-right: 0.1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  vertical-align: 0 !important;
+  margin: 0 !important;
+  background: linear-gradient(135deg, #b3b8c2, #868c99);
 }
 .attachmentslist li.pdf > a.filename:before {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M5.5%204a1.6%201.6%200%20011.6-1.6H13l5%205v11.6A1.6%201.6%200%200117.4%2021H7.1A1.6%201.6%200%20015.5%2019.4z%22%20fill%3D%22%23fff%22%20stroke%3D%22%23ff3b30%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%202.4V7.4h5%22%20fill%3D%22none%22%20stroke%3D%22%23ff3b30%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Crect%20x%3D%224.4%22%20y%3D%2212.6%22%20width%3D%2212.5%22%20height%3D%226%22%20rx%3D%221.3%22%20fill%3D%22%23ff3b30%22%2F%3E%3Ctext%20x%3D%2210.65%22%20y%3D%2217.1%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%224.1%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EPDF%3C%2Ftext%3E%3C%2Fsvg%3E");
+  content: "PDF";
+  background: linear-gradient(135deg, #ff6a88, #ff3b30);
 }
 .attachmentslist li.doc > a.filename:before,
 .attachmentslist li.docx > a.filename:before {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M5.5%204a1.6%201.6%200%20011.6-1.6H13l5%205v11.6A1.6%201.6%200%200117.4%2021H7.1A1.6%201.6%200%20015.5%2019.4z%22%20fill%3D%22%23fff%22%20stroke%3D%22%232b7bff%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%202.4V7.4h5%22%20fill%3D%22none%22%20stroke%3D%22%232b7bff%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Crect%20x%3D%224.4%22%20y%3D%2212.6%22%20width%3D%2212.5%22%20height%3D%226%22%20rx%3D%221.3%22%20fill%3D%22%232b7bff%22%2F%3E%3Ctext%20x%3D%2210.65%22%20y%3D%2217.1%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%224.1%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EDOC%3C%2Ftext%3E%3C%2Fsvg%3E");
+  content: "DOC";
+  background: linear-gradient(135deg, #5e9bff, #0a63d6);
 }
 .attachmentslist li.xls > a.filename:before,
-.attachmentslist li.xlsx > a.filename:before,
+.attachmentslist li.xlsx > a.filename:before {
+  content: "XLS";
+  background: linear-gradient(135deg, #43d783, #1a9e4b);
+}
 .attachmentslist li.csv > a.filename:before {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M5.5%204a1.6%201.6%200%20011.6-1.6H13l5%205v11.6A1.6%201.6%200%200117.4%2021H7.1A1.6%201.6%200%20015.5%2019.4z%22%20fill%3D%22%23fff%22%20stroke%3D%22%2334c759%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%202.4V7.4h5%22%20fill%3D%22none%22%20stroke%3D%22%2334c759%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Crect%20x%3D%224.4%22%20y%3D%2212.6%22%20width%3D%2212.5%22%20height%3D%226%22%20rx%3D%221.3%22%20fill%3D%22%2334c759%22%2F%3E%3Ctext%20x%3D%2210.65%22%20y%3D%2217.1%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%224.1%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EXLS%3C%2Ftext%3E%3C%2Fsvg%3E");
+  content: "CSV";
+  background: linear-gradient(135deg, #43d783, #1a9e4b);
 }
 .attachmentslist li.ppt > a.filename:before,
 .attachmentslist li.pptx > a.filename:before {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M5.5%204a1.6%201.6%200%20011.6-1.6H13l5%205v11.6A1.6%201.6%200%200117.4%2021H7.1A1.6%201.6%200%20015.5%2019.4z%22%20fill%3D%22%23fff%22%20stroke%3D%22%23ff9500%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%202.4V7.4h5%22%20fill%3D%22none%22%20stroke%3D%22%23ff9500%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Crect%20x%3D%224.4%22%20y%3D%2212.6%22%20width%3D%2212.5%22%20height%3D%226%22%20rx%3D%221.3%22%20fill%3D%22%23ff9500%22%2F%3E%3Ctext%20x%3D%2210.65%22%20y%3D%2217.1%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%224.1%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EPPT%3C%2Ftext%3E%3C%2Fsvg%3E");
+  content: "PPT";
+  background: linear-gradient(135deg, #ffb15e, #ff8a00);
 }
 .attachmentslist li.zip > a.filename:before,
 .attachmentslist li.gzip > a.filename:before,
 .attachmentslist li.archive > a.filename:before {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M5.5%204a1.6%201.6%200%20011.6-1.6H13l5%205v11.6A1.6%201.6%200%200117.4%2021H7.1A1.6%201.6%200%20015.5%2019.4z%22%20fill%3D%22%23fff%22%20stroke%3D%22%23a2845e%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%202.4V7.4h5%22%20fill%3D%22none%22%20stroke%3D%22%23a2845e%22%20stroke-width%3D%221.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Crect%20x%3D%224.4%22%20y%3D%2212.6%22%20width%3D%2212.5%22%20height%3D%226%22%20rx%3D%221.3%22%20fill%3D%22%23a2845e%22%2F%3E%3Ctext%20x%3D%2210.65%22%20y%3D%2217.1%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%224.1%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EZIP%3C%2Ftext%3E%3C%2Fsvg%3E");
+  content: "ZIP";
+  background: linear-gradient(135deg, #b3b8c2, #868c99);
 }
 .attachmentslist li.image > a.filename:before {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Crect%20x%3D%223.5%22%20y%3D%224.5%22%20width%3D%2217%22%20height%3D%2215%22%20rx%3D%222.2%22%20fill%3D%22%23fff%22%20stroke%3D%22%23bf5af2%22%20stroke-width%3D%221.3%22%2F%3E%3Ccircle%20cx%3D%228.5%22%20cy%3D%229.5%22%20r%3D%221.7%22%20fill%3D%22%23bf5af2%22%2F%3E%3Cpath%20d%3D%22M4%2016l4.5-4%203%202.6%203.8-3.6L20%2016%22%20fill%3D%22none%22%20stroke%3D%22%23bf5af2%22%20stroke-width%3D%221.3%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+  content: "IMG";
+  background: linear-gradient(135deg, #c58bff, #8a3ffc);
+}
+.attachmentslist li.text > a.filename:before {
+  content: "TXT";
+  background: linear-gradient(135deg, #b3b8c2, #868c99);
+}
+.attachmentslist li .attachment-name {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1d1d1f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.attachmentslist li .attachment-size {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  margin: 1px 0 0 0 !important;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: #a0a0a8;
+  white-space: nowrap;
+}
+html.dark-mode .attachmentslist li .attachment-name {
+  color: #f5f5f7;
+}
+html.dark-mode .attachmentslist li .attachment-size {
+  color: #67676c;
 }
 .attachmentslist li:before {
   display: none !important;
   content: none !important;
 }
-.attachmentslist li a.dropdown {
-  vertical-align: middle;
+.attachmentslist li > a.dropdown {
+  flex: none;
+  align-self: center;
+  opacity: 0.45;
+  transition: opacity 0.12s ease;
 }
-.attachmentslist li a.dropdown:before {
+.attachmentslist li:hover > a.dropdown {
+  opacity: 0.85;
+}
+.attachmentslist li > a.dropdown:before {
   content: "" !important;
   display: inline-block !important;
   width: 0.95em !important;
@@ -7912,8 +8004,6 @@ a.attach:before {
   -webkit-mask-size: contain;
   mask-size: contain;
   vertical-align: middle;
-  position: relative;
-  top: -0.05em;
 }
 .toolbar a.create:before,
 .popupmenu a.create:before {
