@@ -6782,9 +6782,15 @@ html.dark-mode .searchbar {
   flex: 1;
   min-width: 0;
 }
+#mailboxlist li.mailbox.unread > a {
+  padding-right: 0.4rem;
+}
 #mailboxlist li a .unreadcount {
-  margin-left: auto;
+  position: static;
   flex: none;
+  margin: 0 0 0 auto;
+  align-self: center;
+  line-height: 1.35rem;
 }
 #mailboxlist li:not(.selected) > a:hover {
   background: rgba(29, 29, 31, 0.05);
@@ -7059,11 +7065,19 @@ html.dark-mode #message-header .header-summary span.adr,
 html.dark-mode #message-header .header-summary span.adr a {
   color: #f5f5f7 !important;
 }
-#messagebody,
-.message-part,
-.message-htmlpart {
+#message-content {
   padding-left: 30px;
   padding-right: 30px;
+}
+#messagebody,
+.message-part,
+.message-htmlpart,
+.attachmentslist,
+.attachmentslist li,
+#message-content .leftcol,
+#message-content .rightcol {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 .message-part div.pre {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;

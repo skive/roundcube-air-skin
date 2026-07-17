@@ -203,7 +203,17 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
 // folder name takes the remaining space; unread badge sits at the far right
 #mailboxlist li a > span:not(.unreadcount),
 #mailboxlist li a .folder-name { flex: 1; min-width: 0; }
-#mailboxlist li a .unreadcount { margin-left: auto; flex: none; }
+// Elastic pins the badge absolutely (top:0/right:0 + 7.7px margin), so it hugs
+// the top of the row instead of the label. Drop it back into the flex flow so
+// align-items:center on the row lines it up with the folder name.
+#mailboxlist li.mailbox.unread > a { padding-right: .4rem; }  // reclaim reserved space
+#mailboxlist li a .unreadcount {
+    position: static;
+    flex: none;
+    margin: 0 0 0 auto;      // no top margin — push right only
+    align-self: center;
+    line-height: 1.35rem;
+}
 
 #mailboxlist li:not(.selected) > a:hover { background: fade(@color-font, 5%); }
 html.dark-mode #mailboxlist li:not(.selected) > a:hover { background: fade(#fff, 7%); }
@@ -479,11 +489,23 @@ html.dark-mode #message-header .header-summary span.adr a {
 
 // Body — Apple uses the system font for plain-text mail (not monospace),
 // with comfortable reading measure and spacing.
-#messagebody,
-.message-part,
-.message-htmlpart {
+//
+// One consistent 30px left/right indent for the whole preview: the header
+// already has it; give the same to the content wrapper (attachments + body)
+// and zero out the nested paddings so nothing double-indents.
+#message-content {
     padding-left: 30px;
     padding-right: 30px;
+}
+#messagebody,
+.message-part,
+.message-htmlpart,
+.attachmentslist,
+.attachmentslist li,
+#message-content .leftcol,
+#message-content .rightcol {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 .message-part div.pre {
     .font-family();
