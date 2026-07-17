@@ -323,12 +323,12 @@ html.iframe #layout-content {
 }
 #layout-menu .popover-header img {
   max-height: 58px;
-  max-width: 182px;
+  max-width: 217px;
   padding: 0.25rem;
 }
 @media screen and (min-width: 481px) and (max-width: 1024px) {
   #layout-menu .popover-header img {
-    max-width: 81.9px;
+    max-width: 97.65px;
   }
 }
 @media screen and (min-width: 481px) {
@@ -458,7 +458,7 @@ html.layout-phone #layout-menu .popover-header a .inner {
 }
 @media screen and (min-width: 1025px) {
   #layout-menu {
-    width: 182px;
+    width: 217px;
   }
 }
 @media screen and (min-width: 1201px) {
@@ -2646,7 +2646,7 @@ a.toolbar-button {
 }
 @media screen and (min-width: 1025px) {
   #taskmenu a {
-    width: 182px;
+    width: 217px;
     font-size: 1rem;
   }
   #taskmenu a:before {
@@ -5898,7 +5898,7 @@ html.dark-mode #taskmenu .action-buttons a {
 }
 @media screen and (min-width: 1025px) {
   html.dark-mode #taskmenu a {
-    width: 181px;
+    width: 216px;
   }
 }
 html.dark-mode.layout-small .popover,
@@ -6679,9 +6679,10 @@ html.dark-mode #layout-sidebar {
     justify-content: center;
     width: 1.5em;
     height: 1.6em;
-    margin: 0 0.8rem 0 0;
+    margin: 0 0.95rem 0 0;
     font-size: 1.15em;
     line-height: 1;
+    flex: none;
   }
   #taskmenu span.inner {
     display: inline-block;
@@ -6737,12 +6738,28 @@ html.dark-mode .searchbar {
   background: rgba(255, 255, 255, 0.06);
 }
 #mailboxlist li a {
+  display: flex;
+  align-items: center;
   border-radius: 8px;
   margin: 1px 0.4rem;
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
   border: 0 !important;
   transition: background-color 0.12s ease;
+}
+#mailboxlist li a:before {
+  flex: none;
+  margin-right: 0.6rem !important;
+  vertical-align: 0 !important;
+}
+#mailboxlist li a > span:not(.unreadcount),
+#mailboxlist li a .folder-name {
+  flex: 1;
+  min-width: 0;
+}
+#mailboxlist li a .unreadcount {
+  margin-left: auto;
+  flex: none;
 }
 #mailboxlist li:not(.selected) > a:hover {
   background: rgba(29, 29, 31, 0.05);
@@ -6797,13 +6814,20 @@ html.dark-mode .messagelist tbody tr:not(.selected):hover td {
 }
 #toolbar-menu,
 #toolbar-list-menu {
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap;
 }
 #toolbar-menu li,
 #toolbar-list-menu li {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   height: auto;
+}
+#toolbar-menu .dropbutton,
+#toolbar-list-menu .dropbutton {
+  display: flex;
+  align-items: center;
 }
 #toolbar-menu a,
 #toolbar-list-menu a {

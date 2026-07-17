@@ -86,9 +86,10 @@ html.dark-mode {
                 justify-content: center;
                 width: 1.5em;
                 height: 1.6em;
-                margin: 0 .8rem 0 0;
+                margin: 0 .95rem 0 0;
                 font-size: 1.15em;
                 line-height: 1;
+                flex: none;
             }
         }
 
@@ -154,6 +155,8 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
 // Folder list — rounded rows, blue pill selection, airier spacing
 // ---------------------------------------------------------------------------
 #mailboxlist li a {
+    display: flex;               // icon + label always vertically centred
+    align-items: center;
     border-radius: 8px;
     margin: 1px .4rem;
     padding-top: .4rem;
@@ -161,6 +164,17 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
     border: 0 !important;
     transition: background-color .12s ease;
 }
+// icon: fixed centred box, roomy gap to the label
+#mailboxlist li a:before {
+    flex: none;
+    margin-right: .6rem !important;
+    vertical-align: 0 !important;
+}
+// folder name takes the remaining space; unread badge sits at the far right
+#mailboxlist li a > span:not(.unreadcount),
+#mailboxlist li a .folder-name { flex: 1; min-width: 0; }
+#mailboxlist li a .unreadcount { margin-left: auto; flex: none; }
+
 #mailboxlist li:not(.selected) > a:hover { background: fade(@color-font, 5%); }
 html.dark-mode #mailboxlist li:not(.selected) > a:hover { background: fade(#fff, 7%); }
 
@@ -211,9 +225,12 @@ html.dark-mode .messagelist tbody tr:not(.selected):hover td { background-color:
 // ---------------------------------------------------------------------------
 #toolbar-menu,
 #toolbar-list-menu {
-    align-items: center;
+    display: flex !important;      // was inline/block → align-items did nothing,
+    align-items: center !important; // so buttons danced on their text baselines
+    flex-wrap: nowrap;
 
-    li { display: inline-flex; align-items: center; height: auto; }
+    li { display: flex; align-items: center; height: auto; }
+    .dropbutton { display: flex; align-items: center; }
 
     a {
         display: inline-flex !important;
