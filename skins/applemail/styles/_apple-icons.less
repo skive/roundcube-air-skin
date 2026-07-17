@@ -55,6 +55,7 @@
 @ic-source:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/source.svg');
 @ic-open:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/open.svg');
 @ic-read:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/read.svg');
+@ic-unread:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/unread.svg');
 
 // Task rail + message toolbar. Nested under the id selectors so these rules
 // carry id-level specificity and beat the `#taskmenu/#toolbar-menu a:before`
@@ -126,6 +127,14 @@ body.status-flagged #message-header > .subject:before { .am-mask(@ic-flag; .85em
     tr.flaggedroot span.unflagged:before                    { .am-mask(@ic-flag; 1em); }
     span.attachment span:before                             { .am-mask(@ic-paperclip; 1em); vertical-align: -.15em; }
 }
+
+// Row hover-menu quick actions (the little floating flag + trash cluster shown
+// when hovering a message) — swap Elastic's FontAwesome glyphs for the Apple
+// flag / trash. Same for the search bar's "show unread" toggle (was an envelope).
+.listing-hover-menu a.button.flag:before,
+.listing-hover-menu a.button.unflag:before  { .am-mask(@ic-flag; 1.05em); }
+.listing-hover-menu a.button.delete:before  { .am-mask(@ic-delete; 1.05em); }
+.searchbar a.button.unread:before           { .am-mask(@ic-unread; 1.15em); }
 
 // Attachment list inside a message + compose attach button
 .menu a.attach:before,
