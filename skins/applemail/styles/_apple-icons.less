@@ -56,6 +56,7 @@
 @ic-open:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/open.svg');
 @ic-read:      data-uri('image/svg+xml;charset=utf-8', '../images/icons/read.svg');
 @ic-unread:    data-uri('image/svg+xml;charset=utf-8', '../images/icons/unread.svg');
+@ic-close:     data-uri('image/svg+xml;charset=utf-8', '../images/icons/close.svg');
 
 // Task rail + message toolbar. Nested under the id selectors so these rules
 // carry id-level specificity and beat the `#taskmenu/#toolbar-menu a:before`
@@ -97,6 +98,19 @@
     li.trash > a:before,
     li.trash a:before         { .am-mask(@ic-delete);  vertical-align: -.28em; }
     li.archive > a:before     { .am-mask(@ic-archive); vertical-align: -.28em; }
+}
+
+// Settings → Folders manager: same folder icons as the main mailbox list.
+// (#subscription-table is .listing.iconized, so the un-float/centre rule already
+// governs alignment — here we only swap the FontAwesome glyphs for the SF masks.)
+#subscription-table {
+    li > a:before             { .am-mask(@ic-folder;  1.15em); }
+    li.inbox > a:before       { .am-mask(@ic-inbox;   1.15em); }
+    li.sent > a:before        { .am-mask(@ic-sent;    1.15em); }
+    li.drafts > a:before      { .am-mask(@ic-drafts;  1.15em); }
+    li.junk > a:before        { .am-mask(@ic-junk;    1.15em); }
+    li.trash > a:before       { .am-mask(@ic-delete;  1.15em); }
+    li.archive > a:before     { .am-mask(@ic-archive; 1.15em); }
 }
 
 // List toolbar (#toolbar-list-menu) — select / options / refresh
@@ -346,6 +360,23 @@ html.dark-mode .attachmentslist li .attachment-size { color: #67676c; }
 .toolbar a.signature:before  { .am-mask(@ic-signature); }
 .toolbar a.responses:before  { .am-mask(@ic-responses); }
 .toolbar a.spellcheck:before { .am-mask(@ic-spell); }
+
+// Compose footer buttons — Send (paper plane) + Cancel (×). These sit in a plain
+// .btn (not a flex row), so un-float the mask and centre it inline before the text.
+.formbuttons button.send:before,
+.formbuttons a.send:before {
+    .am-mask(@ic-sent; 1em);
+    float: none !important;
+    vertical-align: -.12em;
+    margin-right: .4rem;
+}
+.formbuttons button.cancel:before,
+.formbuttons a.cancel:before {
+    .am-mask(@ic-close; 1em);
+    float: none !important;
+    vertical-align: -.12em;
+    margin-right: .4rem;
+}
 
 // Popup / dropdown menu items. content:"" and the unique mask-image win
 // regardless of Elastic's more specific compound selectors, so a single class
