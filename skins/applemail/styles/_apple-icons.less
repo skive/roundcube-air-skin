@@ -348,11 +348,15 @@ html.dark-mode .attachmentslist li .attachment-size { color: #67676c; }
     position: relative;
     top: -.05em;
 }
-// The contact-list avatar (shown for group members) sits ~1.6px below the name
-// with the shared centring above; drop it onto the name's optical centre.
+// Contact-list icon: Elastic uses a filled FontAwesome bust that sits low in its
+// glyph box (looks crooked) and clashes with the skin's line icons. Swap it for
+// the SF person mask, which is centred in its own viewBox; the .listing.iconized
+// rule handles the rest of the alignment.
 .contactlist td.contact:before,
 .contactlist td.name:before {
-    top: -2.5px !important;
+    .am-mask(@ic-contacts; 1.2em);
+    top: 0 !important;
+    vertical-align: middle !important;
 }
 
 // Compose toolbar (#messagetoolbar) — save / signature / responses / spellcheck
