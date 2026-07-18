@@ -358,6 +358,13 @@ html.dark-mode .attachmentslist li .attachment-size { color: #67676c; }
     top: 0 !important;
     vertical-align: middle !important;
 }
+// Settings → Identities list: same filled-glyph problem — swap for the SF
+// identity (ID card) mask, centred on the row.
+#identities-table td.mail:before {
+    .am-mask(@ic-identity; 1.2em);
+    top: 0 !important;
+    vertical-align: middle !important;
+}
 
 // Compose toolbar (#messagetoolbar) — save / signature / responses / spellcheck
 .toolbar a.save:before       { .am-mask(@ic-save); }

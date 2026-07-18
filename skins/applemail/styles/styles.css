@@ -8494,6 +8494,24 @@ html.dark-mode .attachmentslist li .attachment-size {
   top: 0 !important;
   vertical-align: middle !important;
 }
+#identities-table td.mail:before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1.2em !important;
+  height: 1.2em !important;
+  flex: none !important;
+  background-color: currentColor !important;
+  -webkit-mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%225%22%20width%3D%2218%22%20height%3D%2214%22%20rx%3D%222.2%22%2F%3E%3Ccircle%20cx%3D%228.5%22%20cy%3D%2211%22%20r%3D%222.1%22%2F%3E%3Cpath%20d%3D%22M5.4%2016.2a3.2%203.2%200%20016.2%200%22%2F%3E%3Cpath%20d%3D%22M14.5%2010h3.5M14.5%2013h3.5%22%2F%3E%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%225%22%20width%3D%2218%22%20height%3D%2214%22%20rx%3D%222.2%22%2F%3E%3Ccircle%20cx%3D%228.5%22%20cy%3D%2211%22%20r%3D%222.1%22%2F%3E%3Cpath%20d%3D%22M5.4%2016.2a3.2%203.2%200%20016.2%200%22%2F%3E%3Cpath%20d%3D%22M14.5%2010h3.5M14.5%2013h3.5%22%2F%3E%3C%2Fsvg%3E");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  top: 0 !important;
+  vertical-align: middle !important;
+}
 .toolbar a.save:before {
   content: "" !important;
   display: inline-block !important;
