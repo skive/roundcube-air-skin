@@ -6872,6 +6872,9 @@ html.dark-mode .messagelist tr.unread td.subject span.subject {
 html.dark-mode .messagelist td.subject span.subject {
   color: #bcbcca;
 }
+#toolbar-menu {
+  margin-right: auto !important;
+}
 #toolbar-menu,
 #toolbar-list-menu {
   display: flex !important;

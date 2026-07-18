@@ -303,6 +303,11 @@ html.dark-mode .messagelist td.subject span.subject { color: @color-dark-hint; }
 // label); these rules lay each button out as one horizontal row so both
 // toolbars read identically, macOS Mail–style.
 // ---------------------------------------------------------------------------
+// The message-view header is a flex row with justify-content:center, which
+// centred this toolbar over the reading pane. margin-right:auto absorbs the free
+// space on the right, pushing the toolbar back to the pane's left edge.
+#toolbar-menu { margin-right: auto !important; }
+
 #toolbar-menu,
 #toolbar-list-menu {
     display: flex !important;      // was inline/block → align-items did nothing,
