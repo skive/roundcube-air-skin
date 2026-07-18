@@ -6803,10 +6803,12 @@ html.dark-mode .searchbar {
   display: flex !important;
   align-items: center;
   justify-content: center;
+  line-height: 1 !important;
 }
 #mailboxlist li div.treetoggle:before {
   float: none !important;
   margin: 0 !important;
+  line-height: 1 !important;
 }
 #mailboxlist li:not(.selected) > a:hover {
   background: rgba(29, 29, 31, 0.05);

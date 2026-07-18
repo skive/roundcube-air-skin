@@ -236,10 +236,12 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
     display: flex !important;
     align-items: center;
     justify-content: center;
-}
+    line-height: 1 !important;    // else the chevron inherits the 35px row
+}                                 // line-height and renders below the box centre
 #mailboxlist li div.treetoggle:before {
     float: none !important;
     margin: 0 !important;
+    line-height: 1 !important;
 }
 
 #mailboxlist li:not(.selected) > a:hover { background: fade(@color-font, 5%); }
