@@ -193,10 +193,11 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
     // lets the margins shrink the box so it's inset — and rounded — on both sides.
     width: auto !important;
     box-sizing: border-box;
+    height: 40px !important;      // fixed pill height; flex centres the content
     border-radius: 8px;
     margin: 1px .4rem;
-    padding-top: calc(.4rem - 2px);
-    padding-bottom: calc(.4rem - 2px);
+    padding-top: 0;
+    padding-bottom: 0;
     border: 0 !important;
     transition: background-color .12s ease;
 }
@@ -221,13 +222,24 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
     line-height: 1.35rem;
 }
 
-// Expand/collapse arrow: Elastic pins it absolute at top:0, but the folder name
-// (inside the anchor) is pushed down by the anchor's top margin (1px) + top
-// padding, so the chevron rode above the name. Nudge the toggle down by that
-// same amount so the chevron lines up with the folder name. (bottom must stay
-// unset — the li also wraps the nested sub-folder <ul>.)
+// Expand/collapse arrow: Elastic pins it absolute at the li's left/top edge and
+// floats the chevron, so it hugged the pill edge and rode high. Give the toggle
+// a box that spans exactly the gap between the pill's left edge (.4rem margin)
+// and the folder icon (the anchor's 1.5em padding-left), then flex-centre the
+// chevron in it — horizontally midway in that gap, vertically on the 40px pill.
+// (height is fixed, NOT bottom:0 — the li also wraps the nested sub-folder <ul>.)
 #mailboxlist li div.treetoggle {
-    top: calc(.4rem - 1px) !important;   // = padding-top (.4rem - 2px) + margin-top (1px)
+    left: .4rem !important;
+    width: 1.5em !important;
+    top: 0 !important;
+    height: 42px !important;      // pill (40px) + 1px top + 1px bottom margin
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+#mailboxlist li div.treetoggle:before {
+    float: none !important;
+    margin: 0 !important;
 }
 
 #mailboxlist li:not(.selected) > a:hover { background: fade(@color-font, 5%); }

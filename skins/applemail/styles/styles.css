@@ -6767,10 +6767,11 @@ html.dark-mode .searchbar {
   align-items: center;
   width: auto !important;
   box-sizing: border-box;
+  height: 40px !important;
   border-radius: 8px;
   margin: 1px 0.4rem;
-  padding-top: calc(0.4rem - 2px);
-  padding-bottom: calc(0.4rem - 2px);
+  padding-top: 0;
+  padding-bottom: 0;
   border: 0 !important;
   transition: background-color 0.12s ease;
 }
@@ -6795,7 +6796,17 @@ html.dark-mode .searchbar {
   line-height: 1.35rem;
 }
 #mailboxlist li div.treetoggle {
-  top: calc(0.4rem - 1px) !important;
+  left: 0.4rem !important;
+  width: 1.5em !important;
+  top: 0 !important;
+  height: 42px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+#mailboxlist li div.treetoggle:before {
+  float: none !important;
+  margin: 0 !important;
 }
 #mailboxlist li:not(.selected) > a:hover {
   background: rgba(29, 29, 31, 0.05);
