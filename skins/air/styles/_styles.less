@@ -751,3 +751,15 @@ textarea.form-control { border-radius: 8px; }
     padding-bottom: 0 !important;
 }
 .popupmenu { overflow: hidden; }
+
+// Select dropdowns (Сортировать по / Порядок сортировки, language pickers, …) are
+// .listing lists, so they carried per-row separator lines and tall 35px rows —
+// heavier than the clean popup menus. Drop the separators and tighten the rows.
+.popover.select-menu .listing li,
+.popover.select-menu .listing li > a {
+    border: 0 !important;
+}
+.popover.select-menu .listing li > a {
+    height: 2.1rem !important;
+    line-height: 2.1rem !important;
+}

@@ -7293,6 +7293,14 @@ textarea.form-control {
 .popupmenu {
   overflow: hidden;
 }
+.popover.select-menu .listing li,
+.popover.select-menu .listing li > a {
+  border: 0 !important;
+}
+.popover.select-menu .listing li > a {
+  height: 2.1rem !important;
+  line-height: 2.1rem !important;
+}
 /**
  * Apple Mail skin — Apple-style icon set (design branch `apple-icons`).
  *
