@@ -35,5 +35,7 @@ services:
     ports:
       - "8095:80"
     volumes:
-      # our skin, mounted live so edits + recompiled CSS show on refresh
+      # our skins, mounted live so edits + recompiled CSS show on refresh
       - ./skins/air:/var/www/html/skins/air:ro
+      # Air Blue — a variant of Air (extends it) with contrasting blue selection
+      - ./skins/airblue:/var/www/html/skins/airblue:ro

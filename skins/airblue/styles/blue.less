@@ -1,0 +1,44 @@
+/**
+ * Air Blue — overrides layered on top of Air's stylesheet.
+ *
+ * Air is loaded first (inherited unchanged, so it stays in sync); this file only
+ * restores the original contrasting blue selection for mailboxes and messages
+ * that Air replaced with a soft grey. Standalone (no @import), so no data-uri
+ * paths to resolve — compile with:  lessc blue.less blue.css
+ */
+@ab-sel-bg: #007aff;
+@ab-sel-fg: #ffffff;
+
+// Selected mailbox pill — blue fill, white label / icon / count (both themes).
+#mailboxlist li.selected > a,
+html.dark-mode #mailboxlist li.selected > a {
+    background: @ab-sel-bg !important;
+    color: @ab-sel-fg !important;
+}
+#mailboxlist li.selected > a .unreadcount,
+html.dark-mode #mailboxlist li.selected > a .unreadcount {
+    color: @ab-sel-fg !important;
+}
+
+// Selected message row — blue fill, white text (mirror Air's selectors so these
+// win by source order; blue.css is loaded after Air's styles.css).
+html:not(.dark-mode) .messagelist tr.selected td,
+html.dark-mode .messagelist tr.selected td {
+    background-color: @ab-sel-bg !important;
+}
+html:not(.dark-mode) .messagelist tr.selected td,
+html:not(.dark-mode) .messagelist tr.selected td a,
+html:not(.dark-mode) .messagelist tr.selected td span,
+html:not(.dark-mode) .messagelist tr.selected td .date,
+html:not(.dark-mode) .messagelist tr.selected td.subject span.subject,
+html:not(.dark-mode) .messagelist tr.selected td.subject span.subject a,
+html:not(.dark-mode) .messagelist tr.selected td.subject span.fromto,
+html.dark-mode .messagelist tr.selected td,
+html.dark-mode .messagelist tr.selected td a,
+html.dark-mode .messagelist tr.selected td span,
+html.dark-mode .messagelist tr.selected td .date,
+html.dark-mode .messagelist tr.selected td.subject span.subject,
+html.dark-mode .messagelist tr.selected td.subject span.subject a,
+html.dark-mode .messagelist tr.selected td.subject span.fromto {
+    color: @ab-sel-fg !important;
+}
