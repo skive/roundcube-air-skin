@@ -193,7 +193,7 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
     // lets the margins shrink the box so it's inset — and rounded — on both sides.
     width: auto !important;
     box-sizing: border-box;
-    height: 40px !important;      // fixed pill height; flex centres the content
+    height: 36px !important;      // fixed pill height; flex centres the content
     border-radius: 8px;
     margin: 1px .4rem;
     padding-top: 0;
@@ -232,7 +232,7 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
     left: .4rem !important;
     width: 1.5em !important;
     top: 0 !important;
-    height: 42px !important;      // pill (40px) + 1px top + 1px bottom margin
+    height: 38px !important;      // pill (36px) + 1px top + 1px bottom margin
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -263,8 +263,8 @@ html.dark-mode #mailboxlist li:not(.selected) > a:hover { background: fade(#fff,
     tr.unread td.subject span.subject { color: @color-font; }
     span.date { font-size: 12.5px; letter-spacing: .01em; }
 
-    // airier rows (Tahoe)
-    tbody td { padding-top: 8px; padding-bottom: 9px; }
+    // row height ~64px: content is ~54px, so 5px top/bottom padding gets us there
+    tbody td { padding-top: 5px; padding-bottom: 5px; }
 
     // thin grey row separators (prototype: 0.5px rgba(0,0,0,.08))
     tbody tr td { border-bottom: 1px solid fade(@color-font, 8%) !important; }

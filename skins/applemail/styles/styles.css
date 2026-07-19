@@ -6767,7 +6767,7 @@ html.dark-mode .searchbar {
   align-items: center;
   width: auto !important;
   box-sizing: border-box;
-  height: 40px !important;
+  height: 36px !important;
   border-radius: 8px;
   margin: 1px 0.4rem;
   padding-top: 0;
@@ -6799,7 +6799,7 @@ html.dark-mode .searchbar {
   left: 0.4rem !important;
   width: 1.5em !important;
   top: 0 !important;
-  height: 42px !important;
+  height: 38px !important;
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -6836,8 +6836,8 @@ html.dark-mode #mailboxlist li:not(.selected) > a:hover {
   letter-spacing: 0.01em;
 }
 .messagelist tbody td {
-  padding-top: 8px;
-  padding-bottom: 9px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .messagelist tbody tr td {
   border-bottom: 1px solid rgba(29, 29, 31, 0.08) !important;
