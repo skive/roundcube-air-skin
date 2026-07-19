@@ -6813,6 +6813,9 @@ html.dark-mode #mailboxlist li a .unreadcount {
 html.dark-mode #mailboxlist li.selected > a .unreadcount {
   color: #0B66F1 !important;
 }
+html.dark-mode #mailboxlist li.selected > a {
+  background: #2c2c2e !important;
+}
 #mailboxlist li.mailbox.unread > a {
   font-weight: 400 !important;
 }
@@ -6895,6 +6898,15 @@ html.dark-mode .messagelist tr.unread td.subject span.subject {
 }
 html.dark-mode .messagelist td.subject span.subject {
   color: #bcbcca;
+}
+html.dark-mode .messagelist tr.selected td,
+html.dark-mode .messagelist tr.selected td a,
+html.dark-mode .messagelist tr.selected td span,
+html.dark-mode .messagelist tr.selected td .date,
+html.dark-mode .messagelist tr.selected td.subject span.subject,
+html.dark-mode .messagelist tr.selected td.subject span.subject a,
+html.dark-mode .messagelist tr.selected td.subject span.fromto {
+  color: #E8E8E8 !important;
 }
 #toolbar-menu {
   margin-right: auto !important;

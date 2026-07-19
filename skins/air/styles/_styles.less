@@ -238,6 +238,9 @@ html.dark-mode #mailboxlist li a .unreadcount { color: #98989d !important; }
 }
 #mailboxlist li.selected > a .unreadcount,
 html.dark-mode #mailboxlist li.selected > a .unreadcount { color: #0B66F1 !important; }
+// Dark theme (per request): the selected mailbox pill takes the selected-message
+// background (#2c2c2e); the label/count stay #0B66F1.
+html.dark-mode #mailboxlist li.selected > a { background: #2c2c2e !important; }
 // unread folders keep a normal-weight name (Apple relies on the grey count)
 #mailboxlist li.mailbox.unread > a { font-weight: 400 !important; }
 
@@ -320,6 +323,17 @@ html.dark-mode .messagelist tr.unread td.subject span.subject {
     color: @color-dark-font !important;
 }
 html.dark-mode .messagelist td.subject span.subject { color: @color-dark-hint; }
+// Dark theme (per request): selected message text takes the mailbox-pill colour
+// (#E8E8E8) rather than white.
+html.dark-mode .messagelist tr.selected td,
+html.dark-mode .messagelist tr.selected td a,
+html.dark-mode .messagelist tr.selected td span,
+html.dark-mode .messagelist tr.selected td .date,
+html.dark-mode .messagelist tr.selected td.subject span.subject,
+html.dark-mode .messagelist tr.selected td.subject span.subject a,
+html.dark-mode .messagelist tr.selected td.subject span.fromto {
+    color: #E8E8E8 !important;
+}
 
 // ---------------------------------------------------------------------------
 // Top toolbars (#toolbar-menu = message actions, #toolbar-list-menu = list) —
