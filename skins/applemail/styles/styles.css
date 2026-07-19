@@ -6816,6 +6816,9 @@ html.dark-mode .searchbar {
 html.dark-mode #mailboxlist li:not(.selected) > a:hover {
   background: rgba(255, 255, 255, 0.07);
 }
+#settings-menu li.selected > a {
+  color: inherit !important;
+}
 .messagelist span.fromto {
   font-weight: 600;
   color: #1d1d1f;

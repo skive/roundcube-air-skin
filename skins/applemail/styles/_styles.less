@@ -247,6 +247,12 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
 #mailboxlist li:not(.selected) > a:hover { background: fade(@color-font, 5%); }
 html.dark-mode #mailboxlist li:not(.selected) > a:hover { background: fade(#fff, 7%); }
 
+// Settings nav (Настройки / Папки / Профили / Ответы): the selected row is a
+// solid blue pill, but Elastic kept the anchor its dark link colour → black text
+// on blue. Let the label + icon inherit the row's own selection colour, so it's
+// white on the blue pill (and still correct at narrow widths / in dark mode).
+#settings-menu li.selected > a { color: inherit !important; }
+
 // ---------------------------------------------------------------------------
 // Message list — Apple typography + white text on the blue active row
 // ---------------------------------------------------------------------------
