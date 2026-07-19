@@ -230,9 +230,14 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
     line-height: 1.35rem;
 }
 html.dark-mode #mailboxlist li a .unreadcount { color: #98989d !important; }
-// on the selected (blue) row the grey count would be low-contrast → make it white
+// Selected mailbox: #E8E8E8 pill with #0B66F1 label, count and icon (per request,
+// applied in both themes).
+#mailboxlist li.selected > a {
+    background: #E8E8E8 !important;
+    color: #0B66F1 !important;
+}
 #mailboxlist li.selected > a .unreadcount,
-html.dark-mode #mailboxlist li.selected > a .unreadcount { color: #fff !important; }
+html.dark-mode #mailboxlist li.selected > a .unreadcount { color: #0B66F1 !important; }
 // unread folders keep a normal-weight name (Apple relies on the grey count)
 #mailboxlist li.mailbox.unread > a { font-weight: 400 !important; }
 
