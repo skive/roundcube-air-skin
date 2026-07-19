@@ -334,6 +334,18 @@ html.dark-mode .messagelist tr.selected td.subject span.subject a,
 html.dark-mode .messagelist tr.selected td.subject span.fromto {
     color: #E8E8E8 !important;
 }
+// Light theme (per request): the selected message matches the selected mailbox
+// pill — #E8E8E8 fill with #0B66F1 text.
+html:not(.dark-mode) .messagelist tr.selected td { background-color: #E8E8E8 !important; }
+html:not(.dark-mode) .messagelist tr.selected td,
+html:not(.dark-mode) .messagelist tr.selected td a,
+html:not(.dark-mode) .messagelist tr.selected td span,
+html:not(.dark-mode) .messagelist tr.selected td .date,
+html:not(.dark-mode) .messagelist tr.selected td.subject span.subject,
+html:not(.dark-mode) .messagelist tr.selected td.subject span.subject a,
+html:not(.dark-mode) .messagelist tr.selected td.subject span.fromto {
+    color: #0B66F1 !important;
+}
 
 // ---------------------------------------------------------------------------
 // Top toolbars (#toolbar-menu = message actions, #toolbar-list-menu = list) —
