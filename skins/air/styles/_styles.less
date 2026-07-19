@@ -230,6 +230,9 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
     line-height: 1.35rem;
 }
 html.dark-mode #mailboxlist li a .unreadcount { color: #98989d !important; }
+// on the selected (blue) row the grey count would be low-contrast → make it white
+#mailboxlist li.selected > a .unreadcount,
+html.dark-mode #mailboxlist li.selected > a .unreadcount { color: #fff !important; }
 // unread folders keep a normal-weight name (Apple relies on the grey count)
 #mailboxlist li.mailbox.unread > a { font-weight: 400 !important; }
 
@@ -240,7 +243,7 @@ html.dark-mode #mailboxlist li a .unreadcount { color: #98989d !important; }
 // chevron in it — horizontally midway in that gap, vertically on the 40px pill.
 // (height is fixed, NOT bottom:0 — the li also wraps the nested sub-folder <ul>.)
 #mailboxlist li div.treetoggle {
-    left: .4rem !important;
+    left: calc(.4rem + 2px) !important;   // nudge the chevron 2px toward the folder icon
     width: 1.5em !important;
     top: 0 !important;
     height: 38px !important;      // pill (36px) + 1px top + 1px bottom margin

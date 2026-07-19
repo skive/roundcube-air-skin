@@ -6805,11 +6805,15 @@ html.dark-mode .searchbar {
 html.dark-mode #mailboxlist li a .unreadcount {
   color: #98989d !important;
 }
+#mailboxlist li.selected > a .unreadcount,
+html.dark-mode #mailboxlist li.selected > a .unreadcount {
+  color: #fff !important;
+}
 #mailboxlist li.mailbox.unread > a {
   font-weight: 400 !important;
 }
 #mailboxlist li div.treetoggle {
-  left: 0.4rem !important;
+  left: calc(0.4rem + 2px) !important;
   width: 1.5em !important;
   top: 0 !important;
   height: 38px !important;
