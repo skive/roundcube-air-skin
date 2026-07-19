@@ -420,10 +420,27 @@ html.dark-mode .attachmentslist li .attachment-size { color: #67676c; }
     a.select:before       { .am-mask(@ic-select; 1.15em); }
     a.options:before      { .am-mask(@ic-options; 1.15em); }
 }
-// Elastic's `.popover .menu li a:before { height: inherit !important }` outweighs
-// the mask's own height, so in popover-style dropdowns (Ещё / Пометить / …) some
-// masked icons collapsed to 0 height and vanished. Restore a consistent height.
+// Popover-menu item icons (Ещё / Пометить / …): Elastic floats them and sets
+// `height: inherit !important`, so masked icons either collapsed to 0 (invisible)
+// or top-aligned above the label. Un-float and vertically centre them at a fixed
+// size so they line up with the text in every menu.
 .popover .menu li a:before {
+    float: none !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    width: 1.15em !important;
     height: 1.15em !important;
+    min-width: 1.15em !important;
     line-height: 1 !important;
+    margin: 0 .5rem 0 0 !important;
+}
+// submenu items (Export / Переместить / Копировать) are flex rows — centre the
+// icon and the trailing chevron on the cross axis (delta 0 there).
+.popover .menu li a[aria-haspopup] { align-items: center; }
+// plain (block) items use vertical-align:middle, which sits ~2px low; nudge the
+// icon onto the text centre. (Scoped away from the flex submenu items, which are
+// already exactly centred.)
+.popover .menu li a:not([aria-haspopup]):before {
+    position: relative;
+    top: -0.12em;
 }

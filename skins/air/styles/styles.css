@@ -7287,8 +7287,11 @@ textarea.form-control {
 }
 .popupmenu,
 .popover .popover-body {
-  padding-top: 8px !important;
-  padding-bottom: 8px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.popupmenu {
+  overflow: hidden;
 }
 /**
  * Apple Mail skin — Apple-style icon set (design branch `apple-icons`).
@@ -9021,6 +9024,19 @@ html.dark-mode .attachmentslist li .attachment-size {
   mask-size: contain;
 }
 .popover .menu li a:before {
+  float: none !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  width: 1.15em !important;
   height: 1.15em !important;
+  min-width: 1.15em !important;
   line-height: 1 !important;
+  margin: 0 0.5rem 0 0 !important;
+}
+.popover .menu li a[aria-haspopup] {
+  align-items: center;
+}
+.popover .menu li a:not([aria-haspopup]):before {
+  position: relative;
+  top: -0.12em;
 }

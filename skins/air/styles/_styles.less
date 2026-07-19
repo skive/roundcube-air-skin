@@ -742,11 +742,12 @@ textarea.form-control { border-radius: 8px; }
 .popover .popover-body {
     border-radius: 8px !important;
 }
-// Give the list top/bottom breathing room equal to the corner radius: the first
-// and last items' hover highlight then sits fully inside the straight edges, so
-// it stays a clean square (no rounding, no square corner poking past the card).
+// No extra space before the first / after the last item: drop the vertical
+// padding and let the rounded card clip the item highlights (overflow +
+// border-radius), so the top/bottom highlights follow the corners cleanly.
 .popupmenu,
 .popover .popover-body {
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
+.popupmenu { overflow: hidden; }
