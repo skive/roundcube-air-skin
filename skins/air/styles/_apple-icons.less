@@ -400,8 +400,8 @@ html.dark-mode .attachmentslist li .attachment-size { color: #67676c; }
     a.print:before        { .am-mask(@ic-print; 1.15em); }
     a.delete:before       { .am-mask(@ic-delete; 1.15em); }
     a.download:before,
-    a.export:before,
-    a.import:before       { .am-mask(@ic-download; 1.15em); }
+    a.export:before       { .am-mask(@ic-download; 1.15em); }
+    a.import:before       { .am-mask(@ic-import; 1.15em); }
     a.copy:before         { .am-mask(@ic-copy; 1.15em); }
     a.move:before         { .am-mask(@ic-move; 1.15em); }
     a.edit:before         { .am-mask(@ic-drafts; 1.15em); }
@@ -419,4 +419,11 @@ html.dark-mode .attachmentslist li .attachment-size { color: #67676c; }
     a.compose:before      { .am-mask(@ic-compose; 1.15em); }
     a.select:before       { .am-mask(@ic-select; 1.15em); }
     a.options:before      { .am-mask(@ic-options; 1.15em); }
+}
+// Elastic's `.popover .menu li a:before { height: inherit !important }` outweighs
+// the mask's own height, so in popover-style dropdowns (Ещё / Пометить / …) some
+// masked icons collapsed to 0 height and vanished. Restore a consistent height.
+.popover .menu li a:before {
+    height: 1.15em !important;
+    line-height: 1 !important;
 }

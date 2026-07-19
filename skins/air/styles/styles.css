@@ -8746,8 +8746,7 @@ html.dark-mode .attachmentslist li .attachment-size {
   mask-size: contain;
 }
 .popupmenu a.download:before,
-.popupmenu a.export:before,
-.popupmenu a.import:before {
+.popupmenu a.export:before {
   content: "" !important;
   display: inline-block !important;
   width: 1.15em !important;
@@ -8756,6 +8755,22 @@ html.dark-mode .attachmentslist li .attachment-size {
   background-color: currentColor !important;
   -webkit-mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%204v11%22%2F%3E%3Cpath%20d%3D%22M8%2011l4%204%204-4%22%2F%3E%3Cpath%20d%3D%22M5%2019.5h14%22%2F%3E%3C%2Fsvg%3E");
   mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%204v11%22%2F%3E%3Cpath%20d%3D%22M8%2011l4%204%204-4%22%2F%3E%3Cpath%20d%3D%22M5%2019.5h14%22%2F%3E%3C%2Fsvg%3E");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.popupmenu a.import:before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1.15em !important;
+  height: 1.15em !important;
+  flex: none !important;
+  background-color: currentColor !important;
+  -webkit-mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%204.5v10.5%22%2F%3E%3Cpath%20d%3D%22M8.2%208.3L12%204.5l3.8%203.8%22%2F%3E%3Cpath%20d%3D%22M4.5%2015v3a2%202%200%20002%202h11a2%202%200%20002-2v-3%22%2F%3E%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%204.5v10.5%22%2F%3E%3Cpath%20d%3D%22M8.2%208.3L12%204.5l3.8%203.8%22%2F%3E%3Cpath%20d%3D%22M4.5%2015v3a2%202%200%20002%202h11a2%202%200%20002-2v-3%22%2F%3E%3C%2Fsvg%3E");
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
@@ -9004,4 +9019,8 @@ html.dark-mode .attachmentslist li .attachment-size {
   mask-position: center;
   -webkit-mask-size: contain;
   mask-size: contain;
+}
+.popover .menu li a:before {
+  height: 1.15em !important;
+  line-height: 1 !important;
 }
