@@ -30,10 +30,10 @@ services:
       ROUNDCUBEMAIL_SMTP_SERVER: "greenmail"
       ROUNDCUBEMAIL_SMTP_PORT: "3025"
       ROUNDCUBEMAIL_DB_TYPE: "sqlite"
-      ROUNDCUBEMAIL_SKIN: "applemail"
+      ROUNDCUBEMAIL_SKIN: "air"
       ROUNDCUBEMAIL_USERNAME_DOMAIN: "localhost"
     ports:
       - "8095:80"
     volumes:
       # our skin, mounted live so edits + recompiled CSS show on refresh
-      - ./skins/applemail:/var/www/html/skins/applemail:ro
+      - ./skins/air:/var/www/html/skins/air:ro

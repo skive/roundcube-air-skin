@@ -6793,7 +6793,20 @@ html.dark-mode .searchbar {
   flex: none;
   margin: 0 0 0 auto;
   align-self: center;
+  background: transparent !important;
+  color: #8a8a8e !important;
+  font-weight: 400 !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+  border-radius: 0 !important;
+  font-size: 0.92rem;
   line-height: 1.35rem;
+}
+html.dark-mode #mailboxlist li a .unreadcount {
+  color: #98989d !important;
+}
+#mailboxlist li.mailbox.unread > a {
+  font-weight: 400 !important;
 }
 #mailboxlist li div.treetoggle {
   left: 0.4rem !important;

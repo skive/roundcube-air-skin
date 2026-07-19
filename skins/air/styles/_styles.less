@@ -214,13 +214,24 @@ html.dark-mode .searchbar { border-color: @color-dark-border; background: fade(#
 // the top of the row instead of the label. Drop it back into the flex flow so
 // align-items:center on the row lines it up with the folder name.
 #mailboxlist li.mailbox.unread > a { padding-right: .4rem; }  // reclaim reserved space
+// Apple Mail: the unread count is a muted grey number, not a blue bold pill.
 #mailboxlist li a .unreadcount {
     position: static;
     flex: none;
     margin: 0 0 0 auto;      // no top margin — push right only
     align-self: center;
+    background: transparent !important;
+    color: #8a8a8e !important;
+    font-weight: 400 !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+    border-radius: 0 !important;
+    font-size: .92rem;
     line-height: 1.35rem;
 }
+html.dark-mode #mailboxlist li a .unreadcount { color: #98989d !important; }
+// unread folders keep a normal-weight name (Apple relies on the grey count)
+#mailboxlist li.mailbox.unread > a { font-weight: 400 !important; }
 
 // Expand/collapse arrow: Elastic pins it absolute at the li's left/top edge and
 // floats the chevron, so it hugged the pill edge and rode high. Give the toggle

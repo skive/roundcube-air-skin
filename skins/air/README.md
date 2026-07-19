@@ -61,13 +61,13 @@ rebuild only after editing the LESS sources.
 INSTALLATION
 ------------
 
-1. Copy the `applemail` folder into `roundcubemail/skins/`.
+1. Copy the `air` folder into `roundcubemail/skins/`.
 2. In `config/config.inc.php`:
 
    ```php
-   $config['skin'] = 'applemail';
+   $config['skin'] = 'air';
    // optional: let users pick it in Settings → Appearance
-   $config['skins_allowed'] = ['elastic', 'applemail'];
+   $config['skins_allowed'] = ['elastic', 'air'];
    ```
 
 3. Reload (clear the browser cache if needed).
