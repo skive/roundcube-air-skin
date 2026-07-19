@@ -80,7 +80,11 @@
 	</ul>
 </div>
 
-<!-- Apple Mail: synthesize a coloured initials avatar when there is no photo -->
+<!-- Apple Mail: show a coloured initials monogram by default, then load the
+     sender photo in the background and swap it in only if it actually loads.
+     (More robust than sniffing the placeholder URL, which differs per server:
+     on some setups the "no photo" src isn't the local contactpic placeholder,
+     so the old detect-then-replace logic left a broken image instead.) -->
 <script>
 (function () {
 	function initials(name) {
@@ -96,13 +100,17 @@
 		var h = 0; for (var i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
 		return pals[h % pals.length];
 	}
+	function isPlaceholder(s) {
+		// no src, the local placeholder, or a data-URI stub = "no real photo"
+		return !s || s.indexOf('contactpic') !== -1;
+	}
 	function build() {
 		var mh = document.getElementById('message-header');
 		if (!mh) return;
 		var img = mh.querySelector('img.contactphoto');
 		if (!img || img.dataset.amDone) return;
-		var src = img.getAttribute('src') || '';
-		if (src.indexOf('contactpic') === -1 && src !== '') return; // real photo present
+		img.dataset.amDone = '1';
+
 		var adr = mh.querySelector('.header-summary .adr');
 		var name = adr ? adr.textContent : '';
 		var pal = palette(name || 'x');
@@ -110,12 +118,32 @@
 		av.className = 'am-avatar';
 		av.style.background = 'linear-gradient(135deg,' + pal[0] + ',' + pal[1] + ')';
 		av.textContent = initials(name);
-		img.dataset.amDone = '1';
-		img.replaceWith(av);
+
+		// Monogram first: keep the <img> in the DOM (so it keeps loading and we can
+		// still observe async src changes) but hide it behind the monogram.
+		img.style.display = 'none';
+		img.parentNode.insertBefore(av, img);
+
+		function decide() {
+			var s = img.getAttribute('src') || '';
+			if (!isPlaceholder(s) && img.complete && img.naturalWidth > 1) {
+				img.style.display = '';       // a real photo actually loaded → show it
+				av.style.display = 'none';
+			} else {
+				img.style.display = 'none';   // no (valid) photo → keep the monogram
+				av.style.display = '';
+			}
+		}
+		img.addEventListener('load', decide);
+		img.addEventListener('error', decide);
+		// the photo URL may be assigned/updated asynchronously (plugins, gravatar…)
+		try {
+			new MutationObserver(decide).observe(img, { attributes: true, attributeFilter: ['src'] });
+		} catch (e) {}
+		decide();
 	}
-	// Roundcube sets the placeholder photo asynchronously, so retry a few
-	// times after paint (build() is idempotent — it only acts on a still-
-	// unprocessed placeholder image).
+	// build() is idempotent; retry until the message header exists, and re-run when
+	// the preview pane loads another message.
 	if (document.readyState !== 'loading') build();
 	else document.addEventListener('DOMContentLoaded', build);
 	window.addEventListener('load', build);
