@@ -435,8 +435,15 @@ html.dark-mode .attachmentslist li .attachment-size { color: #67676c; }
     margin: 0 .5rem 0 0 !important;
 }
 // submenu items (Export / Переместить / Копировать) are flex rows — centre the
-// icon and the trailing chevron on the cross axis (delta 0 there).
+// icon and the trailing chevron on the cross axis.
 .popover .menu li a[aria-haspopup] { align-items: center; }
+// The chevron is a FontAwesome glyph in ::after that inherits the 35px row
+// line-height, so it sits on that tall line's baseline and rides high. Collapse
+// its line-height so align-items:center centres the small glyph box on the text.
+.popover .menu li a[aria-haspopup]::after {
+    line-height: 1 !important;
+    align-self: center;
+}
 // plain (block) items use vertical-align:middle, which sits ~2px low; nudge the
 // icon onto the text centre. (Scoped away from the flex submenu items, which are
 // already exactly centred.)

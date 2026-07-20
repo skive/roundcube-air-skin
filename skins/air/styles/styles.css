@@ -9048,6 +9048,10 @@ html.dark-mode .attachmentslist li .attachment-size {
 .popover .menu li a[aria-haspopup] {
   align-items: center;
 }
+.popover .menu li a[aria-haspopup]::after {
+  line-height: 1 !important;
+  align-self: center;
+}
 .popover .menu li a:not([aria-haspopup]):before {
   position: relative;
   top: -0.12em;
