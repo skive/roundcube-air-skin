@@ -41,10 +41,13 @@ server, with the skins mounted live (read-only) so edits show on refresh:
 ```sh
 docker compose up -d
 # open http://localhost:8095   (login: demo@localhost / anything)
-python3 tools/seed-mail.py     # seed a few demo messages
+python3 tools/seed-demo.py     # 132 inbox messages + 30 work folders (idempotent)
 ```
 
-Also available: `tools/seed-mail-extra.py`, `tools/make-folders.py`.
+Other seed helpers: `tools/seed-mail.py`, `tools/seed-mail-extra.py`, `tools/make-folders.py`.
+
+See **[TESTING.md](TESTING.md)** for the full bring-up procedure and how to
+reproduce the environment (and re-seed the demo data) after a PC restart.
 
 ## Installation
 
