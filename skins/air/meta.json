@@ -1,8 +1,8 @@
 {
 	"name": "Air",
 	"author": "Andrey Kulakov",
-	"license": "Creative Commons Attribution-ShareAlike",
-	"license-url": "http://creativecommons.org/licenses/by-sa/3.0/",
+	"license": "GNU General Public License v3",
+	"license-url": "https://www.gnu.org/licenses/gpl-3.0.html",
 	"config": {
 		"supported_layouts": ["widescreen"],
 		"jquery_ui_colors_theme": "bootstrap",

@@ -84,10 +84,10 @@ toolbar and the task rail break.
 LICENSE
 -------
 
-Derived from the Roundcube Elastic skin and subject to the same Creative
-Commons Attribution-ShareAlike License. Credit to the original authors is kept
-here per the license.
-See http://creativecommons.org/licenses/by-sa/3.0/ for details.
+Derived from the Roundcube Elastic skin and licensed under the GNU General
+Public License v3 (GPL-3.0), the same license as Roundcube Webmail. Credit to
+the original authors is kept here per the license.
+See https://www.gnu.org/licenses/gpl-3.0.html for details.
 
 This folder also contains code licensed separately:
 - Bootstrap Framework 4 from https://github.com/twbs/bootstrap

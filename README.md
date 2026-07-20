@@ -63,6 +63,6 @@ so no separate `bin/install-jsdeps.sh` step is needed.
 
 ## License
 
-Derived from the Roundcube Elastic skin and subject to the same
-[Creative Commons Attribution-ShareAlike License](http://creativecommons.org/licenses/by-sa/3.0/).
+Licensed under the [GNU General Public License v3](LICENSE) (`GPL-3.0`), the same
+license as Roundcube Webmail, from whose Elastic skin this is derived.
 Bundles Bootstrap 4 (twbs/bootstrap) and FontAwesome 5 fonts under their own licenses.
