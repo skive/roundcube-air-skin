@@ -8209,9 +8209,11 @@ html.dark-mode .attachmentslist li {
 }
 .attachmentslist li.zip > a.filename:before,
 .attachmentslist li.gzip > a.filename:before,
+.attachmentslist li.rar > a.filename:before,
+.attachmentslist li.tar > a.filename:before,
 .attachmentslist li.archive > a.filename:before {
   content: "ZIP";
-  background: linear-gradient(135deg, #b3b8c2, #868c99);
+  background: linear-gradient(135deg, #f5c84b, #cf8f14);
 }
 .attachmentslist li.image > a.filename:before {
   content: "IMG";
