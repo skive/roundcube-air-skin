@@ -106,7 +106,7 @@ def make_xlsx(title):
             '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
             '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
             'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
-            '<sheets><sheet name="Смета" sheetId="1" r:id="rId1"/></sheets></workbook>',
+            '<sheets><sheet name="Estimate" sheetId="1" r:id="rId1"/></sheets></workbook>',
         "xl/worksheets/sheet1.xml":
             '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
             '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
@@ -174,13 +174,13 @@ def html_newsletter(title, banner_cid, chip_cid):
   <div style="max-width:600px;margin:0 auto;background:#fff;">
     <img src="cid:{banner_cid}" width="600" alt="" style="display:block;width:100%;height:auto;border:0;">
     <div style="padding:28px 32px;">
-      <p style="font-size:13px;color:#8a8a8e;margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em;">Рассылка</p>
+      <p style="font-size:13px;color:#8a8a8e;margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em;">Newsletter</p>
       <h1 style="font-size:24px;line-height:1.25;margin:0 0 14px;">{title}</h1>
-      <p style="font-size:15px;line-height:1.6;margin:0 0 16px;">В этом выпуске — самое важное за неделю: короткие разборы, ссылки и пара наблюдений от редакции.</p>
+      <p style="font-size:15px;line-height:1.6;margin:0 0 16px;">This issue rounds up the week's highlights: short reviews, links and a few notes from the editors.</p>
       <img src="cid:{chip_cid}" width="536" alt="" style="display:block;width:100%;height:auto;border-radius:10px;margin:6px 0 18px;">
-      <a href="#" style="display:inline-block;background:#007aff;color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:11px 22px;border-radius:8px;">Читать выпуск</a>
+      <a href="#" style="display:inline-block;background:#007aff;color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:11px 22px;border-radius:8px;">Read the issue</a>
     </div>
-    <div style="padding:18px 32px;border-top:1px solid #ececef;font-size:12px;color:#8a8a8e;">Вы получили это письмо, потому что подписаны на рассылку.</div>
+    <div style="padding:18px 32px;border-top:1px solid #ececef;font-size:12px;color:#8a8a8e;">You received this email because you're subscribed to our newsletter.</div>
   </div></body></html>"""
 
 
@@ -191,48 +191,48 @@ BANNERS = [((94, 155, 255), (10, 99, 214)), ((255, 106, 136), (255, 59, 48)),
 # --------------------------------------------------------------------------- #
 # content pool: (sender, subject, kind, body)  kind: plain | html | docs
 # --------------------------------------------------------------------------- #
-BODY = ("Добрый день!\n\n{L}\n\nЕсли по этому вопросу есть замечания или предложения — "
-        "напишите в ответ, обсудим до конца недели.\n\nС уважением,\n{N}")
+BODY = ("Hi,\n\n{L}\n\nIf you have any comments or suggestions, just reply and "
+        "we'll sort it out by the end of the week.\n\nBest regards,\n{N}")
 LINES = [
-    "Посмотрел последнюю версию — в целом всё хорошо, осталось поправить пару мелочей в футере.",
-    "Собрал краткое резюме встречи, чтобы ничего не потерялось: договорились переносить навигацию влево.",
-    "Высылаю на согласование обновлённые документы, основные изменения — резерв часов и хостинг отдельной строкой.",
-    "Направляю закрывающие документы за период. Проверьте, пожалуйста, реквизиты и суммы.",
-    "Предлагаем встретиться онлайн для знакомства и обсуждения задач. Тестовое задание не требуется.",
-    "Посмотрели демо всей командой — впечатление отличное. Собрал вопросы одним письмом.",
-    "Отредактировала статью — читается хорошо. Отдельно нужно согласовать иллюстрации.",
-    "Плановые технические работы в ночь на субботу с 02:00 до 04:00. Действий с вашей стороны не требуется.",
-    "Ваш заказ отправлен и прибудет завтра в интервале с 10:00 до 18:00. Курьер позвонит заранее.",
-    "Спасибо за спринт — закрыли почти всё. На ретро предлагаю не брать задачи без оценок.",
-    "Комментарии по договору: пункт 4.2 стоит уточнить по срокам приёмки, 7.1 сделать симметричным.",
-    "Готовим новый сезон рассылки: подборка материалов и пара анонсов внутри.",
-    "Обновление продукта: массовые операции, сохранённые фильтры и новая тёмная тема.",
-    "Напоминаю про планёрку в пятницу. Прикреплю повестку и ссылку на созвон ближе к дате.",
-    "По бюджету на квартал всё сходится, отправляю смету с разбивкой по этапам на согласование.",
+    "Took a look at the latest version — overall it's good, just a couple of small things to fix in the footer.",
+    "Here's a short recap of the meeting so nothing gets lost: we agreed to move the navigation to the left.",
+    "Sending over the updated documents for approval — the main changes are the hours buffer and hosting as a separate line.",
+    "Attaching the closing documents for the period. Please double-check the details and the totals.",
+    "We'd like to meet online to get acquainted and talk through the tasks. No test assignment required.",
+    "The whole team reviewed the demo — great impression. I've gathered our questions into one email.",
+    "I've edited the article — it reads well. The illustrations still need to be signed off separately.",
+    "Scheduled maintenance overnight on Saturday from 02:00 to 04:00. No action is needed on your side.",
+    "Your order has shipped and will arrive tomorrow between 10:00 and 18:00. The courier will call ahead.",
+    "Thanks for the sprint — we closed almost everything. At the retro I suggest we don't take tasks without estimates.",
+    "Comments on the contract: clause 4.2 needs clearer acceptance deadlines, and 7.1 should be made symmetric.",
+    "We're preparing a new season of the newsletter: a roundup of materials and a couple of announcements inside.",
+    "Product update: bulk actions, saved filters and a brand-new dark theme.",
+    "A reminder about Friday's standup. I'll attach the agenda and the call link closer to the date.",
+    "The quarterly budget adds up — sending the estimate broken down by stage for approval.",
 ]
 NAMES = [
-    ("Мария Лебедева", "m.lebedeva@studio.design"), ("Анна Ковалёва", "anna@studio.design"),
-    ("Дмитрий Соколов", "d.sokolov@host.ru"), ("Сергей Николаев", "s.nikolaev@dev.team"),
-    ("Илья Романов", "i.romanov@partner.co"), ("Екатерина Волкова", "e.volkova@hr.company"),
-    ("Павел Тихонов", "p.tihonov@client.biz"), ("Ольга Морозова", "o.morozova@editor.media"),
-    ("Андрей Гусев", "a.gusev@legal.partners"), ("Бухгалтерия", "buh@host.ru"),
-    ("Команда продукта", "product@saas.tools"), ("GitHub", "noreply@github.com"),
-    ("Apple", "no_reply@apple.com"), ("Хостинг-провайдер", "support@hosting.example"),
-    ("Служба доставки", "track@delivery.example"),
+    ("Maria Lebedeva", "m.lebedeva@studio.design"), ("Anna Kovaleva", "anna@studio.design"),
+    ("Dmitry Sokolov", "d.sokolov@host.example"), ("Sergey Nikolaev", "s.nikolaev@dev.team"),
+    ("Ilya Romanov", "i.romanov@partner.co"), ("Kate Volkova", "k.volkova@hr.company"),
+    ("Paul Tikhonov", "p.tikhonov@client.biz"), ("Olga Morozova", "o.morozova@editor.media"),
+    ("Andrew Gusev", "a.gusev@legal.partners"), ("Accounting", "accounting@host.example"),
+    ("Product Team", "product@saas.tools"), ("GitHub", "noreply@github.com"),
+    ("Apple", "no_reply@apple.com"), ("Hosting Provider", "support@hosting.example"),
+    ("Delivery Service", "track@delivery.example"),
 ]
 SERVICES = [
-    ("UX Weekly", "digest@uxweekly.io", "Дайджест недели: 7 приёмов микроанимации"),
-    ("Newsletter Design", "hi@uxdaily.io", "Тренды интерфейсов: объём и мягкие тени"),
-    ("Магазин «Скрепка»", "news@skrepka.shop", "Летняя распродажа: техника со скидкой до 40%"),
-    ("Конференция DesignConf", "hello@designconf.ru", "Программа опубликована — ранние билеты"),
-    ("Команда продукта", "product@saas.tools", "Что нового: массовые действия и фильтры"),
+    ("UX Weekly", "digest@uxweekly.io", "Weekly digest: 7 micro-animation tricks that don't annoy"),
+    ("Design Newsletter", "hi@uxdaily.io", "Interface trends: depth and soft shadows are back"),
+    ("Office Supplies Shop", "news@supplies.shop", "Summer sale: office gear up to 40% off"),
+    ("DesignConf", "hello@designconf.io", "Program published — early-bird tickets ending soon"),
+    ("Product Team", "product@saas.tools", "What's new: bulk actions, filters and dark mode"),
 ]
 SUBJECTS = [
-    "Правки по макету рассылки", "Итоги встречи по редизайну", "Договор на сопровождение",
-    "Акт и счёт-фактура за период", "Приглашение на собеседование", "Замечания по демо",
-    "Правки к статье", "Плановые технические работы", "Ваш заказ в пути",
-    "Ретро спринта", "Комментарии юриста к договору", "Финальная смета и план-график",
-    "Отчёт по проекту за неделю", "Согласование бюджета на квартал", "Повестка планёрки",
+    "Newsletter layout revisions", "Redesign meeting summary", "Support & maintenance contract",
+    "Statement and invoice for the period", "Interview invitation", "Feedback on the demo",
+    "Edits to the article", "Scheduled maintenance", "Your order is on its way",
+    "Sprint retrospective", "Legal comments on the contract", "Final estimate and schedule",
+    "Weekly project report", "Quarterly budget approval", "Standup agenda",
 ]
 
 BASE = []
@@ -244,13 +244,13 @@ for i in range(len(SUBJECTS)):
                  BODY.format(L=line, N=n[0])))
 for s in SERVICES:
     BASE.append((f"{s[0]} <{s[1]}>", s[2], "html",
-                 "В свежем выпуске разбираем самое важное за неделю."))
+                 "In this issue we break down the most important things from the past week."))
 
 
 def to_bytes(m):
     # keep each header on one line: folding a non-ASCII filename into RFC2231
     # continuations (filename*0*/filename*1*) makes Roundcube drop the name and
-    # show "Часть N" instead. 998 = RFC 5322 hard line limit.
+    # show a generic "Part N" instead. 998 = RFC 5322 hard line limit.
     return m.as_bytes(policy=m.policy.clone(max_line_length=998))
 
 
@@ -260,7 +260,7 @@ def build(sender, subject, kind, body, i):
     m["To"] = RCPT
     m["Subject"] = subject
     if kind == "html":
-        m.set_content(body + "\n\n(HTML-письмо — откройте с поддержкой картинок.)")
+        m.set_content(body + "\n\n(HTML email — open in a client with image support.)")
         bc = make_msgid(domain="demo.local")[1:-1]
         cc = make_msgid(domain="demo.local")[1:-1]
         m.add_alternative(html_newsletter(subject, bc, cc), subtype="html")
@@ -271,41 +271,41 @@ def build(sender, subject, kind, body, i):
     else:
         m.set_content(body)
         if kind == "docs":
-            m.add_attachment(make_pdf(subject), maintype="application", subtype="pdf", filename="Договор.pdf")
+            m.add_attachment(make_pdf(subject), maintype="application", subtype="pdf", filename="Contract.pdf")
             m.add_attachment(make_xlsx(subject), maintype="application",
-                             subtype="vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename="Смета.xlsx")
+                             subtype="vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename="Estimate.xlsx")
     return m
 
 
 def build_mega():
     """The newest inbox message — 10 attachments of varied types."""
     m = EmailMessage()
-    m["From"] = "Проектный офис <pm@studio.design>"
+    m["From"] = "Project Office <pm@studio.design>"
     m["To"] = RCPT
-    m["Subject"] = "Пакет документов по проекту «Атлас» — 10 файлов"
+    m["Subject"] = "Project Atlas document package — 10 files"
     m.set_content(
-        "Добрый день!\n\nСобрал в одном письме весь пакет по проекту «Атлас»: договор, смету, "
-        "техзадание, макет главной, выгрузку данных, бриф, конфигурацию, архив материалов, "
-        "приглашение на встречу и краткое README.\n\nПосмотрите, пожалуйста, и подтвердите — "
-        "если всё ок, стартуем в понедельник.\n\nС уважением,\nПроектный офис")
+        "Hi,\n\nI've put the whole Project Atlas package into one email: the contract, the estimate, "
+        "the requirements, the homepage mockup, a data export, the brief, the config, an assets "
+        "archive, a meeting invite and a short README.\n\nPlease take a look and confirm — "
+        "if everything's fine, we start on Monday.\n\nBest regards,\nProject Office")
     atts = [
-        ("Договор №2026-07.pdf", make_pdf("Dogovor Atlas 2026-07"), "application", "pdf"),
-        ("Смета.xlsx", make_xlsx("Смета проекта Атлас"), "application",
+        ("Contract 2026-07.pdf", make_pdf("Contract Atlas 2026-07"), "application", "pdf"),
+        ("Estimate.xlsx", make_xlsx("Project Atlas estimate"), "application",
          "vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
-        ("Техническое задание.docx", make_docx("Техническое задание — Атлас"), "application",
+        ("Requirements.docx", make_docx("Requirements - Atlas"), "application",
          "vnd.openxmlformats-officedocument.wordprocessingml.document"),
-        ("Макет главной.png", make_png(600, 360, (94, 155, 255), (10, 99, 214)), "image", "png"),
-        ("Выгрузка.csv", "id;этап;часы;сумма\n1;Аналитика;40;120000\n2;Дизайн;80;240000\n3;Вёрстка;60;180000\n".encode("utf-8"),
+        ("Homepage mockup.png", make_png(600, 360, (94, 155, 255), (10, 99, 214)), "image", "png"),
+        ("Data export.csv", "id;stage;hours;amount\n1;Analytics;40;120000\n2;Design;80;240000\n3;Frontend;60;180000\n".encode("utf-8"),
          "text", "csv"),
-        ("Бриф.txt", "Бриф проекта «Атлас»\n\nЦель: перезапуск личного кабинета.\nСроки: 8 недель.\nКоманда: 4 человека.\n".encode("utf-8"),
+        ("Brief.txt", "Project Atlas brief\n\nGoal: relaunch the customer account area.\nTimeline: 8 weeks.\nTeam: 4 people.\n".encode("utf-8"),
          "text", "plain"),
-        ("Конфигурация.json", json.dumps({"project": "Атлас", "phase": "kickoff", "budget": 540000,
-         "team": ["pm", "design", "dev"]}, ensure_ascii=False, indent=2).encode("utf-8"),
+        ("Config.json", json.dumps({"project": "Atlas", "phase": "kickoff", "budget": 540000,
+         "team": ["pm", "design", "dev"]}, indent=2).encode("utf-8"),
          "application", "json"),
-        ("Материалы.zip", make_zip({"readme.txt": "Материалы проекта Атлас",
+        ("Assets.zip", make_zip({"readme.txt": "Project Atlas assets",
          "palette.txt": "#007aff / #0a84ff"}), "application", "zip"),
-        ("Встреча.ics", make_ics("Кик-офф проекта «Атлас»").encode("utf-8"), "text", "calendar"),
-        ("README.md", "# Проект «Атлас»\n\n- Договор\n- Смета\n- ТЗ\n- Макет\n\nСтарт в понедельник.\n".encode("utf-8"),
+        ("Meeting.ics", make_ics("Project Atlas kick-off").encode("utf-8"), "text", "calendar"),
+        ("README.md", "# Project Atlas\n\n- Contract\n- Estimate\n- Requirements\n- Mockup\n\nKick-off on Monday.\n".encode("utf-8"),
          "text", "markdown"),
     ]
     for fn, data, mt, st in atts:
@@ -314,12 +314,12 @@ def build_mega():
 
 
 FOLDERS = [
-    "Клиенты", "Проект «Атлас»", "Проект «Орион»", "Проект «Меркурий»", "Договоры",
-    "Счета и оплаты", "Бухгалтерия", "Отчёты", "Аналитика", "Маркетинг",
-    "Рассылки", "SMM", "Дизайн-система", "Макеты", "Разработка",
-    "Релизы", "Баг-репорты", "Поддержка", "Инфраструктура", "Безопасность",
-    "Юристы", "Закупки", "Партнёры", "HR и найм", "Командировки",
-    "Планёрки", "Ретроспективы", "Идеи", "Архив 2025", "Разное",
+    "Clients", "Project Atlas", "Project Orion", "Project Mercury", "Contracts",
+    "Invoices & Payments", "Accounting", "Reports", "Analytics", "Marketing",
+    "Newsletters", "Social Media", "Design System", "Mockups", "Development",
+    "Releases", "Bug Reports", "Support", "Infrastructure", "Security",
+    "Legal", "Procurement", "Partners", "HR & Hiring", "Travel",
+    "Standups", "Retrospectives", "Ideas", "Archive 2025", "Misc",
 ]
 
 
