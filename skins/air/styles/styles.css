@@ -6655,12 +6655,19 @@ html.dark-mode #layout-menu,
 html.dark-mode #layout-sidebar {
   border-color: #38383a;
 }
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 481px) {
   #layout-menu .popover-header {
     display: none !important;
   }
 }
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 481px) {
+  #layout-menu {
+    width: 60px;
+    min-width: 60px;
+    flex: 0 0 60px;
+  }
+}
+@media screen and (min-width: 481px) {
   #taskmenu {
     display: flex;
     flex-direction: column;

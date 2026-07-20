@@ -61,12 +61,28 @@ html.dark-mode {
 // item, theme/about/logout pinned to the bottom.
 // ---------------------------------------------------------------------------
 // hide the logo in the rail (the prototype starts with the Compose button)
-@media screen and (min-width: (@screen-width-medium + 1px)) {
+@media screen and (min-width: (@screen-width-xs + 1px)) {
     #layout-menu .popover-header { display: none !important; }
 }
 
+// The rail is a persistent column from @screen-width-xs up. Two things collapsed
+// our 44px icon buttons flush to the edges:
+//   1. below @screen-width-medium Elastic shrinks the rail to @layout-menu-width-sm;
+//   2. #layout-menu is a flex child of #layout with flex-shrink:1, so on any tight
+//      viewport it shrinks below the icon width even above that breakpoint.
+// Pin the rail to its full width and disable shrink across the whole column range
+// (no upper bound) so the styling — and its centring/padding — holds at every
+// width the rail is shown.
+@media screen and (min-width: (@screen-width-xs + 1px)) {
+    #layout-menu {
+        width: @layout-menu-width;
+        min-width: @layout-menu-width;
+        flex: 0 0 @layout-menu-width;
+    }
+}
+
 #taskmenu {
-    @media screen and (min-width: (@screen-width-medium + 1px)) {
+    @media screen and (min-width: (@screen-width-xs + 1px)) {
         display: flex;
         flex-direction: column;
         align-items: center;
