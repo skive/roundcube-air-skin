@@ -12,6 +12,18 @@ dependency on Elastic.
 | **Air** | `skins/air` | The primary skin. Apple system blue, frosted rail, rounded controls, light + dark mode. |
 | **Air Blue** | `skins/airblue` | Thin variant that `extends: air`; contrasting blue selection only. |
 
+## Preview
+
+Light and dark themes — the message list, the folder sidebar and a message with attachments.
+
+**Light**
+
+![Air skin — light theme](preview-light.png)
+
+**Dark**
+
+![Air skin — dark theme](preview-dark.png)
+
 ## Build
 
 Styles are **LESS compiled to committed CSS** (`styles/styles.css`,
