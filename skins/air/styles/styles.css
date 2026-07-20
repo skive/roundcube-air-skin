@@ -7290,9 +7290,6 @@ textarea.form-control {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
-.popupmenu {
-  overflow: hidden;
-}
 .popover.select-menu .listing li,
 .popover.select-menu .listing li > a {
   border: 0 !important;

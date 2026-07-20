@@ -750,7 +750,10 @@ textarea.form-control { border-radius: 8px; }
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
-.popupmenu { overflow: hidden; }
+// NB: don't put overflow:hidden on .popupmenu — that class is also used for
+// container panels (the list-options dialog #listoptions, the #searchmenu search
+// panel), and clipping them cuts off the pretty-select dropdowns opened inside.
+// The popover menus clip their item highlights via .popover-body's own overflow.
 
 // Select dropdowns (Сортировать по / Порядок сортировки, language pickers, …) are
 // .listing lists, so they carried per-row separator lines and tall 35px rows —
