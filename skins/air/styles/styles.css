@@ -8221,6 +8221,11 @@ html.dark-mode .attachmentslist li {
   content: "TXT";
   background: linear-gradient(135deg, #b3b8c2, #868c99);
 }
+.attachmentslist li.calendar > a.filename:before,
+.attachmentslist li.ics > a.filename:before {
+  content: "ICS";
+  background: linear-gradient(135deg, #ff5b5b, #d70015);
+}
 .attachmentslist li .attachment-name {
   grid-column: 2;
   grid-row: 1;

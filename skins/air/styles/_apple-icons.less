@@ -248,6 +248,10 @@ html.dark-mode .attachmentslist li {
 .attachmentslist li.archive > a.filename:before { content: "ZIP"; background: linear-gradient(135deg, #b3b8c2, #868c99); }
 .attachmentslist li.image > a.filename:before { content: "IMG"; background: linear-gradient(135deg, #c58bff, #8a3ffc); }
 .attachmentslist li.text  > a.filename:before { content: "TXT"; background: linear-gradient(135deg, #b3b8c2, #868c99); }
+// calendar invites (.ics) carry the class "text calendar ics", so this must follow
+// the .text rule above (equal specificity) to win and show a calendar badge.
+.attachmentslist li.calendar > a.filename:before,
+.attachmentslist li.ics      > a.filename:before { content: "ICS"; background: linear-gradient(135deg, #ff5b5b, #d70015); }
 
 // filename + size stacked in the second column
 .attachmentslist li .attachment-name {
