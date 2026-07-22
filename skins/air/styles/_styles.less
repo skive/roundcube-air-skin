@@ -674,7 +674,13 @@ html.dark-mode #login-form {
 .compose-links .formbuttons,
 #compose-content .formbuttons,
 .formbuttons {
-    .btn.send { margin-right: 8px; }
+    // match .cancel's flex centring so the paper-plane icon lines up with the
+    // label (as a plain inline-block .btn the icon rode ~1px high above the text)
+    .btn.send {
+        margin-right: 8px;
+        display: inline-flex;
+        align-items: center;
+    }
 
     .btn.cancel {
         // Elastic tags unrecognised formbuttons with `.hidden` — force it visible
@@ -693,6 +699,26 @@ html.dark-mode .formbuttons .btn.cancel {
     color: @color-dark-font;
     background: @color-dark-input-addon-background;
     border-color: @color-dark-border;
+}
+
+// Recipient chips (To / Cc / Bcc) — a light-blue token like iOS Mail, with the
+// text and the remove × vertically centred and a lighter, muted × glyph.
+.recipient {
+    align-items: baseline;   // the × (an all-above-baseline glyph) sits on the text baseline
+    background: fade(@color-main, 10%) !important;
+    border-color: fade(@color-main, 22%) !important;
+}
+.recipient > a.remove {
+    align-self: baseline;
+    &:before {
+        color: fade(@color-main, 50%);
+        line-height: inherit;
+    }
+    &:hover:before { color: @color-main; }
+}
+html.dark-mode .recipient {
+    background: fade(@color-main, 22%) !important;
+    border-color: fade(@color-main, 34%) !important;
 }
 
 // ---------------------------------------------------------------------------

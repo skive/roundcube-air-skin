@@ -7206,6 +7206,8 @@ html.dark-mode #login-form {
 #compose-content .formbuttons .btn.send,
 .formbuttons .btn.send {
   margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
 }
 .compose-links .formbuttons .btn.cancel,
 #compose-content .formbuttons .btn.cancel,
@@ -7227,6 +7229,25 @@ html.dark-mode .formbuttons .btn.cancel {
   color: #f5f5f7;
   background: #374549;
   border-color: #38383a;
+}
+.recipient {
+  align-items: baseline;
+  background: rgba(0, 122, 255, 0.1) !important;
+  border-color: rgba(0, 122, 255, 0.22) !important;
+}
+.recipient > a.remove {
+  align-self: baseline;
+}
+.recipient > a.remove:before {
+  color: rgba(0, 122, 255, 0.5);
+  line-height: inherit;
+}
+.recipient > a.remove:hover:before {
+  color: #007aff;
+}
+html.dark-mode .recipient {
+  background: rgba(0, 122, 255, 0.22) !important;
+  border-color: rgba(0, 122, 255, 0.34) !important;
 }
 #toolbar-menu a:not(.disabled):hover,
 #toolbar-list-menu a:not(.disabled):hover,
