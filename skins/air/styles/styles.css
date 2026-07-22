@@ -7307,9 +7307,13 @@ textarea.form-control {
 }
 .ui-dialog {
   border-radius: 12px !important;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.14) !important;
 }
 .ui-dialog-titlebar {
   border-radius: 12px 12px 0 0 !important;
+}
+.ui-dialog-buttonpane {
+  border-radius: 0 0 12px 12px !important;
 }
 .popupmenu,
 .popover,

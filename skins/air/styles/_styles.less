@@ -777,8 +777,14 @@ textarea.form-control { border-radius: 8px; }
 // white titlebar — round ITS top corners to match. (Don't clip the whole dialog
 // with overflow:hidden: the select dropdowns render inside it and extend past its
 // bottom edge, so clipping cuts them off.)
-.ui-dialog { border-radius: 12px !important; }
-.ui-dialog-titlebar { border-radius: 12px 12px 0 0 !important; }
+.ui-dialog {
+    border-radius: 12px !important;
+    box-shadow: 0 10px 34px fade(#000, 14%) !important;   // soft lift on all modals
+}
+// Round the white titlebar (top) and buttonpane (bottom) to match the container
+// so both ends of the card are rounded — their square corners otherwise poke out.
+.ui-dialog-titlebar   { border-radius: 12px 12px 0 0 !important; }
+.ui-dialog-buttonpane { border-radius: 0 0 12px 12px !important; }
 
 // The visible card is `.popover` (bg + border + shadow); round IT and its body
 // to the same radius so they don't fight (Bootstrap left the card at ~4px while
