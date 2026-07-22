@@ -7241,6 +7241,8 @@ html.dark-mode .formbuttons .btn.cancel {
 .recipient > a.remove:before {
   color: rgba(0, 122, 255, 0.5);
   line-height: inherit;
+  position: relative;
+  top: -0.24em;
 }
 .recipient > a.remove:hover:before {
   color: #007aff;

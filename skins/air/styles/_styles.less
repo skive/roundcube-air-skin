@@ -713,6 +713,10 @@ html.dark-mode .formbuttons .btn.cancel {
     &:before {
         color: fade(@color-main, 50%);
         line-height: inherit;
+        // the Icons-font × renders ~0.24em below its own baseline box, so flex
+        // baseline-alignment leaves it sitting low — lift it onto the text baseline.
+        position: relative;
+        top: -0.24em;
     }
     &:hover:before { color: @color-main; }
 }
