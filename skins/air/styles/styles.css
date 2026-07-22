@@ -7230,24 +7230,24 @@ html.dark-mode .formbuttons .btn.cancel {
   background: #374549;
   border-color: #38383a;
 }
-.recipient {
+li.recipient {
   align-items: baseline;
   background: rgba(0, 122, 255, 0.1) !important;
   border-color: rgba(0, 122, 255, 0.22) !important;
 }
-.recipient > a.remove {
+li.recipient > a.remove {
   align-self: baseline;
 }
-.recipient > a.remove:before {
+li.recipient > a.remove:before {
   color: rgba(0, 122, 255, 0.5);
   line-height: inherit;
   position: relative;
   top: -0.24em;
 }
-.recipient > a.remove:hover:before {
+li.recipient > a.remove:hover:before {
   color: #007aff;
 }
-html.dark-mode .recipient {
+html.dark-mode li.recipient {
   background: rgba(0, 122, 255, 0.22) !important;
   border-color: rgba(0, 122, 255, 0.34) !important;
 }

@@ -703,12 +703,14 @@ html.dark-mode .formbuttons .btn.cancel {
 
 // Recipient chips (To / Cc / Bcc) — a light-blue token like iOS Mail, with the
 // text and the remove × vertically centred and a lighter, muted × glyph.
-.recipient {
+// Scoped to li.recipient: the "Insert recipient" dialog button also carries the
+// .recipient class, and a bare .recipient stole its btn-primary blue.
+li.recipient {
     align-items: baseline;   // the × (an all-above-baseline glyph) sits on the text baseline
     background: fade(@color-main, 10%) !important;
     border-color: fade(@color-main, 22%) !important;
 }
-.recipient > a.remove {
+li.recipient > a.remove {
     align-self: baseline;
     &:before {
         color: fade(@color-main, 50%);
@@ -720,7 +722,7 @@ html.dark-mode .formbuttons .btn.cancel {
     }
     &:hover:before { color: @color-main; }
 }
-html.dark-mode .recipient {
+html.dark-mode li.recipient {
     background: fade(@color-main, 22%) !important;
     border-color: fade(@color-main, 34%) !important;
 }
