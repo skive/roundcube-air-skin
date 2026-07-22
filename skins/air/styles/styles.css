@@ -7307,7 +7307,9 @@ textarea.form-control {
 }
 .ui-dialog {
   border-radius: 12px !important;
-  overflow: hidden;
+}
+.ui-dialog-titlebar {
+  border-radius: 12px 12px 0 0 !important;
 }
 .popupmenu,
 .popover,
@@ -7327,7 +7329,8 @@ textarea.form-control {
   height: 2.1rem !important;
   line-height: 2.1rem !important;
 }
-.popover.select-menu .listing li > a:before {
+.popover.select-menu .listing li > a:before,
+.popover .selectable li > a:before {
   display: inline-block !important;
   width: 1.4em !important;
   min-width: 1.4em !important;
@@ -7339,8 +7342,18 @@ textarea.form-control {
   position: relative;
   top: 0;
 }
-.popover.select-menu .listing li > a.selected:before {
+.popover.select-menu .listing li > a.selected:before,
+.popover .selectable li > a.selected:before {
   color: #007aff;
+}
+.popover.select-menu .listing li > a:hover,
+.popover .selectable li > a:hover {
+  background: #007aff !important;
+  color: #fff !important;
+}
+.popover.select-menu .listing li > a.selected:hover:before,
+.popover .selectable li > a.selected:hover:before {
+  color: #fff;
 }
 /**
  * Apple Mail skin — Apple-style icon set (design branch `apple-icons`).
