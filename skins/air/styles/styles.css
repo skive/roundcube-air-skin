@@ -7286,6 +7286,7 @@ textarea.form-control {
 }
 .ui-dialog {
   border-radius: 12px !important;
+  overflow: hidden;
 }
 .popupmenu,
 .popover,

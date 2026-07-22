@@ -747,7 +747,14 @@ input.form-control,
 textarea.form-control { border-radius: 8px; }
 
 // Popup menus: rounded card, soft shadow (Tahoe).
-.ui-dialog { border-radius: 12px !important; }
+// overflow:hidden clips the square-cornered children (the white titlebar and the
+// content area) to the 12px radius — without it their corners poke out over the
+// rounded container and the card looks rectangular. The select dropdowns opened
+// inside are appended to <body>, not the dialog, so they aren't clipped.
+.ui-dialog {
+    border-radius: 12px !important;
+    overflow: hidden;
+}
 
 // The visible card is `.popover` (bg + border + shadow); round IT and its body
 // to the same radius so they don't fight (Bootstrap left the card at ~4px while
